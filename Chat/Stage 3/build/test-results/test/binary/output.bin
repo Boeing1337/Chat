@@ -1,0 +1,31 @@
+[1;31m
+Start test 1[0m
+> One One One
+> second one
+> going to sleep
+> /show
+One One One
+
+second one
+going to sleep
+> a  f g     h!!!!
+	> Hello!
+> 1
+> first
+> /exit
+
+Count is 3
+
+Count is 4
+
+Count is 1
+> /exit
+
+Count is 2
+
+Count is 3
+
+Count is 1
+> /exit
+
+Count is 1

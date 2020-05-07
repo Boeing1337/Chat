@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3d709212-bb65-4ffb-86d0-927349d46620" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Java_Course_—_Chat" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Java_Course_—_Chat" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1b2dsikmFnINVlWYD3GRCkycCEN" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="HINTS_IN_TASK_DESCRIPTION" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Chat/Stage 3/src/chat/client" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="show.inlinked.gradle.project.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="chat" />
+      <recent name="chat.server" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Java Course — Chat\Chat\Stage 3\src\chat\client" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.Tests">
+    <configuration name="Client (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="chat.client.Client" />
+      <module name="Chat-Stage_3_main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="chat.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="chat.client.Client" />
+      <module name="Chat-Stage_2_main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="chat.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="chat.server.Server" />
+      <module name="Chat-Stage_3_main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="chat.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;MainTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":Chat-Stage_1:cleanTest" />
+            <option value=":Chat-Stage_1:test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;Tests&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":Chat-Stage_3:cleanTest" />
+            <option value=":Chat-Stage_3:test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.Tests" />
+        <item itemvalue="Application.Client (1)" />
+        <item itemvalue="Application.Server (1)" />
+        <item itemvalue="Gradle.Tests" />
+        <item itemvalue="Application.Client" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3d709212-bb65-4ffb-86d0-927349d46620" name="Default Changelist" comment="" />
+      <created>1587834330285</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587834330285</updated>
+      <workItem from="1587834332374" duration="963000" />
+      <workItem from="1588079615713" duration="13647000" />
+      <workItem from="1588157301841" duration="1369000" />
+      <workItem from="1588252077295" duration="15704000" />
+      <workItem from="1588287338612" duration="600000" />
+      <workItem from="1588344794862" duration="16281000" />
+      <workItem from="1588370535664" duration="7973000" />
+      <workItem from="1588616164358" duration="2087000" />
+      <workItem from="1588666739769" duration="22130000" />
+      <workItem from="1588775172697" duration="11098000" />
+      <workItem from="1588806717692" duration="4512000" />
+      <workItem from="1588861633493" duration="86000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="872" y="380" key="#Project_Structure" timestamp="1588088058587">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="872" y="380" key="#Project_Structure/0.0.2560.1440@0.0.2560.1440" timestamp="1588088058587" />
+    <state x="1047" y="415" key="#com.intellij.ide.util.MemberChooser" timestamp="1588687256218">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="1047" y="415" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1440@0.0.2560.1440" timestamp="1588687256218" />
+    <state x="992" y="654" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1588680327362">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="992" y="654" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1588680327362" />
+    <state width="2519" height="391" key="GridCell.Tab.0.bottom" timestamp="1588812187357">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2519" height="391" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1588812187357" />
+    <state width="2519" height="391" key="GridCell.Tab.0.center" timestamp="1588812187357">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2519" height="391" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1588812187357" />
+    <state width="2519" height="391" key="GridCell.Tab.0.left" timestamp="1588812187357">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2519" height="391" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1588812187357" />
+    <state width="2519" height="391" key="GridCell.Tab.0.right" timestamp="1588812187357">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2519" height="391" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1588812187357" />
+    <state width="2519" height="508" key="GridCell.Tab.1.bottom" timestamp="1588367961346">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2519" height="508" key="GridCell.Tab.1.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1588367961346" />
+    <state width="2519" height="508" key="GridCell.Tab.1.center" timestamp="1588367961346">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2519" height="508" key="GridCell.Tab.1.center/0.0.2560.1440@0.0.2560.1440" timestamp="1588367961346" />
+    <state width="2519" height="508" key="GridCell.Tab.1.left" timestamp="1588367961345">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2519" height="508" key="GridCell.Tab.1.left/0.0.2560.1440@0.0.2560.1440" timestamp="1588367961345" />
+    <state width="2519" height="508" key="GridCell.Tab.1.right" timestamp="1588367961346">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2519" height="508" key="GridCell.Tab.1.right/0.0.2560.1440@0.0.2560.1440" timestamp="1588367961346" />
+    <state x="1010" y="498" key="extract.method.dialog" timestamp="1588252482896">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="1010" y="498" key="extract.method.dialog/0.0.2560.1440@0.0.2560.1440" timestamp="1588252482896" />
+    <state x="943" y="325" width="672" height="678" key="search.everywhere.popup" timestamp="1588668573642">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="943" y="325" width="672" height="678" key="search.everywhere.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1588668573642" />
+  </component>
+</project>

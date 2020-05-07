@@ -1,0 +1,6 @@
+type: edu
+files:
+- name: src/chat/Main.java
+  visible: true
+- name: test/MainTest.java
+  visible: false

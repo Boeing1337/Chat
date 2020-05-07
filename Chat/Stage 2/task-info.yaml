@@ -1,0 +1,14 @@
+type: edu
+files:
+- name: test/Tests.java
+  visible: false
+- name: src/chat/client/Client.java
+  visible: true
+- name: src/chat/server/Server.java
+  visible: true
+- name: src/chat/util/InputReader.java
+  visible: true
+- name: src/chat/util/OutputWriter.java
+  visible: true
+- name: src/chat/util/MessageContainer.java
+  visible: true
