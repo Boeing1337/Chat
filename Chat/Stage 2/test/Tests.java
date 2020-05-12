@@ -43,7 +43,7 @@ public class Tests extends StageTest<String> {
         if (clientShow != null && !clientShow.trim().equals(msgToClient))
             return CheckResult.wrong("client showed wrong message");
 
-        System.out.println("TEST COMMIT");
+        System.out.println("TEST COMM IT");
         return CheckResult.correct();
     }
 
