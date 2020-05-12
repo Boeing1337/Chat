@@ -2,16 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 1/Chat-Stage_1.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 1/Chat-Stage_1.iml" group="Java Course — Chat/Chat-Stage_1" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 1/Chat-Stage_1_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 1/Chat-Stage_1_main.iml" group="Java Course — Chat/Chat-Stage_1" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 1/Chat-Stage_1_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 1/Chat-Stage_1_test.iml" group="Java Course — Chat/Chat-Stage_1" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 2/Chat-Stage_2.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 2/Chat-Stage_2.iml" group="Java Course — Chat/Chat-Stage_2" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 2/Chat-Stage_2_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 2/Chat-Stage_2_main.iml" group="Java Course — Chat/Chat-Stage_2" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 2/Chat-Stage_2_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 2/Chat-Stage_2_test.iml" group="Java Course — Chat/Chat-Stage_2" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 3/Chat-Stage_3.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 3/Chat-Stage_3.iml" group="Java Course — Chat/Chat-Stage_3" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 3/Chat-Stage_3_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 3/Chat-Stage_3_main.iml" group="Java Course — Chat/Chat-Stage_3" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 3/Chat-Stage_3_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 3/Chat-Stage_3_test.iml" group="Java Course — Chat/Chat-Stage_3" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Java_Course_—_Chat.iml" filepath="$PROJECT_DIR$/.idea/modules/Java_Course_—_Chat.iml" group="Java_Course_—_Chat" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat.iml" group="Chat" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 1/Chat-Stage_1.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 1/Chat-Stage_1.iml" group="Chat/Chat-Stage_1" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 1/Chat-Stage_1_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 1/Chat-Stage_1_main.iml" group="Chat/Chat-Stage_1" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 1/Chat-Stage_1_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 1/Chat-Stage_1_test.iml" group="Chat/Chat-Stage_1" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 2/Chat-Stage_2.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 2/Chat-Stage_2.iml" group="Chat/Chat-Stage_2" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 2/Chat-Stage_2_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 2/Chat-Stage_2_main.iml" group="Chat/Chat-Stage_2" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 2/Chat-Stage_2_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 2/Chat-Stage_2_test.iml" group="Chat/Chat-Stage_2" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 3/Chat-Stage_3.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 3/Chat-Stage_3.iml" group="Chat/Chat-Stage_3" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 3/Chat-Stage_3_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 3/Chat-Stage_3_main.iml" group="Chat/Chat-Stage_3" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 3/Chat-Stage_3_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 3/Chat-Stage_3_test.iml" group="Chat/Chat-Stage_3" />
     </modules>
   </component>
 </project>

@@ -58,6 +58,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1b2dsikmFnINVlWYD3GRCkycCEN" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -73,6 +76,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="show.inlinked.gradle.project.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -196,6 +200,8 @@
       <workItem from="1588775172697" duration="11098000" />
       <workItem from="1588806717692" duration="4512000" />
       <workItem from="1588861633493" duration="86000" />
+      <workItem from="1588861964777" duration="13000" />
+      <workItem from="1589302925294" duration="417000" />
     </task>
     <servers />
   </component>
@@ -215,6 +221,10 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="992" y="654" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1588680327362" />
+    <state x="1059" y="476" key="FileChooserDialogImpl" timestamp="1589303229906">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="1059" y="476" key="FileChooserDialogImpl/0.0.2560.1440@0.0.2560.1440" timestamp="1589303229906" />
     <state width="2519" height="391" key="GridCell.Tab.0.bottom" timestamp="1588812187357">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
@@ -247,6 +257,10 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="2519" height="508" key="GridCell.Tab.1.right/0.0.2560.1440@0.0.2560.1440" timestamp="1588367961346" />
+    <state x="803" y="365" key="SettingsEditor" timestamp="1589303278170">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="803" y="365" key="SettingsEditor/0.0.2560.1440@0.0.2560.1440" timestamp="1589303278170" />
     <state x="1010" y="498" key="extract.method.dialog" timestamp="1588252482896">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
