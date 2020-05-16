@@ -5,74 +5,108 @@ import org.hyperskill.hstest.stage.StageTest;
 import org.hyperskill.hstest.testcase.CheckResult;
 import org.hyperskill.hstest.testing.TestedProgram;
 
+import static org.hyperskill.hstest.common.Utils.sleep;
+
 public class Tests extends StageTest<String> {
 
     @DynamicTestingMethod
     CheckResult test() {
-        TestedProgram server = new TestedProgram(Server.class);
-        TestedProgram client = new TestedProgram(Client.class);
-        TestedProgram client2 = new TestedProgram(Client.class);
-        TestedProgram client3 = new TestedProgram(Client.class);
+        final TestedProgram server = new TestedProgram(Server.class);
+        final TestedProgram client1 = new TestedProgram(Client.class);
+        final TestedProgram client2 = new TestedProgram(Client.class);
+        final TestedProgram client3 = new TestedProgram(Client.class);
+        final String countIs = "Count is ";
 
-        server.start();
-        client.start();
+        final int startAppsPause = 50; //50 is guaranty (c)
+        final int executePause = 25;
+        server.startInBackground();
+
+        //////Client 1
+
+        final String output = client1.start();
+        sleep(startAppsPause);
+
+        //TO DO: can't get output by getOutput method right now.
+        // If else startAppPause would be 1000ms
+
+        if (output == null)
+            return CheckResult.wrong("Can't get the \"Client started!\" message");
+
+        if (!"Client started!".equals(output.trim()))
+            return CheckResult.wrong("Can't get the \"Client started!\" message");
+
+        String client1Answer = client1.execute("1 2 3").trim();
+        if (!(countIs + "3").equals(client1Answer))
+            return CheckResult.wrong("A Client show wrong answer!");
+
+        client1Answer = client1.execute("1 2").trim();
+        if (!(countIs + "2").equals(client1Answer))
+            return CheckResult.wrong("A Client show wrong answer!");
+
+        client1.execute("/exit");
+
+        //////Client 2
+
         client2.start();
+        sleep(startAppsPause);
+
+        String client2Answer = client2.execute("By my hands").trim();
+        if (!(countIs + "3").equals(client2Answer))
+            return CheckResult.wrong("A Client show wrong answer!");
+
+        /////Client 3
+
         client3.start();
+        sleep(startAppsPause);
 
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e) {
-            System.out.println("Unexpected exception!\nTest has been aborted.\nPlease " +
-            "send the report to support@hyperskill.org");
-            e.printStackTrace();
-        }
+        String client3Answer = client3.execute("Zzzz.").trim();
+        if (!(countIs + "1").equals(client3Answer))
+            return CheckResult.wrong("A Client show wrong answer!");
 
-        client.execute("One One One"); // 1 - 3
-        client2.execute("second one"); // 2 - 2
-        client2.execute("going to sleep"); // 2 -3
+        client3Answer = client3.execute("want to sleep").trim();
+        if (!(countIs + "3").equals(client3Answer))
+            return CheckResult.wrong("A Client show wrong answer!");
 
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e) {
-            System.out.println("Unexpected exception!\nTest has been aborted.\nPlease " +
-            "send the report to support@hyperskill.org");
-            e.printStackTrace();
-        }
+        client3.execute("/exit");
 
-        String temp = server.execute("/show");
-        if (temp == null || !temp.trim().equals("One One One\nsecond one\ngoing to sleep"))
-            return CheckResult.wrong("Wrong answer after /show command.");
+        //////Client 2 AGAIN
 
-        client.execute("a  f g     h!!!!"); // 1 - 4
-        client3.execute("Hello!"); // 3 - 1
-        client.execute("1"); // 1 - 0
-        client2.execute("first"); // 2 - 1
+        client2Answer = client2.execute("Repeat").trim();
+        if (!(countIs + "1").equals(client2Answer))
+            return CheckResult.wrong("A Client show wrong answer!");
 
+        client2.execute("/exit");
+        sleep(executePause);
 
-        try {
-            Thread.sleep(2000);
-        } catch (Exception e) {
-            System.out.println("Unexpected exception!\nTest has been aborted.\nPlease " +
-            "send the report to support@hyperskill.org");
-            e.printStackTrace();
-        }
+        //////Server
 
+        if (!server.getOutput().trim().equals(
+        "Server started!\n" +
 
-        String clientExit = client.execute("/exit");
-        String client2Exit = client2.execute("/exit");
-        String client3Exit = client3.execute("/exit");
+        "Client 1 connected!\n" +
+        "Client 1 sent: 1 2 3\n" +
+        "Sent to client 1: " + countIs + "3\n" +
+        "Client 1 sent: 1 2\n" +
+        "Sent to client 1: " + countIs + "2\n" +
+        "Client 1 disconnected!\n" +
 
-        if (clientExit == null || client2Exit == null || client3Exit == null)
-            return CheckResult.wrong("Client didn't show message.");
+        "Client 2 connected!\n" +
+        "Client 2 sent: By my hands\n" +
+        "Sent to client 2: " + countIs + "3\n" +
 
-        if (!clientExit.trim().equals("Count is 3\nCount is 4\nCount is 1"))
-            return CheckResult.wrong("Wrong answer.");
+        "Client 3 connected!\n" +
+        "Client 3 sent: Zzzz.\n" +
+        "Sent to client 3: " + countIs + "1\n" +
 
-        if (!client2Exit.trim().equals("Count is 2\nCount is 3\nCount is 1"))
-            return CheckResult.wrong("Wrong answer.");
+        "Client 3 sent: want to sleep\n" +
+        "Sent to client 3: " + countIs + "3\n" +
+        "Client 3 disconnected!\n" +
 
-        if (!client3Exit.trim().equals("Count is 1"))
-            return CheckResult.wrong("Wrong answer.");
+        "Client 2 sent: Repeat\n" +
+        "Sent to client 2: " + countIs + "1\n" +
+        "Client 2 disconnected!"
+        ))
+            return CheckResult.wrong("Server show wrong messages");
 
 
         return CheckResult.correct();

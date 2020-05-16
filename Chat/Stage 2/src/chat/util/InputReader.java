@@ -1,16 +1,16 @@
 package chat.util;
 
 import java.io.DataInputStream;
+import java.io.EOFException;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class InputReader implements Runnable {
     private final Socket socket;
-    private MessageContainer inputMessage;
     private DataInputStream dataInputStream;
 
-    public InputReader(final Socket socket, final MessageContainer inputMessage) {
+    public InputReader(final Socket socket) {
         this.socket = socket;
-        this.inputMessage = inputMessage;
     }
 
     @Override
@@ -19,7 +19,7 @@ public class InputReader implements Runnable {
         if (!isHasStream()) {
             return;
         }
-        readMessage();
+        readAndOutputMessage();
     }
 
     private boolean isHasStream() {
@@ -30,14 +30,17 @@ public class InputReader implements Runnable {
         return true;
     }
 
-
-    private void readMessage() {
-        try {
-            String msg = dataInputStream.readUTF();
-            inputMessage.setMessage(msg);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("can't read the message");
+    private void readAndOutputMessage() {
+        while (true) {
+            try {
+                String msg = dataInputStream.readUTF();
+                System.out.println(msg);
+            } catch (EOFException | SocketException ignored) {
+                return;
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("can't read the message");
+            }
         }
     }
 
@@ -47,6 +50,5 @@ public class InputReader implements Runnable {
         } catch (Exception e) {
             System.out.println("inputReader can't create a input stream");
         }
-
     }
 }

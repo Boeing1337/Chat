@@ -1,17 +1,13 @@
 package chat.server;
 
 import chat.util.InputReader;
-import chat.util.MessageContainer;
 import chat.util.OutputWriter;
 
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Server {
-    private MessageContainer inputMessage = new MessageContainer();
-    private MessageContainer outputMessage = new MessageContainer();
     private ServerSocket ss;
 
     public static void main(final String[] args) {
@@ -20,22 +16,15 @@ public class Server {
 
     private void start() {
         createServerSocket();
-        createIOWorkers();
-        scannerWork();
+        createIOWorkersThread();
+        pause();
+        closeSocket();
     }
 
-    private void scannerWork() {
-        final Scanner scanner = new Scanner(System.in);
-
-        while (scanner.hasNextLine()) {
-            final String temp = scanner.nextLine().trim();
-            if (temp.equals("/show")) {
-                System.out.println(inputMessage.getMessage());
-                closeSocket();
-                return;
-            } else {
-                outputMessage.setMessage(temp);
-            }
+    private void pause() {
+        try {
+            Thread.sleep(5000);
+        } catch (Exception ignored) {
         }
     }
 
@@ -43,19 +32,17 @@ public class Server {
         try {
             ss.close();
         } catch (Exception ignored) {
-
         }
     }
 
-
-    private void createIOWorkers() {
+    private void createIOWorkersThread() {
         new Thread(() -> {
             while (!ss.isClosed()) {
                 final Socket clientSocket = getConnection();
-                if (clientSocket == null)
-                    continue;
-                createInputReader(clientSocket);
-                createOutputWriter(clientSocket);
+                if (clientSocket != null) {
+                    createInputReader(clientSocket);
+                    createOutputWriter(clientSocket);
+                }
             }
         }).start();
     }
@@ -63,23 +50,22 @@ public class Server {
     private Socket getConnection() {
         try {
             return ss.accept();
-        } catch (Exception e) {
-            System.out.println("[SERVER] Can't accept connection!");
+        } catch (Exception ignored) {
         }
         return null;
     }
 
     private void createInputReader(final Socket clientSocket) {
-        new Thread(new InputReader(clientSocket, inputMessage)).start();
+        new Thread(new InputReader(clientSocket)).start();
     }
 
     private void createOutputWriter(final Socket clientSocket) {
-        new Thread(new OutputWriter(clientSocket, outputMessage)).start();
+        new Thread(new OutputWriter(clientSocket)).start();
     }
 
     private void createServerSocket() {
-        String address = "127.0.0.1";
-        int port = 23456;
+        final String address = "127.0.0.1";
+        final int port = 23456;
         while (true) {
             try {
                 ss = new ServerSocket(port, 50, InetAddress.getByName(address));
@@ -88,7 +74,7 @@ public class Server {
                 System.out.println("[SERVER] Can't create a socket!");
             }
             try {
-                Thread.sleep(500);
+                Thread.sleep(10);
             } catch (Exception ignored) {
                 System.out.println("[SERVER] Server is awoken from being asleep!");
             }

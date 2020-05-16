@@ -1,16 +1,17 @@
 package chat.util;
 
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.net.Socket;
+import java.net.SocketException;
+import java.util.Scanner;
 
 public class OutputWriter implements Runnable {
     private final Socket socket;
-    private MessageContainer outputMessage;
     private DataOutputStream dataOutputStream;
 
-    public OutputWriter(final Socket socket, final MessageContainer outputMessage) {
+    public OutputWriter(final Socket socket) {
         this.socket = socket;
-        this.outputMessage = outputMessage;
     }
 
     @Override
@@ -24,17 +25,11 @@ public class OutputWriter implements Runnable {
     }
 
     private void sent() {
+        final Scanner scanner = new Scanner(System.in);
         while (true) {
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                System.out.println("sent method has been interrupted");
-                e.printStackTrace();
-            }
-
-            if (!outputMessage.isEmpty()) {
-                sentMessage();
-                return;
+            if (scanner.hasNextLine()) {
+                if (!sentMessage(scanner.nextLine()))
+                    return;
             }
         }
     }
@@ -47,15 +42,16 @@ public class OutputWriter implements Runnable {
         return true;
     }
 
-    private void sentMessage() {
+    private boolean sentMessage(final String message) {
         try {
-            dataOutputStream.writeUTF(outputMessage.getMessage());
+            dataOutputStream.writeUTF(message);
+        } catch (EOFException | SocketException ignored) {
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("can't write the message");
-        } finally {
-            outputMessage.setMessage("");
         }
+        return true;
     }
 
     private void createOutputStream() {

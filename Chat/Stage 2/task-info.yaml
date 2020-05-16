@@ -10,5 +10,3 @@ files:
   visible: true
 - name: src/chat/util/OutputWriter.java
   visible: true
-- name: src/chat/util/MessageContainer.java
-  visible: true

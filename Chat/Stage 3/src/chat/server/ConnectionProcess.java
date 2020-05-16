@@ -1,41 +1,40 @@
 package chat.server;
 
+import chat.connection.InputReader;
+import chat.connection.OutputWriter;
+
 import java.net.Socket;
-import java.util.ArrayDeque;
-import java.util.List;
-import java.util.Queue;
 
 public class ConnectionProcess implements Runnable {
-    private final List<String> messageStore;
-    private final Queue<String> inputMessages = new ArrayDeque<>();
-    private final Queue<String> outputMessages = new ArrayDeque<>();
+    private static int clientNumber = 0;
+    private final int client;
+    private final InputReader inputReader;
+    private final OutputWriter outputWriter;
     private final Socket socket;
 
-    public ConnectionProcess(final Socket socket, final List<String> messageStore) {
+    public ConnectionProcess(final Socket socket) {
+        this.client = ++clientNumber;
+        System.out.printf("Client %s connected!\n", client);
         this.socket = socket;
-        this.messageStore = messageStore;
+        this.inputReader = new InputReader(socket);
+        this.outputWriter = new OutputWriter(socket);
     }
-
 
     @Override
     public void run() {
-        createIOWorkers();
-        processMessages();
-    }
-
-    private void processMessages() {
-        while (!socket.isClosed() && socket.isConnected()) {
-            final String tempMessage = inputMessages.peek();
-            if (tempMessage != null) {
-                if (tempMessage.equals("/exit")) {
-                    closeSocket();
-                    return;
-                } else {
-                    messageStore.add(tempMessage);
-                    outputMessages.add(countWords(tempMessage));
-                    inputMessages.remove();
-                }
+        while (!socket.isClosed()) {
+            final String rawMessage = inputReader.read().trim();
+            if ("/exit".equals(rawMessage)) {
+                System.out.printf("Client %s disconnected!\n", client);
+                closeSocket();
+                return;
+            } else {
+                System.out.printf("Client %s sent: %s\n", client, rawMessage);
+                final String outputMessage = countWords(rawMessage);
+                System.out.printf("Sent to client %s: %s\n", client, outputMessage);
+                outputWriter.sentMessage(outputMessage);
             }
+
         }
     }
 
@@ -47,11 +46,6 @@ public class ConnectionProcess implements Runnable {
         .length);
     }
 
-    private void createIOWorkers() {
-        createInputReader();
-        createOutputWriter();
-    }
-
     private void closeSocket() {
         try {
             socket.close();
@@ -59,11 +53,5 @@ public class ConnectionProcess implements Runnable {
         }
     }
 
-    private void createInputReader() {
-        new Thread(new InputReader(socket, inputMessages)).start();
-    }
 
-    private void createOutputWriter() {
-        new Thread(new OutputWriter(socket, outputMessages)).start();
-    }
 }

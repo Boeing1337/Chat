@@ -1,72 +1,49 @@
 package chat.client;
 
+import chat.connection.InputReader;
+import chat.connection.OutputWriter;
+
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
-    private OutputWriter outputWriter;
-    private InputReader inputReader;
-    private Socket clientSocket;
+    private final InputReader inputReader;
+    private final OutputWriter outputWriter;
+    private Socket socket;
+
+    private Client() {
+        createSocket();
+        this.inputReader = new InputReader(socket);
+        this.outputWriter = new OutputWriter(socket);
+        System.out.println("Client started!");
+    }
 
     public static void main(final String[] args) {
         new Client().start();
     }
 
     private void start() {
-        createSocket();
-        startIOWorkers();
-        scannerWork();
-
-
-    }
-
-    private void scannerWork() {
         final Scanner scanner = new Scanner(System.in);
+        while (!socket.isClosed() && scanner.hasNext()) {
 
-        while (scanner.hasNextLine()) {
-            final String temp = scanner.nextLine().trim();
-            outputWriter.addOutputMessage(temp);
-            if (temp.equals("/exit")) {
-                printInputMessages();
+            final String message = scanner.nextLine().trim();
+            outputWriter.sentMessage(message);
+
+            if ("/exit".equals(message)) {
                 closeSocket();
                 return;
+            } else {
+                System.out.println(inputReader.read());
             }
-
-
         }
     }
 
     private void closeSocket() {
         try {
-            Thread.sleep(500);
-            clientSocket.close();
+            socket.close();
         } catch (Exception ignored) {
-
         }
-    }
-
-    private void printInputMessages() {
-        for (String s : inputReader.getAllMessages()) {
-            System.out.println(s);
-        }
-    }
-
-
-    private void startIOWorkers() {
-        startInputReader();
-        startOutputWriter();
-
-    }
-
-    private void startInputReader() {
-        inputReader = new InputReader(clientSocket);
-        new Thread(inputReader).start();
-    }
-
-    private void startOutputWriter() {
-        outputWriter = new OutputWriter(clientSocket);
-        new Thread(outputWriter).start();
     }
 
     private void createSocket() {
@@ -74,7 +51,7 @@ public class Client {
         final int port = 23456;
         while (true) {
             try {
-                clientSocket = new Socket(InetAddress.getByName(address), port);
+                socket = new Socket(InetAddress.getByName(address), port);
                 return;
             } catch (Exception e) {
                 System.out.println("\n" + e + "\n[CLIENT] Can't connect to the server");

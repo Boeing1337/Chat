@@ -8,11 +8,7 @@ files:
   visible: false
 - name: src/chat/server/ConnectionProcess.java
   visible: true
-- name: src/chat/server/InputReader.java
+- name: src/chat/connection/OutputWriter.java
   visible: true
-- name: src/chat/server/OutputWriter.java
-  visible: true
-- name: src/chat/client/OutputWriter.java
-  visible: true
-- name: src/chat/client/InputReader.java
+- name: src/chat/connection/InputReader.java
   visible: true
