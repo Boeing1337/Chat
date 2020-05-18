@@ -8,6 +8,8 @@
       <module name="Chat-Stage_2_test" target="11" />
       <module name="Chat-Stage_3_main" target="11" />
       <module name="Chat-Stage_3_test" target="11" />
+      <module name="Chat-Stage_4_main" target="11" />
+      <module name="Chat-Stage_4_test" target="11" />
       <module name="Chat-task2_main" target="11" />
       <module name="Chat-task2_test" target="11" />
       <module name="lesson1-task1_main" target="1.8" />

@@ -1,31 +1,40 @@
 [1;31m
 Start test 1[0m
-> One One One
-> second one
-> going to sleep
-> /show
-One One One
-
-second one
-going to sleep
-> a  f g     h!!!!
-	> Hello!
-> 1
-> first
+Server started!
+Client started!
+Client 1 connected!
+> 1 2 3
+Client 1 sent: 1 2 3
+Sent to client 1: Count is 3
+Count is 3
+> 1 2
+Client 1 sent: 1 2
+Sent to client 1: Count is 2
+Count is 2
 > /exit
-
-Count is 3
-
-Count is 4
-
-Count is 1
+Client 1 disconnected!
+Client 2 connected!
+Client started!
+> By my hands
+Client 2 sent: By my hands
+Sent to client 2: Count is 3
+Count is 3
+Client 3 connected!
+Client started!
+> Zzzz.
+Client 3 sent: Zzzz.
+Sent to client 3: Count is 1
+Count is 1
+> want to sleep
+Client 3 sent: want to sleep
+Sent to client 3: Count is 3
+Count is 3
 > /exit
-
-Count is 2
-
-Count is 3
-
-Count is 1
+	> Repeat
+Client 3 disconnected!
+Client 2 sent: Repeat
+Sent to client 2: Count is 1
+Count is 1
 > /exit
-
-Count is 1
+Client 2 disconnected!
+%[SERVER] Can't accept a connection!
