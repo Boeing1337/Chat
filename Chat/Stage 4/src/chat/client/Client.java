@@ -17,10 +17,10 @@ public class Client {
         createSocket();
         this.inputReader = new InputReader(socket);
         this.outputWriter = new OutputWriter(socket);
-        System.out.println("Client started!");
     }
 
     public static void main(final String[] args) {
+        System.out.println("Client started!");
         new Client().start();
     }
 
@@ -59,7 +59,7 @@ public class Client {
             final String answer = inputReader.read().trim();
             if (answer.equals("welcome"))
                 break;
-           // System.out.println(answer);
+            System.out.println(answer);
         }
     }
 

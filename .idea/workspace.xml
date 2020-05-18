@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d709212-bb65-4ffb-86d0-927349d46620" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Chat/Stage 4/src/chat/client/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chat/Stage 4/src/chat/connection/InputReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chat/Stage 4/src/chat/connection/OutputWriter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chat/Stage 4/src/chat/server/ChatData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chat/Stage 4/src/chat/server/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chat/Stage 4/src/chat/server/UserThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chat/Stage 4/task-info.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chat/Stage 4/task.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chat/Stage 4/test/Tests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -26,27 +17,12 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/classes/java/main/chat/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 3/build/classes/java/main/chat/client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/classes/java/main/chat/client/InputReader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/classes/java/main/chat/client/OutputWriter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/classes/java/main/chat/server/ConnectionProcess.class" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 3/build/classes/java/main/chat/server/ConnectionProcess.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/classes/java/main/chat/server/InputReader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/classes/java/main/chat/server/OutputWriter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/classes/java/main/chat/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 3/build/classes/java/main/chat/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/classes/java/test/Tests.class" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 3/build/classes/java/test/Tests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/reports/tests/test/classes/Tests.html" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 3/build/reports/tests/test/classes/Tests.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 3/build/reports/tests/test/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/reports/tests/test/packages/default-package.html" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 3/build/reports/tests/test/packages/default-package.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/test-results/test/TEST-Tests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 3/build/test-results/test/TEST-Tests.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 3/build/test-results/test/binary/output.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 3/build/test-results/test/binary/output.bin.idx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 3/build/test-results/test/binary/results.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/lesson-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/lesson-info.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 3/test/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 3/test/Tests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 4/src/chat/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 4/src/chat/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 4/src/chat/server/ChatData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 4/src/chat/server/ChatData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 4/src/chat/server/UserThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 4/src/chat/server/UserThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 4/test/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 4/test/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -261,7 +237,7 @@
       <workItem from="1589482029832" duration="3347000" />
       <workItem from="1589630991951" duration="15524000" />
       <workItem from="1589726628800" duration="524000" />
-      <workItem from="1589804304175" duration="18068000" />
+      <workItem from="1589804304175" duration="24944000" />
     </task>
     <task id="LOCAL-00001" summary="Just test">
       <created>1589305118834</created>
@@ -284,7 +260,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589649099411</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Stage 4 in process">
+      <created>1589838976818</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1589838976819</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,7 +318,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Just test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Just test" />
+    <MESSAGE value="Stage 4 in process" />
+    <option name="LAST_COMMIT_MESSAGE" value="Stage 4 in process" />
   </component>
   <component name="WindowStateProjectService">
     <state x="872" y="380" key="#Notifications" timestamp="1589304229266">
@@ -358,30 +342,30 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="905" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1589836543754" />
-    <state x="875" y="317" key="CommitChangelistDialog2" timestamp="1589838938014">
+    <state x="875" y="317" key="CommitChangelistDialog2" timestamp="1589838976061">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="875" y="317" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1589838938014" />
+    <state x="875" y="317" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1589838976061" />
     <state x="1059" y="476" key="FileChooserDialogImpl" timestamp="1589304970754">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="1059" y="476" key="FileChooserDialogImpl/0.0.2560.1440@0.0.2560.1440" timestamp="1589304970754" />
-    <state width="2519" height="469" key="GridCell.Tab.0.bottom" timestamp="1589838938080">
+    <state width="2519" height="469" key="GridCell.Tab.0.bottom" timestamp="1589844443691">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="469" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1589838938080" />
-    <state width="2519" height="469" key="GridCell.Tab.0.center" timestamp="1589838938079">
+    <state width="2519" height="469" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1589844443691" />
+    <state width="2519" height="469" key="GridCell.Tab.0.center" timestamp="1589844443691">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="469" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1589838938079" />
-    <state width="2519" height="469" key="GridCell.Tab.0.left" timestamp="1589838938079">
+    <state width="2519" height="469" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1589844443691" />
+    <state width="2519" height="469" key="GridCell.Tab.0.left" timestamp="1589844443691">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="469" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1589838938079" />
-    <state width="2519" height="469" key="GridCell.Tab.0.right" timestamp="1589838938079">
+    <state width="2519" height="469" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1589844443691" />
+    <state width="2519" height="469" key="GridCell.Tab.0.right" timestamp="1589844443691">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="469" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1589838938079" />
+    <state width="2519" height="469" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1589844443691" />
     <state width="2519" height="508" key="GridCell.Tab.1.bottom" timestamp="1588367961346">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>

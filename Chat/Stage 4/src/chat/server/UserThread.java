@@ -50,7 +50,6 @@ public class UserThread implements Runnable {
     }
 
     protected void sentMessage(final String message) {
-        System.out.println("EO");
         outputWriter.sentMessage(message);
     }
 

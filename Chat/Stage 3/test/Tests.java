@@ -23,16 +23,13 @@ public class Tests extends StageTest<String> {
 
         //////Client 1
 
-        final String output = client1.start();
+        final String client1Start = client1.start();
         sleep(startAppsPause);
 
-        //TO DO: can't get output by getOutput method right now.
+        //TO DO: can't get client1Start by getOutput method right now.
         // If else startAppPause would be 1000ms
 
-        if (output == null)
-            return CheckResult.wrong("Can't get the \"Client started!\" message");
-
-        if (!"Client started!".equals(output.trim()))
+        if (client1Start == null || !"Client started!".equals(client1Start.trim()))
             return CheckResult.wrong("Can't get the \"Client started!\" message");
 
         String client1Answer = client1.execute("1 2 3").trim();

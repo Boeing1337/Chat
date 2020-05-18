@@ -11,9 +11,8 @@ public class ChatData {
     private final HashMap<String, UserThread> users = new HashMap<>();
 
     synchronized boolean registry(@NotNull final UserThread userThread,
-                                  @NotNull String userName) {
-        userName = userName.trim();
-        if (isUserExist(userName))
+                                  @NotNull final String userName) {
+        if (users.get(userName) != null)
             return false;
 
         users.put(userName, userThread);
@@ -27,10 +26,6 @@ public class ChatData {
     synchronized void addMessage(@NotNull final String message) {
         messages.add(message);
         users.forEach((a, b) -> b.sentMessage(message));
-    }
-
-    private boolean isUserExist(final String user) {
-        return users.get(user) != null;
     }
 
     synchronized String getLastMessages() {
