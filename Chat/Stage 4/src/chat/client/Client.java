@@ -43,8 +43,10 @@ public class Client {
         while (scanner.hasNextLine()) {
             final String input = scanner.nextLine().trim();
             outputWriter.sentMessage(input);
-            if (input.equals("/exit"))
+            if (input.equals("/exit")) {
+                closeSocket();
                 return;
+            }
 
         }
     }

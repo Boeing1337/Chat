@@ -30,10 +30,10 @@ public class ChatData {
 
     synchronized String getLastMessages() {
         final StringBuilder string = new StringBuilder();
-        for (int i = messages.size() - 1, s = 0; s < 10 && i >= 0; i--, s++) {
-            string.append(messages.get(i));
+        for (int i = 0; i < 10 && i < messages.size(); i++) {
+            string.append(messages.get(i)).append("\n");
         }
-        return string.toString();
+        return string.toString().trim();
     }
 
 }

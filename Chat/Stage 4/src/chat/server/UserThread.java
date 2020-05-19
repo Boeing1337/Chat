@@ -41,7 +41,7 @@ public class UserThread implements Runnable {
             final String tempMessage = inputReader.read().trim();
             if (tempMessage.equals("/exit")) {
                 chatData.unRegistry(userName);
-                closeSocket();
+               // closeSocket();
                 return;
             } else {
                 chatData.addMessage(userName + ": " + tempMessage);
