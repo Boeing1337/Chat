@@ -21,7 +21,7 @@ public class UserThread implements Runnable {
 
     @Override
     public void run() {
-        outputWriter.sentMessage("Server: write your name.");
+
         while (!socket.isClosed()) {
             final String tempUserName = inputReader.read().trim();
             if (chatData.registry(this, tempUserName)) {
@@ -41,7 +41,7 @@ public class UserThread implements Runnable {
             final String tempMessage = inputReader.read().trim();
             if (tempMessage.equals("/exit")) {
                 chatData.unRegistry(userName);
-               // closeSocket();
+                // closeSocket();
                 return;
             } else {
                 chatData.addMessage(userName + ": " + tempMessage);

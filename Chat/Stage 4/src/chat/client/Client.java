@@ -53,7 +53,6 @@ public class Client {
 
     private void registration() {
         System.out.println(inputReader.read());
-
         while (scanner.hasNextLine()) {
             final String input = scanner.nextLine().trim();
             outputWriter.sentMessage(input);
