@@ -38,14 +38,14 @@ public class Tests extends StageTest<String> {
 
         String client1Answer = client1.getOutput().trim();
         if (!(countIs + "3").equals(client1Answer))
-            return CheckResult.wrong("A Client show wrong answer!");
+            return CheckResult.wrong("Client showed a wrong answer!");
 
         client1.execute("1 2");
         sleep(executePause);
 
         client1Answer = client1.getOutput().trim();
         if (!(countIs + "2").equals(client1Answer))
-            return CheckResult.wrong("A Client show wrong answer!");
+            return CheckResult.wrong("Client showed a wrong answer!");
 
         client1.execute("/exit");
         sleep(executePause);
@@ -54,31 +54,45 @@ public class Tests extends StageTest<String> {
 
         client2.start();
         sleep(startAppsPause);
+        client2.getOutput();
 
-        String client2Answer = client2.execute("By my hands").trim();
+        client2.execute("By my hands");
+        sleep(executePause);
+
+        String client2Answer = client2.getOutput().trim();
         if (!(countIs + "3").equals(client2Answer))
-            return CheckResult.wrong("A Client show wrong answer!");
+            return CheckResult.wrong("Client showed a wrong answer!");
 
         /////Client 3
 
         client3.start();
         sleep(startAppsPause);
+        client3.getOutput();
 
-        String client3Answer = client3.execute("Zzzz.").trim();
+        client3.execute("Zzzz.");
+        sleep(executePause);
+
+        String client3Answer = client3.getOutput().trim();
         if (!(countIs + "1").equals(client3Answer))
-            return CheckResult.wrong("A Client show wrong answer!");
+            return CheckResult.wrong("Client showed a wrong answer!");
 
-        client3Answer = client3.execute("want to sleep").trim();
+        client3.execute("want to sleep");
+        sleep(executePause);
+
+        client3Answer = client3.getOutput().trim();
         if (!(countIs + "3").equals(client3Answer))
-            return CheckResult.wrong("A Client show wrong answer!");
+            return CheckResult.wrong("Client showed a wrong answer!");
 
         client3.execute("/exit");
 
         //////Client 2 AGAIN
 
-        client2Answer = client2.execute("Repeat").trim();
+        client2.execute("Repeat");
+        sleep(executePause);
+
+        client2Answer = client2.getOutput().trim();
         if (!(countIs + "1").equals(client2Answer))
-            return CheckResult.wrong("A Client show wrong answer!");
+            return CheckResult.wrong("Client showed a wrong answer!");
 
         client2.execute("/exit");
         sleep(executePause);
@@ -111,7 +125,8 @@ public class Tests extends StageTest<String> {
         "Sent to client 2: " + countIs + "1\n" +
         "Client 2 disconnected!"
         ))
-            return CheckResult.wrong("Server show wrong messages");
+            return CheckResult.wrong(
+            "Server showed wrong messages or messages in wrong order");
 
 
         return CheckResult.correct();
