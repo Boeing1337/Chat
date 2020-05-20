@@ -8,6 +8,8 @@ import org.hyperskill.hstest.testing.TestedProgram;
 import static org.hyperskill.hstest.common.Utils.sleep;
 
 public class Tests extends StageTest<String> {
+    private final int startAppsPause = 50; //50 is guaranty (c)
+    private final int executePause = 25;
 
     @DynamicTestingMethod
     CheckResult test() {
@@ -15,32 +17,38 @@ public class Tests extends StageTest<String> {
         final TestedProgram client1 = new TestedProgram(Client.class);
         final TestedProgram client2 = new TestedProgram(Client.class);
         final TestedProgram client3 = new TestedProgram(Client.class);
+        client1.setReturnOutputAfterExecution(false);
+        client2.setReturnOutputAfterExecution(false);
+        client3.setReturnOutputAfterExecution(false);
         final String countIs = "Count is ";
 
-        final int startAppsPause = 50; //50 is guaranty (c)
-        final int executePause = 25;
         server.startInBackground();
 
         //////Client 1
 
-        final String client1Start = client1.start();
+        client1.start();
         sleep(startAppsPause);
 
-        //TO DO: can't get client1Start by getOutput method right now.
-        // If else startAppPause would be 1000ms
-
-        if (client1Start == null || !"Client started!".equals(client1Start.trim()))
+        final String client1Start = client1.getOutput().trim();
+        if (!"Client started!".equals(client1Start))
             return CheckResult.wrong("Can't get the \"Client started!\" message");
 
-        String client1Answer = client1.execute("1 2 3").trim();
+        client1.execute("1 2 3");
+        sleep(executePause);
+
+        String client1Answer = client1.getOutput().trim();
         if (!(countIs + "3").equals(client1Answer))
             return CheckResult.wrong("A Client show wrong answer!");
 
-        client1Answer = client1.execute("1 2").trim();
+        client1.execute("1 2");
+        sleep(executePause);
+
+        client1Answer = client1.getOutput().trim();
         if (!(countIs + "2").equals(client1Answer))
             return CheckResult.wrong("A Client show wrong answer!");
 
         client1.execute("/exit");
+        sleep(executePause);
 
         //////Client 2
 

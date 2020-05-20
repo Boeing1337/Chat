@@ -9,42 +9,53 @@ import static org.hyperskill.hstest.common.Utils.sleep;
 
 public class Tests extends StageTest<String> {
 
+    private final int executePause = 25;
+    private final int startAppsPause = 50; //50 is guaranty (c)
 
     @DynamicTestingMethod
     CheckResult test() {
-        TestedProgram server = new TestedProgram(Server.class);
-        TestedProgram client = new TestedProgram(Client.class);
-        final int executePause = 25;
-        final int startAppsPause = 50; //50 is guaranty (c)
+        final TestedProgram server1 = new TestedProgram(Server.class);
+        final TestedProgram client1 = new TestedProgram(Client.class);
+        client1.setReturnOutputAfterExecution(false);
         final String fromServerMsg1 = "Fuzzy Buzzy!";
         final String fromServerMsg2 = "The Batman is here!";
         final String fromClientMsg = "You are in my mind!";
 
-        server.startInBackground();
-        client.start();
+        server1.startInBackground();
+        client1.start();
         sleep(startAppsPause);
 
-        client.execute(fromClientMsg);
+        if (!client1.getOutput().trim().equals("Client started!"))
+            return CheckResult.wrong("Can't get the \"Client started\" message from " +
+            "a client");
+
+        if (!server1.getOutput().trim().equals("Server started!"))
+            return CheckResult.wrong("Can't get the \"Server started!\" message from a " +
+            "server");
+
+        client1.execute(fromClientMsg);
         sleep(executePause);
 
-        if (!server.getOutput().trim().equals(fromClientMsg))
+        if (!server1.getOutput().trim().equals(fromClientMsg))
             return CheckResult.wrong("server showed wrong message");
 
-        server.stop();
-        client.stop();
+        server1.stop();
+        client1.stop();
 
-        server = new TestedProgram(Server.class); //apps can't be twice started
-        client = new TestedProgram(Client.class);
+        final TestedProgram server2 = new TestedProgram(Server.class);
+        final TestedProgram client2 = new TestedProgram(Client.class);
+        client2.setReturnOutputAfterExecution(false);
 
-        client.startInBackground();
-        server.start();
+        client2.startInBackground();
+        server2.start();
         sleep(startAppsPause);
+        client2.getOutput();
 
-        server.execute(fromServerMsg1);
-        server.execute(fromServerMsg2);
+        server2.execute(fromServerMsg1);
+        server2.execute(fromServerMsg2);
         sleep(executePause);
 
-        final String answerFromServer = client.getOutput().trim();
+        final String answerFromServer = client2.getOutput().trim();
 
         if (answerFromServer.equals(fromServerMsg2 + "\n" + fromServerMsg1))
             return CheckResult.wrong("client showed messages in wrong order!");

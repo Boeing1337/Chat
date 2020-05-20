@@ -14,10 +14,15 @@ public class Client {
     }
 
     private void start() {
+        announce();
         createSocket();
         createIOWorkers();
         pause();
         closeSocket();
+    }
+
+    private void announce() {
+        System.out.println("Client started!");
     }
 
     private void pause() {

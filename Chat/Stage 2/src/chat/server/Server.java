@@ -15,10 +15,15 @@ public class Server {
     }
 
     private void start() {
+        announce();
         createServerSocket();
         createIOWorkersThread();
         pause();
         closeSocket();
+    }
+
+    private void announce() {
+        System.out.println("Server started!");
     }
 
     private void pause() {
