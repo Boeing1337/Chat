@@ -72,7 +72,7 @@ public class Tests extends StageTest<String> {
 
         final String client3Answer1 = client3.getOutput().trim();
         if (client3Answer1.isEmpty() || !client3Answer1.trim().equals("Server: This name is in use! Choose " +
-        "another one:"))
+        "another one."))
             return CheckResult.wrong("Can't get the \"Server: This name is in use! " +
             "Choose another one:\" message after login with name that already in use");
 
@@ -81,7 +81,7 @@ public class Tests extends StageTest<String> {
 
         final String client3Answer2 = client3.getOutput().trim();
         if (client3Answer2.isEmpty() || !client3Answer2.trim().equals("Server: This name is in use! Choose " +
-        "another one:"))
+        "another one."))
             return CheckResult.wrong("Can't get the \"Server: This name is in use! " +
             "Choose another one:\" message after login with name than already in use");
 
