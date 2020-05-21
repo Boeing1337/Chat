@@ -14,3 +14,7 @@ files:
   visible: true
 - name: test/Tests.java
   visible: false
+- name: src/chat/server/util/Analyzer.java
+  visible: true
+- name: src/chat/server/IOManager.java
+  visible: true
