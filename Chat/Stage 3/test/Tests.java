@@ -8,7 +8,7 @@ import org.hyperskill.hstest.testing.TestedProgram;
 import static org.hyperskill.hstest.common.Utils.sleep;
 
 public class Tests extends StageTest<String> {
-    private final int startAppsPause = 50; //50 is guaranty (c)
+    private final int startAppsPause = 50;
     private final int executePause = 25;
 
     @DynamicTestingMethod
@@ -36,15 +36,15 @@ public class Tests extends StageTest<String> {
         client1.execute("1 2 3");
         sleep(executePause);
 
-        String client1Answer = client1.getOutput().trim();
-        if (!(countIs + "3").equals(client1Answer))
+        final String client1Answer1 = client1.getOutput().trim();
+        if (!(countIs + "3").equals(client1Answer1))
             return CheckResult.wrong("Client showed a wrong answer!");
 
         client1.execute("1 2");
         sleep(executePause);
 
-        client1Answer = client1.getOutput().trim();
-        if (!(countIs + "2").equals(client1Answer))
+        final String client1Answer2 = client1.getOutput().trim();
+        if (!(countIs + "2").equals(client1Answer2))
             return CheckResult.wrong("Client showed a wrong answer!");
 
         client1.execute("/exit");
@@ -59,8 +59,8 @@ public class Tests extends StageTest<String> {
         client2.execute("By my hands");
         sleep(executePause);
 
-        String client2Answer = client2.getOutput().trim();
-        if (!(countIs + "3").equals(client2Answer))
+        final String client2Answer1 = client2.getOutput().trim();
+        if (!(countIs + "3").equals(client2Answer1))
             return CheckResult.wrong("Client showed a wrong answer!");
 
         /////Client 3
@@ -72,15 +72,15 @@ public class Tests extends StageTest<String> {
         client3.execute("Zzzz.");
         sleep(executePause);
 
-        String client3Answer = client3.getOutput().trim();
-        if (!(countIs + "1").equals(client3Answer))
+        final String client3Answer1 = client3.getOutput().trim();
+        if (!(countIs + "1").equals(client3Answer1))
             return CheckResult.wrong("Client showed a wrong answer!");
 
         client3.execute("want to sleep");
         sleep(executePause);
 
-        client3Answer = client3.getOutput().trim();
-        if (!(countIs + "3").equals(client3Answer))
+        final String client3Answer2 = client3.getOutput().trim();
+        if (!(countIs + "3").equals(client3Answer2))
             return CheckResult.wrong("Client showed a wrong answer!");
 
         client3.execute("/exit");
@@ -90,8 +90,8 @@ public class Tests extends StageTest<String> {
         client2.execute("Repeat");
         sleep(executePause);
 
-        client2Answer = client2.getOutput().trim();
-        if (!(countIs + "1").equals(client2Answer))
+        final String client2Answer2 = client2.getOutput().trim();
+        if (!(countIs + "1").equals(client2Answer2))
             return CheckResult.wrong("Client showed a wrong answer!");
 
         client2.execute("/exit");

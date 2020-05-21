@@ -13,15 +13,11 @@ public class Server {
     }
 
     private void start() {
-        announce();
+        System.out.println("Server started!");
         createServerSocket();
         createSocketDealer();
         pause();
         closeSocket();
-    }
-
-    private void announce() {
-        System.out.println("Server started!");
     }
 
     private void pause() {

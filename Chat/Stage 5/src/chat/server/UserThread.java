@@ -21,15 +21,9 @@ public class UserThread implements Runnable {
 
     @Override
     public void run() {
-        sendDefaultMessage();
-        registration();
-        chatting();
-    }
-
-    private void registration() {
+        outputWriter.sentMessage("Server: write your name.");
         while (!socket.isClosed()) {
             final String tempUserName = inputReader.read().trim();
-
             if (chatData.registry(this, tempUserName)) {
                 this.userName = tempUserName;
                 outputWriter.sentMessage("welcome");
@@ -41,9 +35,8 @@ public class UserThread implements Runnable {
                 outputWriter.sentMessage("Server: This name is in use! Choose another one:");
             }
         }
-    }
 
-    private void chatting() {
+
         while (!socket.isClosed()) {
             final String tempMessage = inputReader.read().trim();
             if (tempMessage.equals("/exit")) {
@@ -54,11 +47,6 @@ public class UserThread implements Runnable {
                 chatData.addMessage(userName + ": " + tempMessage);
             }
         }
-    }
-
-
-    private void sendDefaultMessage() {
-        outputWriter.sentMessage("Server: write your name.");
     }
 
     protected void sentMessage(final String message) {

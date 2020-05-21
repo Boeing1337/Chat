@@ -8,6 +8,7 @@ import org.hyperskill.hstest.testing.TestedProgram;
 import static org.hyperskill.hstest.common.Utils.sleep;
 
 public class Tests extends StageTest<String> {
+    private final int executePause = 50;
 
     @DynamicTestingMethod
     CheckResult test() {
@@ -15,97 +16,135 @@ public class Tests extends StageTest<String> {
         final TestedProgram client1 = new TestedProgram(Client.class);
         final TestedProgram client2 = new TestedProgram(Client.class);
         final TestedProgram client3 = new TestedProgram(Client.class);
-        final int pause = 50;
+        client1.setReturnOutputAfterExecution(false);
+        client2.setReturnOutputAfterExecution(false);
+        client3.setReturnOutputAfterExecution(false);
 
         server.startInBackground();
-        final String client1Start = client1.start();
+        sleep(executePause);
+        client1.start();
+        sleep(executePause);
         client2.start();
+        sleep(executePause);
         client3.start();
-        sleep(pause);
+        sleep(executePause);
+        client3.getOutput();
+        client2.getOutput();
 
-        //TO DO: can't get output by getOutput method right now.
-        // If else startAppPause would be 1000ms
-        if (client1Start == null || !"Client started!\nServer: write your name.".equals(client1Start.trim()))
-            return CheckResult.wrong("Can't get the \"Client started!\nServer: write your name.\" message");
+        final String client1Start = client1.getOutput().trim();
+        if (!"Client started!\nServer: write your name.".equals(client1Start.trim()))
+            return CheckResult.wrong("Can't get the \"Client started!\nServer: write " +
+            "your name.\" messages");
 
-        String temp1 = client1.execute("First");
-        if (!temp1.isEmpty())
+        client1.execute("First");
+        sleep(executePause);
+
+        final String client1Answer1 = client1.getOutput().trim();
+        if (!client1Answer1.isEmpty())
             return CheckResult.wrong("Client receive a message after successful " +
             "login, but shouldn't");
 
         client1.execute("Hello all!");
-        sleep(pause);
+        sleep(executePause);
 
-        temp1 = client1.getOutput();
-        if (temp1 == null || !temp1.trim().equals("First: Hello all!"))
+        final String client1Answer2 = client1.getOutput().trim();
+        if (client1Answer2.isEmpty() || !client1Answer2.equals("First: Hello all!"))
             return CheckResult.wrong("Client receive wrong message");
 
-        String temp2 = client2.getOutput();
-        if (temp2.trim().equals("First: Hello all!"))
+
+        final String client2Answer1 = client2.getOutput().trim();
+        if (client2Answer1.trim().equals("First: Hello all!"))
             return CheckResult.wrong("Client print a message from chat before login " +
             "yet!");
-        if (!temp2.isEmpty())
+        if (!client2Answer1.isEmpty())
             return CheckResult.wrong("Client print a message before login but shouldn't");
 
-        client2.execute("Second");  //TO DO (1.1) execute didn't return String
-        sleep(pause);
+        client2.execute("Second");
+        sleep(executePause);
 
-        temp2 = client2.getOutput().trim();  //TO DO (1.2) String is returned by getOutput
-        if (!temp2.equals("First: Hello all!"))
+        final String client2Answer2 = client2.getOutput().trim();
+        if (!client2Answer2.equals("First: Hello all!"))
+            return CheckResult.wrong("Client should receive and print last 10 messages " +
+            "after login");
+
+        client3.execute("First");
+        sleep(executePause);
+
+        final String client3Answer1 = client3.getOutput().trim();
+        if (client3Answer1.isEmpty() || !client3Answer1.trim().equals("Server: This name is in use! Choose " +
+        "another one:"))
+            return CheckResult.wrong("Can't get the \"Server: This name is in use! " +
+            "Choose another one:\" message after login with name that already in use");
+
+        client3.execute("Second");
+        sleep(executePause);
+
+        final String client3Answer2 = client3.getOutput().trim();
+        if (client3Answer2.isEmpty() || !client3Answer2.trim().equals("Server: This name is in use! Choose " +
+        "another one:"))
+            return CheckResult.wrong("Can't get the \"Server: This name is in use! " +
+            "Choose another one:\" message after login with name than already in use");
+
+        client2.execute("Bye bye!");
+        sleep(executePause);
+
+        final String client1Answer3 = client1.getOutput().trim();
+        final String client2Answer3 = client2.getOutput().trim();
+
+        if (client1Answer3.isEmpty() || client2Answer3.isEmpty())
+            return CheckResult.wrong("Client didn't receive a message");
+
+        if (!client1Answer3.equals("Second: Bye bye!") || !client2Answer3.equals("Second: Bye " +
+        "bye!"))
+            return CheckResult.wrong("Client receive a wrong message");
+
+        client2.execute("First message");
+        sleep(executePause);
+        client2.execute("Second message");
+        sleep(executePause);
+        client2.execute("Third message");
+        sleep(executePause);
+        client2.execute("Fourth message");
+        sleep(executePause);
+        client2.execute("Fifth message");
+        sleep(executePause);
+        client2.execute("Sixth message");
+        sleep(executePause);
+        client2.execute("Seventh message");
+        sleep(executePause);
+        client2.execute("Eighth message");
+        sleep(executePause);
+        client2.execute("Ninth message");
+        sleep(executePause);
+        client2.execute("Tenth message");
+        sleep(executePause);
+        client2.execute("/exit");
+        sleep(executePause);
+
+        if (!client2.isFinished())
+            return CheckResult.wrong("Client's program should shut down after /exit " +
+            "command");
+
+        client3.execute("Third");
+        sleep(executePause);
+
+        final String client3Answer3 = client3.getOutput().trim();
+        if (!client3Answer3.equals(
+        "Second: First message\n" +
+        "Second: Second message\n" +
+        "Second: Third message\n" +
+        "Second: Fourth message\n" +
+        "Second: Fifth message\n" +
+        "Second: Sixth message\n" +
+        "Second: Seventh message\n" +
+        "Second: Eighth message\n" +
+        "Second: Ninth message\n" +
+        "Second: Tenth message"))
             return CheckResult.wrong("Client should receive and print 10 last messages " +
             "after " +
             "login");
-
-        String temp3 = client3.execute("First");  // TO DO (1.3) execute() return a
-                                                        // String instantly
-
-        if (temp3.isEmpty() || !temp3.trim().equals("Server: This name is in use! Choose " +
-        "another one:"))
-            return CheckResult.wrong("Can't get the \"Server: This name is in use! " +
-            "Choose another one:\" message after login with name than already in use");
-
-        temp3 = client3.execute("Second");
-        if (temp3.isEmpty() || !temp3.trim().equals("Server: This name is in use! Choose " +
-        "another one:"))
-            return CheckResult.wrong("Can't get the \"Server: This name is in use! " +
-            "Choose another one:\" message after login with name than already in use");
-
-       // sleep(pause);
-
-        System.out.println(client2.execute("Bye bye!"));
-        sleep(pause);
-        sleep(pause);
-
-        temp1 = client2.getOutput().trim();//TO DO (2.1) cut message from client 2
-        sleep(pause);
-        temp2 = client1.getOutput().trim();
-
-        System.out.println(temp1);
-        System.out.println(temp2);
-
-        if (temp1.isEmpty() || temp2.isEmpty())
-            return CheckResult.wrong("Client didn't receive a message");
-
-        if (!temp1.equals("Second: Bye bye!") || !temp2.equals("Second: Bye bye!"))
-            return CheckResult.wrong("Client receive wrong message");
-
 
 
         return CheckResult.correct();
     }
 }
-/*
-        client2.execute("/exit");
-        if (!client2.isFinished())
-            return CheckResult.wrong("Client's program should shut down after /exit " +
-            "command");
-
-        temp3 = client3.execute("Third");
-        sleep(pause);
-        temp3 = client3.getOutput().trim();
-        System.out.println("\n\n"+temp3+"\n\n");
-        if (!temp3.equals("First: Hello all!\nSecond: Bye bye!"))
-            return CheckResult.wrong("Client should receive and print 10 last messages " +
-            "after " +
-            "login");
- */

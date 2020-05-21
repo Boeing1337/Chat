@@ -20,18 +20,14 @@ public class Client {
     }
 
     public static void main(final String[] args) {
+        System.out.println("Client started!");
         new Client().start();
     }
 
     private void start() {
-        announce();
         registration();
         createInputThread();
         chatting();
-    }
-
-    private void announce() {
-        System.out.println("Client started!");
     }
 
     private void createInputThread() {
@@ -86,7 +82,7 @@ public class Client {
                 System.out.println("\n" + e + "\n[CLIENT] Can't connect to the server");
             }
             try {
-                Thread.sleep(50);
+                Thread.sleep(500);
             } catch (Exception ignored) {
                 System.out.println("[CLIENT] Client is awoken from being asleep!");
             }
