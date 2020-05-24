@@ -1,5 +1,7 @@
 package chat.server;
 
+import chat.server.util.Message;
+
 import java.net.Socket;
 
 public class UserThread implements Runnable {
@@ -15,39 +17,33 @@ public class UserThread implements Runnable {
     @Override
     public void run() {
         sendDefaultMessage();
-        registrationOrLogin();
+        authOrRegister();
         chatting();
     }
 
-    private void registrationOrLogin() {
-        while (!ioManager.isSocketClosed()) {
-            final String tempInput = ioManager.read();
+    private void chatting() {
 
-
-            if (chatData.registry(this, tempInput)) {
-                this.userName = tempInput;
-                ioManager.sent("welcome");
-                final String temp = chatData.getLastMessages();
-                if (!temp.isEmpty())
-                    ioManager.sent(temp);
-                break;
-            } else {
-                ioManager.sent("Server: This name is in use! Choose another one:");
-            }
-        }
     }
 
-    private void chatting() {
-        while (!ioManager.isSocketClosed()) {
-            final String tempMessage = ioManager.read();
-            if (tempMessage.equals("/exit")) {
-                chatData.unRegistry(userName);
-                ioManager.closeSocket();
-                return;
+    private void authOrRegister() {
+        while (true) {
+            Message message = new Message(ioManager.read());
+
+            if (message.getCommand().equals("registration")) {
+                if (chatData.registry(this, message.getLogin(), message.getPass())) {
+                    userName = message.getLogin();
+                    return;
+                }
+            } else if (message.getCommand().equals("auth")) {
+                if (chatData.auth(this, message.getLogin(), message.getPass())) {
+                    userName = message.getLogin();
+                    return;
+                }
             } else {
-                chatData.addMessage(userName + ": " + tempMessage);
+                ioManager.sent("You are not in the chat!");
             }
         }
+
     }
 
 
@@ -61,3 +57,5 @@ public class UserThread implements Runnable {
 
 
 }
+
+

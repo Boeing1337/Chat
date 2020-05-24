@@ -8,13 +8,15 @@ files:
   visible: true
 - name: src/chat/connection/InputReader.java
   visible: true
-- name: src/chat/server/UserThread.java
+- name: test/Tests.java
+  visible: false
+- name: src/chat/server/IOManager.java
   visible: true
 - name: src/chat/server/ChatData.java
   visible: true
-- name: test/Tests.java
-  visible: false
-- name: src/chat/server/util/Analyzer.java
+- name: src/chat/server/UserThread.java
   visible: true
-- name: src/chat/server/IOManager.java
+- name: src/chat/server/Chat.java
+  visible: true
+- name: src/chat/server/util/Message.java
   visible: true

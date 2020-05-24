@@ -1,40 +1,52 @@
 package chat.server;
 
-import org.jetbrains.annotations.NotNull;
+import chat.server.util.Message;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 public class ChatData {
-    private final List<String> messages = new ArrayList<>();
-    private final HashMap<String, UserThread> users = new HashMap<>();
+    private final Map<String, UserThread> onlineUsers = new HashMap<>();
+    private final Map<String, String> allUsers = new HashMap<>();
 
-    synchronized boolean registry(@NotNull final UserThread userThread,
-                                  @NotNull final String userName) {
-        if (users.get(userName) != null)
+    synchronized boolean registry(final UserThread userThread, final String login,
+                                  final String pass) {
+
+        if (allUsers.get(login) != null) {
+            userThread.sentMessage("This login is already in use!");
             return false;
+        }
+        if (pass.length() < 8) {
+            userThread.sentMessage("The password is too short");
+            return false;
+        }
 
-        users.put(userName, userThread);
+        allUsers.put(login, pass);
+        onlineUsers.put(login, userThread);
         return true;
     }
 
-    void unRegistry(@NotNull final String userName) {
-        users.remove(userName);
-    }
+    synchronized boolean auth(final UserThread userThread, final String login,
+                              final String pass) {
 
-    synchronized void addMessage(@NotNull final String message) {
-        messages.add(message);
-        users.forEach((a, b) -> b.sentMessage(message));
-    }
+        final String tempPass = allUsers.get(login);
 
-    synchronized String getLastMessages() {
-        final StringBuilder string = new StringBuilder();
-        int i = messages.size() > 10 ? messages.size() - 10 : 0;
-        for (; i < messages.size(); i++) {
-            string.append(messages.get(i)).append("\n");
+        if (tempPass == null || !tempPass.equals(pass)) {
+            userThread.sentMessage("Wrong users' data!");
+            return false;
         }
-        return string.toString().trim();
+
+        onlineUsers.put(login, userThread);
+        return true;
     }
+
+    synchronized void sentMessage(final UserThread userThread, final Message message) {
+
+    }
+
+    synchronized void getLastMessages() {
+
+    }
+
 
 }
