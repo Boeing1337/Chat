@@ -17,6 +17,7 @@ public class InputReader {
     public String read() {
         try {
             return dataInputStream.readUTF();
+        } catch (EOFException | SocketException ignored) {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("can't read the message");

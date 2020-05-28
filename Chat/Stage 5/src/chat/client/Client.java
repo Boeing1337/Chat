@@ -25,9 +25,8 @@ public class Client {
 
     private void start() {
         announce();
-        registration();
         createInputThread();
-        chatting();
+        sending();
     }
 
     private void announce() {
@@ -43,7 +42,7 @@ public class Client {
         }).start();
     }
 
-    private void chatting() {
+    private void sending() {
         while (scanner.hasNextLine()) {
             final String input = scanner.nextLine().trim();
             outputWriter.sentMessage(input);
@@ -52,19 +51,6 @@ public class Client {
                 return;
             }
 
-        }
-    }
-
-    private void registration() {
-        System.out.println(inputReader.read());
-        while (scanner.hasNextLine()) {
-            final String input = scanner.nextLine().trim();
-            outputWriter.sentMessage(input);
-
-            final String answer = inputReader.read().trim();
-            if (answer.equals("welcome"))
-                break;
-            System.out.println(answer);
         }
     }
 

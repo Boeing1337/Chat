@@ -32,7 +32,6 @@ public class UserThread implements Runnable {
 
             if (chatData.registry(this, tempUserName)) {
                 this.userName = tempUserName;
-                outputWriter.sentMessage("welcome");
                 final String temp = chatData.getLastMessages();
                 if (!temp.isEmpty())
                     outputWriter.sentMessage(temp);

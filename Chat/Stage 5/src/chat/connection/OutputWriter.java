@@ -18,6 +18,7 @@ public class OutputWriter {
     public void sentMessage(final String message) {
         try {
             dataOutputStream.writeUTF(message);
+        } catch (EOFException | SocketException ignored) {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("can't write the message");
