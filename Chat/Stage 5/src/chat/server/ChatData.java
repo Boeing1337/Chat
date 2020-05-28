@@ -4,10 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ChatData {
     private final Map<String, UserThread> onlineUsers = new HashMap<>();
@@ -86,8 +83,23 @@ public class ChatData {
         return new File(toUser + "/" + fromUser).exists();
     }
 
-    synchronized void getLastMessages(final String fromUser, final String toUser) {
-
+    synchronized String getLastMessages(final String fromUser, final String toUser) {
+        if (!isFileExist(fromUser, toUser))
+            return "";
+        File file = new File(toUser + "/" + fromUser);
+        try (Scanner scanner = new Scanner(file)) {
+            ArrayList<String> temp = new ArrayList<>();
+            while (scanner.hasNextLine()) {
+                temp.add(scanner.nextLine());
+            }
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = temp.size(); i >= 0; i--) {
+                stringBuilder.append("\n").append(temp.get(i));
+            }
+            return stringBuilder.toString().trim();
+        } catch (Exception ignored) {
+        }
+        return "";
     }
 
     synchronized void logOut(final String userName) {

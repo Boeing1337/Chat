@@ -34,7 +34,9 @@ public class UserThread implements Runnable {
                     if (chatData.isAddresseeOnline(message.getTarget())) {
                         chatData.removeConversation(userName, addressee);
                         chatData.creatConversation(userName, addressee);
-                        chatData.getLastMessages(userName, addressee);
+                        final String temp = chatData.getLastMessages(userName, addressee);
+                        if (!temp.isEmpty())
+                            ioManager.sent(temp);
                         addressee = message.getTarget();
                     } else {
                         ioManager.sent("User is not online!");
