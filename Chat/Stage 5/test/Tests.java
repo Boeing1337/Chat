@@ -5,7 +5,10 @@ import org.hyperskill.hstest.stage.StageTest;
 import org.hyperskill.hstest.testcase.CheckResult;
 import org.hyperskill.hstest.testing.TestedProgram;
 
+import static org.hyperskill.hstest.common.Utils.sleep;
+
 public class Tests extends StageTest<String> {
+    private String space = "\n\n";
 
     @DynamicTestingMethod
     CheckResult test() {
@@ -22,7 +25,16 @@ public class Tests extends StageTest<String> {
         client2.start();
 
         client1.execute("/auth asdasd asdasd");
-        System.out.println(client1.getOutput().trim());
+        client2.execute("/registration login passssss");
+        client2.execute("/exit");
+
+        sleep(50);
+        client1.execute("/auth login passssss");
+        sleep(50);
+        System.out.println(space + client1.getOutput().trim() + space);
+        client1.execute("/list");
+        sleep(50);
+        System.out.println(space + client1.getOutput().trim() + space);
 
 
         return CheckResult.correct();
