@@ -15,19 +15,21 @@ public class ChatData {
                                   final String pass) {
 
         if (allUsers.get(login) != null) {
-            userThread.sentMessage("This login is already in use!");
+            userThread.sentMessage("this login is already in use!");
             return false;
         }
         if (pass.length() < 8) {
-            userThread.sentMessage("The password is too short");
+            userThread.sentMessage("the password is too short");
             return false;
         }
 
         allUsers.put(login, pass);
         onlineUsers.put(login, userThread);
+        userThread.sentMessage("you are registered successfully!");
         try {
             Files.createDirectories(Paths.get(login));
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return true;
     }
@@ -38,14 +40,15 @@ public class ChatData {
         final String tempPass = allUsers.get(login);
 
         if (tempPass == null) {
-            userThread.sentMessage("Incorrect login!");
+            userThread.sentMessage("incorrect login!");
             return false;
         }
         if (!tempPass.equals(pass)) {
-            userThread.sentMessage("Incorrect password!");
+            userThread.sentMessage("incorrect password!");
             return false;
         }
 
+        userThread.sentMessage("you are authorized successfully!");
         onlineUsers.put(login, userThread);
         return true;
     }
@@ -118,9 +121,12 @@ public class ChatData {
         return onlineUsers.get(target) != null;
     }
 
-    String getOnlineUsers() {
+    String getOnlineUsers(final String owner) {
         final StringBuilder temp = new StringBuilder();
-        onlineUsers.keySet().forEach(a -> temp.append(" ").append(a));
+        temp.append("online:");
+        Set<String> set = onlineUsers.keySet();
+        set.remove(owner);
+        set.forEach(a -> temp.append(" ").append(a));
         return temp.toString().trim();
     }
 

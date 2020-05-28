@@ -28,7 +28,7 @@ public class UserThread implements Runnable {
 
             switch (message.getCommand()) {
                 case "list":
-                    ioManager.sent(chatData.getOnlineUsers());
+                    ioManager.sent(chatData.getOnlineUsers(userName));
                     break;
                 case "chat":
                     if (chatData.isAddresseeOnline(message.getTarget())) {
@@ -39,7 +39,7 @@ public class UserThread implements Runnable {
                             ioManager.sent(temp);
                         addressee = message.getTarget();
                     } else {
-                        ioManager.sent("User is not online!");
+                        ioManager.sent("user is not online!");
                     }
                     break;
                 case "exit":
@@ -49,7 +49,7 @@ public class UserThread implements Runnable {
                     break;
                 default:
                     if (addressee.isEmpty()) {
-                        ioManager.sent("Use /list command to choose an user to text!");
+                        ioManager.sent("use /list command to choose an user to text!");
                     } else {
                         chatData.sentMessage(userName, addressee, message.getMessage());
                     }
@@ -79,7 +79,7 @@ public class UserThread implements Runnable {
                     ioManager.closeSocket();
                     return;
                 default:
-                    ioManager.sent("You are not in the chat!");
+                    ioManager.sent("you are not in the chat!");
                     break;
             }
         }
@@ -87,7 +87,7 @@ public class UserThread implements Runnable {
     }
 
     private void sendDefaultMessage() {
-        ioManager.sent("Server: authorize or register.");
+        ioManager.sent("authorize or register.");
     }
 
     void sentMessage(final String message) {

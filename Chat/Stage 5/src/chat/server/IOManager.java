@@ -33,7 +33,7 @@ public class IOManager {
     }
 
     void sent(@NotNull final String message) {
-        outputWriter.sentMessage(message);
+        outputWriter.sentMessage("Server: " + message);
     }
 
 
