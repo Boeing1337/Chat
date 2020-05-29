@@ -15,17 +15,17 @@ public class ChatData {
                                   final String pass) {
 
         if (allUsers.get(login) != null) {
-            userThread.sentMessage("this login is already in use!");
+            userThread.sentTechnicalMessage("this login is already in use!");
             return false;
         }
         if (pass.length() < 8) {
-            userThread.sentMessage("the password is too short!");
+            userThread.sentTechnicalMessage("the password is too short!");
             return false;
         }
 
         allUsers.put(login, pass);
         onlineUsers.put(login, userThread);
-        userThread.sentMessage("you are registered successfully!");
+        userThread.sentTechnicalMessage("you are registered successfully!");
         try {
             Files.createDirectories(Paths.get(login));
         } catch (Exception e) {
@@ -40,15 +40,15 @@ public class ChatData {
         final String tempPass = allUsers.get(login);
 
         if (tempPass == null) {
-            userThread.sentMessage("incorrect login!");
+            userThread.sentTechnicalMessage("incorrect login!");
             return false;
         }
         if (!tempPass.equals(pass)) {
-            userThread.sentMessage("incorrect password!");
+            userThread.sentTechnicalMessage("incorrect password!");
             return false;
         }
 
-        userThread.sentMessage("you are authorized successfully!");
+        userThread.sentTechnicalMessage("you are authorized successfully!");
         onlineUsers.put(login, userThread);
         return true;
     }
@@ -112,7 +112,6 @@ public class ChatData {
     }
 
     synchronized void creatConversation(final String fromUser, final String toUser) {
-        System.out.println(fromUser + ", " + toUser);
         conversations.add(fromUser + toUser);
     }
 

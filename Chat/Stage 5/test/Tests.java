@@ -112,7 +112,6 @@ public class Tests extends StageTest<String> {
         client3.execute("/chat first");
         sleep(executePause);
         final String client3Answer2 = client3.getOutput().trim();
-        System.out.println(space + client3Answer2 + space);
 
 
         return CheckResult.correct();
