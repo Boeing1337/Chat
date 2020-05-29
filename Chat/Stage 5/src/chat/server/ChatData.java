@@ -19,7 +19,7 @@ public class ChatData {
             return false;
         }
         if (pass.length() < 8) {
-            userThread.sentMessage("the password is too short");
+            userThread.sentMessage("the password is too short!");
             return false;
         }
 
@@ -56,7 +56,7 @@ public class ChatData {
     synchronized void sentMessage(final String fromUser, final String toUser,
                                   final String message) {
         if (conversations.contains(fromUser + toUser))
-            onlineUsers.get(toUser).sentMessage(message);
+            onlineUsers.get(toUser).sentMessage(fromUser + ": " + message);
 
         saveMessage(fromUser, toUser, message);
 
@@ -78,7 +78,8 @@ public class ChatData {
     private void createFile(final String fromUser, final String toUser) {
         try {
             new File(toUser + "/" + fromUser).createNewFile();
-        } catch (Exception ignored) {
+        } catch (Exception r) {
+            r.printStackTrace();
         }
     }
 
@@ -96,11 +97,12 @@ public class ChatData {
                 temp.add(scanner.nextLine());
             }
             StringBuilder stringBuilder = new StringBuilder();
-            for (int i = temp.size(); i >= 0; i--) {
+            for (int i = temp.size() - 1; i >= 0; i--) {
                 stringBuilder.append("\n").append(temp.get(i));
             }
             return stringBuilder.toString().trim();
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return "";
     }
@@ -110,6 +112,7 @@ public class ChatData {
     }
 
     synchronized void creatConversation(final String fromUser, final String toUser) {
+        System.out.println(fromUser + ", " + toUser);
         conversations.add(fromUser + toUser);
     }
 
@@ -124,7 +127,7 @@ public class ChatData {
     String getOnlineUsers(final String owner) {
         final StringBuilder temp = new StringBuilder();
         temp.append("online:");
-        Set<String> set = onlineUsers.keySet();
+        Set<String> set = new HashSet<>(onlineUsers.keySet());
         set.remove(owner);
         set.forEach(a -> temp.append(" ").append(a));
         return temp.toString().trim();

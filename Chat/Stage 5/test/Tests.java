@@ -45,12 +45,28 @@ public class Tests extends StageTest<String> {
             "Can't get the \"Server: incorrect login!\" message after " +
             "input wrong login and password");
 
-        client2.execute("/registration login passssss");
+        client2.execute("/registration first pass");
         sleep(executePause);
+        final String client2Answer1 = client2.getOutput().trim();
+        if (!client2Answer1.equals("Server: the password is too short!"))
+            return CheckResult.wrong(
+            "Can't get the \"Server: the password is too short!\" message after " +
+            "try to registry with short password");
+
+        client2.execute("/registration first 12345678");
+        sleep(executePause);
+        final String client2Answer2 = client2.getOutput().trim();
+        if (!client2Answer2.equals("Server: you are registered successfully!"))
+            return CheckResult.wrong("Can't get the \"Server: you are registered " +
+            "successfully!\" message after successful authentication");
+
         client2.execute("/exit");
         sleep(executePause);
+        if (!client2.isFinished())
+            return CheckResult.wrong("A client should be shut down, after the " +
+            "\"/exit\" command");
 
-        client1.execute("/auth login paasf");
+        client1.execute("/auth first paasf");
         sleep(executePause);
         final String client1Answer2 = client1.getOutput().trim();
         if (!client1Answer2.equals("Server: incorrect password!"))
@@ -58,19 +74,46 @@ public class Tests extends StageTest<String> {
             "Can't get the \"Server: incorrect password!\" message after " +
             "input a wrong password being logging");
 
-        client1.execute("/auth login passssss");
+        client1.execute("/auth first 12345678");
         sleep(executePause);
         final String client1Answer3 = client1.getOutput().trim();
         if (!client1Answer3.equals("Server: you are authorized successfully!"))
             return CheckResult.wrong("Can't get the \"Server: you are authorized " +
-            "successfully!\" message after " +
-            "successful authentication");
+            "successfully!\" message after successful authentication");
 
-        client3.execute("/registration second passssssss");
+        client3.execute("/registration second 12345678");
         sleep(executePause);
+        final String client3Answer1 = client3.getOutput().trim();
+        if (!client3Answer1.equals("Server: you are registered successfully!"))
+            return CheckResult.wrong("Can't get the \"Server: you are registered " +
+            "successfully!\" message after successful authentication");
+
         client1.execute("/list");
         sleep(executePause);
-        System.out.println(client1.getOutput());
+        final String client1Answer4 = client1.getOutput().trim();
+        if (client1Answer4.contains("first"))
+            return CheckResult.wrong("The list of onLine users contains the client's " +
+            "name, but shouldn't");
+        if (!client1Answer4.equals("Server: online: second"))
+            return CheckResult.wrong("A client receive a wrong list of online users");
+
+        client1.execute("/chat blabla");
+        sleep(executePause);
+        final String client1Answer5 = client1.getOutput().trim();
+        if (!client1Answer5.equals("Server: the user is not online!"))
+            return CheckResult.wrong("Can't get the \"Server: the user is not online!\"" +
+            "after try to chat using wrong users' name");
+
+        client1.execute("/chat second");
+        sleep(executePause);
+        client1.execute("test");
+        sleep(executePause);
+
+        client3.execute("/chat first");
+        sleep(executePause);
+        final String client3Answer2 = client3.getOutput().trim();
+        System.out.println(space + client3Answer2 + space);
+
 
         return CheckResult.correct();
     }

@@ -24,22 +24,23 @@ public class UserThread implements Runnable {
 
     private void chatting() {
         while (!ioManager.isSocketClosed()) {
-            Message message = new Message(ioManager.read());
+            Message message = new Message(ioManager.read().trim());
 
             switch (message.getCommand()) {
                 case "list":
-                    ioManager.sent(chatData.getOnlineUsers(userName));
+                    sentTechnicalMessage(chatData.getOnlineUsers(userName));
                     break;
                 case "chat":
                     if (chatData.isAddresseeOnline(message.getTarget())) {
+                        addressee = message.getTarget();
                         chatData.removeConversation(userName, addressee);
                         chatData.creatConversation(userName, addressee);
                         final String temp = chatData.getLastMessages(userName, addressee);
                         if (!temp.isEmpty())
-                            ioManager.sent(temp);
+                            sentTechnicalMessage(temp);
                         addressee = message.getTarget();
                     } else {
-                        ioManager.sent("user is not online!");
+                        sentTechnicalMessage("the user is not online!");
                     }
                     break;
                 case "exit":
@@ -49,7 +50,7 @@ public class UserThread implements Runnable {
                     break;
                 default:
                     if (addressee.isEmpty()) {
-                        ioManager.sent("use /list command to choose an user to text!");
+                        sentTechnicalMessage("use /list command to choose an user to text!");
                     } else {
                         chatData.sentMessage(userName, addressee, message.getMessage());
                     }
@@ -79,7 +80,7 @@ public class UserThread implements Runnable {
                     ioManager.closeSocket();
                     return;
                 default:
-                    ioManager.sent("you are not in the chat!");
+                    sentTechnicalMessage("you are not in the chat!");
                     break;
             }
         }
@@ -87,7 +88,11 @@ public class UserThread implements Runnable {
     }
 
     private void sendDefaultMessage() {
-        ioManager.sent("authorize or register.");
+        sentTechnicalMessage("authorize or register.");
+    }
+
+    void sentTechnicalMessage(final String message) {
+        ioManager.sent("Server: " + message);
     }
 
     void sentMessage(final String message) {
