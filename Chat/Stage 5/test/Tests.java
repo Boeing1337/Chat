@@ -106,12 +106,20 @@ public class Tests extends StageTest<String> {
 
         client1.execute("/chat second");
         sleep(executePause);
+
         client1.execute("test");
         sleep(executePause);
+        final String client3Answer2 = client3.getOutput().trim();
+        if (!client3Answer2.isEmpty())
+            return CheckResult.wrong("A client receive a message but shouldn't");
 
         client3.execute("/chat first");
         sleep(executePause);
-        final String client3Answer2 = client3.getOutput().trim();
+        final String client3Answer3 = client3.getOutput().trim();
+        System.out.println(client3Answer3);
+        if (!client3Answer3.equals("first: test"))
+            return CheckResult.wrong("A client don't receive a message from another one" +
+            " or message have wrong format. \"userName: message\"");
 
 
         return CheckResult.correct();

@@ -55,20 +55,20 @@ public class ChatData {
 
     synchronized void sentMessage(final String fromUser, final String toUser,
                                   final String message) {
-        if (conversations.contains(fromUser + toUser))
+        if (conversations.contains(toUser + fromUser))
             onlineUsers.get(toUser).sentMessage(fromUser + ": " + message);
 
         saveMessage(fromUser, toUser, message);
 
     }
 
-    private void saveMessage(final String fromUser, final String toUser,
+    private void saveMessage(final String fromUser, final String account,
                              final String message) {
-        if (!isFileExist(fromUser, toUser))
-            createFile(fromUser, toUser);
+        if (!isFileExist(fromUser, account))
+            createFile(fromUser, account);
 
-        try (FileWriter file = new FileWriter(toUser + "/" + fromUser, true)) {
-            file.write("\n" + message);
+        try (FileWriter file = new FileWriter(account + "/" + fromUser, true)) {
+            file.write(message + "\n");
         } catch (Exception ignored) {
 
         }
@@ -83,14 +83,14 @@ public class ChatData {
         }
     }
 
-    private boolean isFileExist(final String fromUser, final String toUser) {
-        return new File(toUser + "/" + fromUser).exists();
+    private boolean isFileExist(final String fromUser, final String account) {
+        return new File(account + "/" + fromUser).exists();
     }
 
-    synchronized String getLastMessages(final String fromUser, final String toUser) {
-        if (!isFileExist(fromUser, toUser))
+    synchronized String getLastMessages(final String fromUser, final String account) {
+        if (!isFileExist(fromUser, account))
             return "";
-        File file = new File(toUser + "/" + fromUser);
+        File file = new File(account + "/" + fromUser);
         try (Scanner scanner = new Scanner(file)) {
             ArrayList<String> temp = new ArrayList<>();
             while (scanner.hasNextLine()) {

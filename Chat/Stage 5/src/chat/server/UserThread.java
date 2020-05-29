@@ -35,7 +35,7 @@ public class UserThread implements Runnable {
                         addressee = message.getTarget();
                         chatData.removeConversation(userName, addressee);
                         chatData.creatConversation(userName, addressee);
-                        final String temp = chatData.getLastMessages(userName, addressee);
+                        final String temp = chatData.getLastMessages(addressee, userName);
                         if (!temp.isEmpty())
                             sentTechnicalMessage(temp);
                         addressee = message.getTarget();
