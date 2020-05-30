@@ -2,14 +2,24 @@ package chat.server;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class ChatData {
     private final Map<String, UserThread> onlineUsers = new HashMap<>();
     private final Map<String, String> allUsers = new HashMap<>();
     private final Set<String> conversations = new HashSet<>();
+
+    ChatData() {
+        File file = new File("allUsers");
+        try (Scanner scanner = new Scanner(file)) {
+            if (!file.exists())
+                file.createNewFile();
+            while (scanner.hasNext()) {
+                allUsers.put(scanner.next(), scanner.next());
+            }
+        } catch (Exception ignored) {
+        }
+    }
 
     synchronized boolean registry(final UserThread userThread, final String login,
                                   final String pass) {
@@ -25,12 +35,13 @@ public class ChatData {
 
         allUsers.put(login, pass);
         onlineUsers.put(login, userThread);
-        userThread.sentTechnicalMessage("you are registered successfully!");
-        try {
-            Files.createDirectories(Paths.get(login));
+        try (FileWriter file = new FileWriter("allUsers", true)) {
+            file.write(login + " " + pass + "\n");
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        userThread.sentTechnicalMessage("you are registered successfully!");
         return true;
     }
 
@@ -55,54 +66,50 @@ public class ChatData {
 
     synchronized void sentMessage(final String fromUser, final String toUser,
                                   final String message) {
+
         if (conversations.contains(toUser + fromUser))
             onlineUsers.get(toUser).sentMessage(fromUser + ": " + message);
 
-        saveMessage(fromUser, toUser, message);
+        File messages = new File(generateFileName(fromUser, toUser));
 
-    }
+        if (!messages.exists()) {
+            try {
+                messages.createNewFile();
+            } catch (Exception ignored) {
+            }
+        }
 
-    private void saveMessage(final String fromUser, final String account,
-                             final String message) {
-        if (!isFileExist(fromUser, account))
-            createFile(fromUser, account);
-
-        try (FileWriter file = new FileWriter(account + "/" + fromUser, true)) {
-            file.write(message + "\n");
-        } catch (Exception ignored) {
-
+        try (FileWriter file = new FileWriter(messages.getName(), true)) {
+            file.write(fromUser + ": " + message + "\n");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
 
-    private void createFile(final String fromUser, final String toUser) {
-        try {
-            new File(toUser + "/" + fromUser).createNewFile();
-        } catch (Exception r) {
-            r.printStackTrace();
-        }
-    }
-
-    private boolean isFileExist(final String fromUser, final String account) {
-        return new File(account + "/" + fromUser).exists();
+    private String generateFileName(final String a, final String b) {
+        final List<String> strings = new ArrayList<>(List.of(a, b));
+        strings.sort(Comparator.naturalOrder());
+        return strings.get(0) + strings.get(1);
     }
 
     synchronized String getLastMessages(final String fromUser, final String account) {
-        if (!isFileExist(fromUser, account))
-            return "";
-        File file = new File(account + "/" + fromUser);
+        File file = new File(generateFileName(fromUser, account));
+
         try (Scanner scanner = new Scanner(file)) {
-            ArrayList<String> temp = new ArrayList<>();
+            final List<String> temp = new ArrayList<>();
+            final StringBuilder stringBuilder = new StringBuilder();
             while (scanner.hasNextLine()) {
                 temp.add(scanner.nextLine());
             }
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = temp.size() - 1; i >= 0; i--) {
+
+            for (int i = temp.size() - 10, step = 0; step < 10; i++, step++) {
+                if (i < 0)
+                    continue;
                 stringBuilder.append("\n").append(temp.get(i));
             }
             return stringBuilder.toString().trim();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
         return "";
     }

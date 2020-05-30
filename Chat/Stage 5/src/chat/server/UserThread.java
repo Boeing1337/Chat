@@ -37,7 +37,7 @@ public class UserThread implements Runnable {
                         chatData.creatConversation(userName, addressee);
                         final String temp = chatData.getLastMessages(addressee, userName);
                         if (!temp.isEmpty())
-                            sentTechnicalMessage(temp);
+                            sentMessage(temp);
                         addressee = message.getTarget();
                     } else {
                         sentTechnicalMessage("the user is not online!");
@@ -53,6 +53,7 @@ public class UserThread implements Runnable {
                         sentTechnicalMessage("use /list command to choose an user to text!");
                     } else {
                         chatData.sentMessage(userName, addressee, message.getMessage());
+                        sentMessage(userName + ": " + message.getMessage());
                     }
                     break;
             }

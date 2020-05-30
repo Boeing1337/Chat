@@ -116,11 +116,108 @@ public class Tests extends StageTest<String> {
         client3.execute("/chat first");
         sleep(executePause);
         final String client3Answer3 = client3.getOutput().trim();
-        System.out.println(client3Answer3);
         if (!client3Answer3.equals("first: test"))
             return CheckResult.wrong("A client don't receive a message from another one" +
             " or message have wrong format. \"userName: message\"");
 
+        client1.execute("1");
+        sleep(executePause);
+        client1.execute("2");
+        sleep(executePause);
+        client1.execute("3");
+        sleep(executePause);
+        client1.execute("4");
+        sleep(executePause);
+        client1.execute("5");
+        sleep(executePause);
+        client1.execute("6");
+        sleep(executePause);
+        client1.execute("7");
+        sleep(executePause);
+        client1.execute("8");
+        sleep(executePause);
+        client1.execute("9");
+        sleep(executePause);
+        client3.execute("10");
+        sleep(executePause);
+
+        final String client1Answer6 = client1.getOutput().trim();
+        System.out.println(client1Answer6);
+        if (!client1Answer6.equals(
+        "first: test\n" +
+        "first: 1\n" +
+        "first: 2\n" +
+        "first: 3\n" +
+        "first: 4\n" +
+        "first: 5\n" +
+        "first: 6\n" +
+        "first: 7\n" +
+        "first: 8\n" +
+        "first: 9\n" +
+        "second: 10"))
+            return CheckResult.wrong("Client output wrong messages");
+
+        final String client3Answer4 = client3.getOutput().trim();
+        System.out.println(client1Answer6);
+        if (!client3Answer4.equals(
+        "first: 1\n" +
+        "first: 2\n" +
+        "first: 3\n" +
+        "first: 4\n" +
+        "first: 5\n" +
+        "first: 6\n" +
+        "first: 7\n" +
+        "first: 8\n" +
+        "first: 9\n" +
+        "second: 10"))
+            return CheckResult.wrong("Client output wrong messages");
+
+        client1.execute("/exit");
+        sleep(executePause);
+        client3.execute("/exit");
+        sleep(executePause);
+        server.stop();
+
+        final TestedProgram server2 = new TestedProgram(Server.class);
+        final TestedProgram tempClient = new TestedProgram(Client.class);
+        final TestedProgram tempClient2 = new TestedProgram(Client.class);
+        tempClient.setReturnOutputAfterExecution(false);
+        tempClient2.setReturnOutputAfterExecution(false);
+        server2.startInBackground();
+        sleep(executePause);
+        tempClient.start();
+        sleep(executePause);
+        tempClient2.start();
+        sleep(executePause);
+        tempClient.getOutput();
+        tempClient2.getOutput();
+
+        tempClient.execute("/auth first 12345678");
+        sleep(executePause);
+        final String tempClientAnswer1 = tempClient.getOutput().trim();
+        if (!tempClientAnswer1.equals("Server: you are authorized successfully!"))
+            return CheckResult.wrong("A registered client can't be authenticated after" +
+            " rebooting a server");
+
+        tempClient2.execute("/auth second 12345678");
+        sleep(executePause);
+
+        tempClient.execute("/chat second");
+        sleep(executePause);
+        final String tempClientAnswer2 = tempClient.getOutput().trim();
+        if (!tempClientAnswer2.equals(
+        "first: 1\n" +
+        "first: 2\n" +
+        "first: 3\n" +
+        "first: 4\n" +
+        "first: 5\n" +
+        "first: 6\n" +
+        "first: 7\n" +
+        "first: 8\n" +
+        "first: 9\n" +
+        "second: 10"))
+            return CheckResult.wrong("Server should save conversations on hard disk.");
+        tempClient.execute("/chat");
 
         return CheckResult.correct();
     }
