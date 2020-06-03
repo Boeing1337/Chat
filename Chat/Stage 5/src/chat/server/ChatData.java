@@ -12,12 +12,15 @@ public class ChatData {
     ChatData() {
         File file = new File("allUsers");
         try (Scanner scanner = new Scanner(file)) {
-            if (!file.exists())
+            if (!file.exists()) {
                 file.createNewFile();
-            while (scanner.hasNext()) {
-                allUsers.put(scanner.next(), scanner.next());
+            } else {
+                while (scanner.hasNext()) {
+                    allUsers.put(scanner.next(), scanner.next());
+                }
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -67,10 +70,10 @@ public class ChatData {
     synchronized void sentMessage(final String fromUser, final String toUser,
                                   final String message) {
 
+        final File messages = new File(generateFileName(fromUser, toUser));
+
         if (conversations.contains(toUser + fromUser))
             onlineUsers.get(toUser).sentMessage(fromUser + ": " + message);
-
-        File messages = new File(generateFileName(fromUser, toUser));
 
         if (!messages.exists()) {
             try {
@@ -114,16 +117,14 @@ public class ChatData {
         return "";
     }
 
-    synchronized void logOut(final String userName) {
+    synchronized void logOut(final String userName, final String toUser) {
+        conversations.remove(userName + toUser);
         onlineUsers.remove(userName);
     }
 
-    synchronized void creatConversation(final String fromUser, final String toUser) {
-        conversations.add(fromUser + toUser);
-    }
-
-    synchronized void removeConversation(final String fromUser, final String toUser) {
+    synchronized void setConversation(final String fromUser, final String toUser) {
         conversations.remove(fromUser + toUser);
+        conversations.add(fromUser + toUser);
     }
 
     boolean isAddresseeOnline(final String target) {

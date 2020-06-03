@@ -8,8 +8,6 @@ import org.hyperskill.hstest.testing.TestedProgram;
 import static org.hyperskill.hstest.common.Utils.sleep;
 
 public class Tests extends StageTest<String> {
-    private final int startAppsPause = 50;
-    private final int executePause = 25;
 
     @DynamicTestingMethod
     CheckResult test() {
@@ -21,13 +19,14 @@ public class Tests extends StageTest<String> {
         client2.setReturnOutputAfterExecution(false);
         client3.setReturnOutputAfterExecution(false);
         final String countIs = "Count is ";
+        final int executePause = 50;
 
         server.startInBackground();
 
         //////Client 1
 
         client1.start();
-        sleep(startAppsPause);
+        sleep(executePause);
 
         final String client1Start = client1.getOutput().trim();
         if (!"Client started!".equals(client1Start))
@@ -53,7 +52,7 @@ public class Tests extends StageTest<String> {
         //////Client 2
 
         client2.start();
-        sleep(startAppsPause);
+        sleep(executePause);
         client2.getOutput();
 
         client2.execute("By my hands");
@@ -66,7 +65,7 @@ public class Tests extends StageTest<String> {
         /////Client 3
 
         client3.start();
-        sleep(startAppsPause);
+        sleep(executePause);
         client3.getOutput();
 
         client3.execute("Zzzz.");

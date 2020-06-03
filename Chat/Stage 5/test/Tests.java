@@ -9,10 +9,9 @@ import static org.hyperskill.hstest.common.Utils.sleep;
 
 public class Tests extends StageTest<String> {
     private final int executePause = 50;
-    private String space = "\n\n";
 
     @DynamicTestingMethod
-    CheckResult test() {
+    CheckResult test1() {
         final TestedProgram server = new TestedProgram(Server.class);
         final TestedProgram client1 = new TestedProgram(Client.class);
         final TestedProgram client2 = new TestedProgram(Client.class);
@@ -172,12 +171,11 @@ public class Tests extends StageTest<String> {
         "second: 10"))
             return CheckResult.wrong("Client output wrong messages");
 
-        client1.execute("/exit");
-        sleep(executePause);
-        client3.execute("/exit");
-        sleep(executePause);
-        server.stop();
+        return CheckResult.correct();
+    }
 
+    @DynamicTestingMethod
+    CheckResult test2() {
         final TestedProgram server2 = new TestedProgram(Server.class);
         final TestedProgram tempClient = new TestedProgram(Client.class);
         final TestedProgram tempClient2 = new TestedProgram(Client.class);
@@ -221,4 +219,6 @@ public class Tests extends StageTest<String> {
 
         return CheckResult.correct();
     }
+
+
 }

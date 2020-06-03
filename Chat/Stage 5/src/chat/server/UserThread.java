@@ -7,6 +7,7 @@ import java.net.Socket;
 public class UserThread implements Runnable {
     private final ChatData chatData;
     private final IOManager ioManager;
+    private Message message;
     private String userName;
     private String addressee;
 
@@ -24,39 +25,53 @@ public class UserThread implements Runnable {
 
     private void chatting() {
         while (!ioManager.isSocketClosed()) {
-            Message message = new Message(ioManager.read().trim());
+            message = new Message(ioManager.read().trim());
 
             switch (message.getCommand()) {
                 case "list":
-                    sentTechnicalMessage(chatData.getOnlineUsers(userName));
+                    sendListOfUsers();
                     break;
                 case "chat":
-                    if (chatData.isAddresseeOnline(message.getTarget())) {
-                        addressee = message.getTarget();
-                        chatData.removeConversation(userName, addressee);
-                        chatData.creatConversation(userName, addressee);
-                        final String temp = chatData.getLastMessages(addressee, userName);
-                        if (!temp.isEmpty())
-                            sentMessage(temp);
-                        addressee = message.getTarget();
-                    } else {
-                        sentTechnicalMessage("the user is not online!");
-                    }
+                    setConversation();
                     break;
                 case "exit":
-                    chatData.removeConversation(userName, addressee);
-                    chatData.logOut(userName);
-                    ioManager.closeSocket();
+                    exit();
                     break;
-                default:
-                    if (addressee.isEmpty()) {
-                        sentTechnicalMessage("use /list command to choose an user to text!");
-                    } else {
-                        chatData.sentMessage(userName, addressee, message.getMessage());
-                        sentMessage(userName + ": " + message.getMessage());
-                    }
+                case "text":
+                    tryToSentMessage();
                     break;
             }
+        }
+    }
+
+    private void tryToSentMessage() {
+        if (addressee.isEmpty()) {
+            sentTechnicalMessage("use /list command to choose an user to text!");
+        } else {
+            chatData.sentMessage(userName, addressee, message.getMessage());
+            sentMessage(userName + ": " + message.getMessage());
+        }
+    }
+
+    private void sendListOfUsers() {
+        sentTechnicalMessage(chatData.getOnlineUsers(userName));
+    }
+
+    private void exit() {
+        chatData.logOut(userName, addressee);
+        ioManager.closeSocket();
+    }
+
+    private void setConversation() {
+        if (chatData.isAddresseeOnline(message.getTarget())) {
+            addressee = message.getTarget();
+            chatData.setConversation(userName, addressee);
+            final String temp = chatData.getLastMessages(addressee, userName);
+            if (!temp.isEmpty())
+                sentMessage(temp);
+            addressee = message.getTarget();
+        } else {
+            sentTechnicalMessage("the user is not online!");
         }
     }
 

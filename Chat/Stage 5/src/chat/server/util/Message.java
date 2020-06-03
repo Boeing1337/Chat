@@ -59,7 +59,6 @@ public class Message {
         command = "error";
     }
 
-
     public String getPass() {
         return pass;
     }

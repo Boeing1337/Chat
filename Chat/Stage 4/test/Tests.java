@@ -8,7 +8,6 @@ import org.hyperskill.hstest.testing.TestedProgram;
 import static org.hyperskill.hstest.common.Utils.sleep;
 
 public class Tests extends StageTest<String> {
-    private final int executePause = 50;
 
     @DynamicTestingMethod
     CheckResult test() {
@@ -19,6 +18,7 @@ public class Tests extends StageTest<String> {
         client1.setReturnOutputAfterExecution(false);
         client2.setReturnOutputAfterExecution(false);
         client3.setReturnOutputAfterExecution(false);
+        final int executePause = 50;
 
         server.startInBackground();
         sleep(executePause);
