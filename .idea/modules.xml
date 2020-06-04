@@ -18,6 +18,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 5/Chat-Stage_5.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 5/Chat-Stage_5.iml" group="Chat/Chat-Stage_5" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 5/Chat-Stage_5_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 5/Chat-Stage_5_main.iml" group="Chat/Chat-Stage_5" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 5/Chat-Stage_5_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 5/Chat-Stage_5_test.iml" group="Chat/Chat-Stage_5" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 6/Chat-Stage_6.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 6/Chat-Stage_6.iml" group="Chat/Chat-Stage_6" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 6/Chat-Stage_6_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 6/Chat-Stage_6_main.iml" group="Chat/Chat-Stage_6" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chat/Stage 6/Chat-Stage_6_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Chat/Stage 6/Chat-Stage_6_test.iml" group="Chat/Chat-Stage_6" />
     </modules>
   </component>
 </project>

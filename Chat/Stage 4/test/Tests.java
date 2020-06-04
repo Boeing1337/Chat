@@ -41,7 +41,7 @@ public class Tests extends StageTest<String> {
 
         final String client1Answer1 = client1.getOutput().trim();
         if (!client1Answer1.isEmpty())
-            return CheckResult.wrong("Client receive a message after successful " +
+            return CheckResult.wrong("Client output a message after successful " +
             "login, but shouldn't");
 
         client1.execute("Hello all!");
@@ -57,7 +57,8 @@ public class Tests extends StageTest<String> {
             return CheckResult.wrong("Client print a message from chat before login " +
             "yet!");
         if (!client2Answer1.isEmpty())
-            return CheckResult.wrong("Client print a message before login but shouldn't");
+            return CheckResult.wrong("Client output a message before login but " +
+            "shouldn't");
 
         client2.execute("Second");
         sleep(executePause);

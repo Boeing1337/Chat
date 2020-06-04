@@ -1,0 +1,20 @@
+type: edu
+files:
+- name: src/chat/client/Client.java
+  visible: true
+- name: src/chat/server/Server.java
+  visible: true
+- name: src/chat/connection/OutputWriter.java
+  visible: true
+- name: src/chat/connection/InputReader.java
+  visible: true
+- name: src/chat/server/IOManager.java
+  visible: true
+- name: src/chat/server/UserThread.java
+  visible: true
+- name: src/chat/server/ChatData.java
+  visible: true
+- name: src/chat/server/util/Message.java
+  visible: true
+- name: test/Tests.java
+  visible: false
