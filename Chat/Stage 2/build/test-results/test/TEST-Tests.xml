@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-21T00:29:52" hostname="DESKTOP-Boeing" time="0.728">
+<testsuite name="Tests" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-03T12:30:57" hostname="DESKTOP-Boeing" time="0.339">
   <properties/>
-  <testcase name="start" classname="Tests" time="0.728"/>
+  <testcase name="start" classname="Tests" time="0.339"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
-Server started!
 Client started!
+Server started!
 > You are in my mind!
 You are in my mind!
-Client started!
+?[1;31m
+Start test 2?[0m
 Server started!
+Client started!
 > Fuzzy Buzzy!
 Fuzzy Buzzy!
 > The Batman is here!

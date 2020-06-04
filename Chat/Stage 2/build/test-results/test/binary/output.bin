@@ -1,11 +1,13 @@
 [1;31m
 Start test 1[0m
-Server started!
 Client started!
+Server started!
 > You are in my mind!
 You are in my mind!
-Client started!
+[1;31m
+Start test 2[0m
 Server started!
+Client started!
 > Fuzzy Buzzy!
 Fuzzy Buzzy!
 > The Batman is here!
