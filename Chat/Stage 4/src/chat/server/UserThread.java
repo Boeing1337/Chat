@@ -38,7 +38,7 @@ public class UserThread implements Runnable {
                 break;
             } else {
                 outputWriter.sentMessage("Server: This name is in use! Choose another " +
-                "one.");
+                "one");
             }
         }
     }

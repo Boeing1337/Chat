@@ -41,7 +41,7 @@ public class Tests extends StageTest<String> {
 
         final String client1Answer1 = client1.getOutput().trim();
         if (!client1Answer1.isEmpty())
-            return CheckResult.wrong("Client output a message after successful " +
+            return CheckResult.wrong("Client receive a message after successful " +
             "login, but shouldn't");
 
         client1.execute("Hello all!");
@@ -57,8 +57,7 @@ public class Tests extends StageTest<String> {
             return CheckResult.wrong("Client print a message from chat before login " +
             "yet!");
         if (!client2Answer1.isEmpty())
-            return CheckResult.wrong("Client output a message before login but " +
-            "shouldn't");
+            return CheckResult.wrong("Client print a message before login but shouldn't");
 
         client2.execute("Second");
         sleep(executePause);
@@ -73,18 +72,18 @@ public class Tests extends StageTest<String> {
 
         final String client3Answer1 = client3.getOutput().trim();
         if (client3Answer1.isEmpty() || !client3Answer1.trim().equals("Server: This name is in use! Choose " +
-        "another one."))
+        "another one"))
             return CheckResult.wrong("Can't get the \"Server: This name is in use! " +
-            "Choose another one:\" message after login with name that already in use");
+            "Choose another one\" message after login with name that already in use");
 
         client3.execute("Second");
         sleep(executePause);
 
         final String client3Answer2 = client3.getOutput().trim();
         if (client3Answer2.isEmpty() || !client3Answer2.trim().equals("Server: This name is in use! Choose " +
-        "another one."))
+        "another one"))
             return CheckResult.wrong("Can't get the \"Server: This name is in use! " +
-            "Choose another one:\" message after login with name than already in use");
+            "Choose another one\" message after login with name than already in use");
 
         client2.execute("Bye bye!");
         sleep(executePause);

@@ -11,13 +11,15 @@ public class ChatData {
 
     ChatData() {
         File file = new File("allUsers");
-        try (Scanner scanner = new Scanner(file)) {
+        try {
             if (!file.exists()) {
                 file.createNewFile();
             } else {
+                Scanner scanner = new Scanner(file);
                 while (scanner.hasNext()) {
                     allUsers.put(scanner.next(), scanner.next());
                 }
+                scanner.close();
             }
         } catch (Exception e) {
             e.printStackTrace();

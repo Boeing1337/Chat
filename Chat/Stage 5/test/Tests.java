@@ -80,10 +80,18 @@ public class Tests extends StageTest<String> {
             return CheckResult.wrong("Can't get the \"Server: you are authorized " +
             "successfully!\" message after successful authentication");
 
-        client3.execute("/registration second 12345678");
+        client3.execute("/registration first 12345678");
         sleep(executePause);
         final String client3Answer1 = client3.getOutput().trim();
-        if (!client3Answer1.equals("Server: you are registered successfully!"))
+        if (!client3Answer1.equals("Server: this login is already in use!"))
+            return CheckResult.wrong("Can't get the \"Server: this login is already in " +
+            "use!\" message from a client that is trying to register with a login which is " +
+            "already in use");
+
+        client3.execute("/registration second 12345678");
+        sleep(executePause);
+        final String client3Answer2 = client3.getOutput().trim();
+        if (!client3Answer2.equals("Server: you are registered successfully!"))
             return CheckResult.wrong("Can't get the \"Server: you are registered " +
             "successfully!\" message after successful authentication");
 
@@ -108,14 +116,14 @@ public class Tests extends StageTest<String> {
 
         client1.execute("test");
         sleep(executePause);
-        final String client3Answer2 = client3.getOutput().trim();
-        if (!client3Answer2.isEmpty())
+        final String client3Answer3 = client3.getOutput().trim();
+        if (!client3Answer3.isEmpty())
             return CheckResult.wrong("A client receive a message but shouldn't");
 
         client3.execute("/chat first");
         sleep(executePause);
-        final String client3Answer3 = client3.getOutput().trim();
-        if (!client3Answer3.equals("first: test"))
+        final String client3Answer4 = client3.getOutput().trim();
+        if (!client3Answer4.equals("first: test"))
             return CheckResult.wrong("A client don't receive a message from another one" +
             " or message have wrong format. \"userName: message\"");
 
@@ -156,9 +164,9 @@ public class Tests extends StageTest<String> {
         "second: 10"))
             return CheckResult.wrong("Client output wrong messages");
 
-        final String client3Answer4 = client3.getOutput().trim();
+        final String client3Answer5 = client3.getOutput().trim();
         System.out.println(client1Answer6);
-        if (!client3Answer4.equals(
+        if (!client3Answer5.equals(
         "first: 1\n" +
         "first: 2\n" +
         "first: 3\n" +
