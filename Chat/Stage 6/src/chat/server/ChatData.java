@@ -44,6 +44,7 @@ public class ChatData {
             e.printStackTrace();
         }
 
+        userThread.setUserName(login);
         userThread.sentTechnicalMessage("you are registered successfully!");
         return true;
     }
@@ -64,6 +65,7 @@ public class ChatData {
 
         userThread.sentTechnicalMessage("you are authorized successfully!");
         onlineUsers.put(login, userThread);
+        userThread.setUserName(login);
         return true;
     }
 

@@ -46,6 +46,7 @@ public class ChatData {
             e.printStackTrace();
         }
 
+        userThread.setUserName(login);
         userThread.sentTechnicalMessage("you are registered successfully!");
         return true;
     }
@@ -66,6 +67,7 @@ public class ChatData {
 
         userThread.sentTechnicalMessage("you are authorized successfully!");
         onlineUsers.put(login, userThread);
+        userThread.setUserName(login);
         return true;
     }
 
@@ -135,11 +137,15 @@ public class ChatData {
 
     String getOnlineUsers(final String owner) {
         final StringBuilder temp = new StringBuilder();
-        temp.append("online:");
-        Set<String> set = new HashSet<>(onlineUsers.keySet());
+        final Set<String> set = new HashSet<>(onlineUsers.keySet());
         set.remove(owner);
         set.forEach(a -> temp.append(" ").append(a));
-        return temp.toString().trim();
+        final String users = temp.toString().trim();
+        if (users.isEmpty()) {
+            return "no one online";
+        } else {
+            return "online: " + users;
+        }
     }
 
 

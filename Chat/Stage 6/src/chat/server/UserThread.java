@@ -44,6 +44,34 @@ public class UserThread implements Runnable {
         }
     }
 
+    private void authOrRegister() {
+        while (!ioManager.isSocketClosed()) {
+            Message message = new Message(ioManager.read());
+
+            switch (message.getCommand()) {
+                case "registration":
+                    if (chatData.registry(this, message.getLogin(), message.getPass()))
+                        return;
+                    break;
+                case "auth":
+                    if (chatData.auth(this, message.getLogin(), message.getPass()))
+                        return;
+                    break;
+                case "exit":
+                    ioManager.closeSocket();
+                    return;
+                default:
+                    sentTechnicalMessage("you are not in the chat!");
+                    break;
+            }
+        }
+
+    }
+
+    void setUserName(final String userName) {
+        this.userName = userName;
+    }
+
     private void tryToSentMessage() {
         if (addressee.isEmpty()) {
             sentTechnicalMessage("use /list command to choose an user to text!");
@@ -75,33 +103,6 @@ public class UserThread implements Runnable {
         }
     }
 
-    private void authOrRegister() {
-        while (!ioManager.isSocketClosed()) {
-            Message message = new Message(ioManager.read());
-
-            switch (message.getCommand()) {
-                case "registration":
-                    if (chatData.registry(this, message.getLogin(), message.getPass())) {
-                        userName = message.getLogin();
-                        return;
-                    }
-                    break;
-                case "auth":
-                    if (chatData.auth(this, message.getLogin(), message.getPass())) {
-                        userName = message.getLogin();
-                        return;
-                    }
-                    break;
-                case "exit":
-                    ioManager.closeSocket();
-                    return;
-                default:
-                    sentTechnicalMessage("you are not in the chat!");
-                    break;
-            }
-        }
-
-    }
 
     private void sendDefaultMessage() {
         sentTechnicalMessage("authorize or register.");
