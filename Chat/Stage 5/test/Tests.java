@@ -59,6 +59,13 @@ public class Tests extends StageTest<String> {
             return CheckResult.wrong("Can't get the \"Server: you are registered " +
             "successfully!\" message after successful authentication");
 
+        client2.execute("/list");
+        sleep(executePause);
+        final String client2Answer3 = client2.getOutput().trim();
+        if (!client2Answer3.equals("Server: no one online"))
+            return CheckResult.wrong("Can't get the \"Server: no one online\" message " +
+            "after receive a empty list of online users");
+
         client2.execute("/exit");
         sleep(executePause);
         if (!client2.isFinished())
