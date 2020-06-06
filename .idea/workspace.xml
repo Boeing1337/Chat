@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d709212-bb65-4ffb-86d0-927349d46620" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/UserInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/UsersDataManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -10,27 +12,21 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/Chat/Stage 6/Chat-Stage_6_main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/Chat/Stage 6/Chat-Stage_6_test.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 5/src/chat/server/UserThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 5/src/chat/server/UserThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 5/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 5/task-info.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/Stage 5/test/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 5/test/Tests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/client/Client.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/connection/InputReader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/connection/OutputWriter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/ChatData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/IOManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/Server.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/UserThread.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/Message.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/task-info.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/task.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/test/Tests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/lesson-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/lesson-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/ChatData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/ChatData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/UserThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/UserThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/task-info.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,7 +248,7 @@
       <workItem from="1591014762324" duration="12488000" />
       <workItem from="1591050733855" duration="5729000" />
       <workItem from="1591183100669" duration="4303000" />
-      <workItem from="1591269485671" duration="10060000" />
+      <workItem from="1591269485671" duration="21671000" />
     </task>
     <task id="LOCAL-00001" summary="Just test">
       <created>1589305118834</created>
@@ -450,7 +446,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591359421625</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="stage 6">
+      <created>1591360665079</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1591360665079</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -523,46 +526,46 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="872" y="380" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1591041058159" />
-    <state x="1047" y="415" key="#com.intellij.ide.util.MemberChooser" timestamp="1590351200896">
+    <state x="1047" y="415" key="#com.intellij.ide.util.MemberChooser" timestamp="1591404764169">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="1047" y="415" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1440@0.0.2560.1440" timestamp="1590351200896" />
+    <state x="1047" y="415" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1440@0.0.2560.1440" timestamp="1591404764169" />
     <state x="992" y="654" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1589636806737">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="992" y="654" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1589636806737" />
-    <state x="905" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1590356039742">
+    <state x="905" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591402022461">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="905" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1590356039742" />
+    <state x="905" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1591402022461" />
     <state x="1034" y="561" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1590630410687">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="1034" y="561" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.2560.1440@0.0.2560.1440" timestamp="1590630410687" />
-    <state x="875" y="317" key="CommitChangelistDialog2" timestamp="1591359421035">
+    <state x="875" y="317" key="CommitChangelistDialog2" timestamp="1591360664537">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="875" y="317" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1591359421035" />
+    <state x="875" y="317" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1591360664537" />
     <state x="1059" y="476" key="FileChooserDialogImpl" timestamp="1589304970754">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="1059" y="476" key="FileChooserDialogImpl/0.0.2560.1440@0.0.2560.1440" timestamp="1589304970754" />
-    <state width="1259" height="381" key="GridCell.Tab.0.bottom" timestamp="1591360544001">
+    <state width="2519" height="381" key="GridCell.Tab.0.bottom" timestamp="1591406425146">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="1259" height="381" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1591360544001" />
-    <state width="1259" height="381" key="GridCell.Tab.0.center" timestamp="1591360544001">
+    <state width="2519" height="381" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1591406425146" />
+    <state width="2519" height="381" key="GridCell.Tab.0.center" timestamp="1591406425146">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="1259" height="381" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1591360544001" />
-    <state width="1259" height="381" key="GridCell.Tab.0.left" timestamp="1591360544001">
+    <state width="2519" height="381" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1591406425146" />
+    <state width="2519" height="381" key="GridCell.Tab.0.left" timestamp="1591406425146">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="1259" height="381" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1591360544001" />
-    <state width="1259" height="381" key="GridCell.Tab.0.right" timestamp="1591360544001">
+    <state width="2519" height="381" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1591406425146" />
+    <state width="2519" height="381" key="GridCell.Tab.0.right" timestamp="1591406425146">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="1259" height="381" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1591360544001" />
+    <state width="2519" height="381" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1591406425146" />
     <state width="2519" height="508" key="GridCell.Tab.1.bottom" timestamp="1588367961346">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>

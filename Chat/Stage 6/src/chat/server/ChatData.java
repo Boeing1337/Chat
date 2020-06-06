@@ -1,35 +1,39 @@
 package chat.server;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.util.*;
+import chat.server.util.UsersDataManager;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class ChatData {
+    private final Set<String> allUsers = new HashSet<>();
     private final Map<String, UserThread> onlineUsers = new HashMap<>();
-    private final Map<String, String> allUsers = new HashMap<>();
     private final Set<String> conversations = new HashSet<>();
+    private final UsersDataManager usersDataManager;
 
     ChatData() {
-        File file = new File("allUsers");
-        try {
-            if (!file.exists()) {
-                file.createNewFile();
-            } else {
-                Scanner scanner = new Scanner(file);
-                while (scanner.hasNext()) {
-                    allUsers.put(scanner.next(), scanner.next());
-                }
-                scanner.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.usersDataManager = new UsersDataManager(allUsers);
+        usersDataManager.createUser("admin", "12345678", "1");
+    }
+
+    synchronized void revoke(final UserThread owner, final String target) {
+
+    }
+
+    synchronized void kick(final UserThread owner, final String target) {
+
+    }
+
+    synchronized void grant(final UserThread owner, final String target) {
+
     }
 
     synchronized boolean registry(final UserThread userThread, final String login,
                                   final String pass) {
 
-        if (allUsers.get(login) != null) {
+        if (allUsers.contains(login)) {
             userThread.sentTechnicalMessage("this login is already in use!");
             return false;
         }
@@ -38,92 +42,48 @@ public class ChatData {
             return false;
         }
 
-        allUsers.put(login, pass);
-        onlineUsers.put(login, userThread);
-        try (FileWriter file = new FileWriter("allUsers", true)) {
-            file.write(login + " " + pass + "\n");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        userThread.setUserName(login);
+        usersDataManager.createUser(login, pass, "3");
         userThread.sentTechnicalMessage("you are registered successfully!");
         return true;
     }
 
+
     synchronized boolean auth(final UserThread userThread, final String login,
                               final String pass) {
 
-        final String tempPass = allUsers.get(login);
-
-        if (tempPass == null) {
+        if (!usersDataManager.isUserExist(login)) {
             userThread.sentTechnicalMessage("incorrect login!");
             return false;
         }
-        if (!tempPass.equals(pass)) {
+        if (!usersDataManager.getUserInfo(login).getLogin().equals(pass)) {
             userThread.sentTechnicalMessage("incorrect password!");
             return false;
         }
 
         userThread.sentTechnicalMessage("you are authorized successfully!");
-        onlineUsers.put(login, userThread);
-        userThread.setUserName(login);
         return true;
     }
 
     synchronized void sentMessage(final String fromUser, final String toUser,
                                   final String message) {
 
-        final File messages = new File(generateFileName(fromUser, toUser));
+        usersDataManager.saveMessage(fromUser, toUser, message);
 
         if (conversations.contains(toUser + fromUser))
             onlineUsers.get(toUser).sentMessage(fromUser + ": " + message);
 
-        if (!messages.exists()) {
-            try {
-                messages.createNewFile();
-            } catch (Exception ignored) {
-            }
-        }
-
-        try (FileWriter file = new FileWriter(messages.getName(), true)) {
-            file.write(fromUser + ": " + message + "\n");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }
 
-    private String generateFileName(final String a, final String b) {
-        final List<String> strings = new ArrayList<>(List.of(a, b));
-        strings.sort(Comparator.naturalOrder());
-        return strings.get(0) + strings.get(1);
+    synchronized String getLastMessages(final String user, final String fromUser) {
+
+        return usersDataManager.getLastMessages(user, fromUser);
+
     }
 
-    synchronized String getLastMessages(final String fromUser, final String account) {
-        File file = new File(generateFileName(fromUser, account));
-
-        try (Scanner scanner = new Scanner(file)) {
-            final List<String> temp = new ArrayList<>();
-            final StringBuilder stringBuilder = new StringBuilder();
-            while (scanner.hasNextLine()) {
-                temp.add(scanner.nextLine());
-            }
-
-            for (int i = temp.size() - 10, step = 0; step < 10; i++, step++) {
-                if (i < 0)
-                    continue;
-                stringBuilder.append("\n").append(temp.get(i));
-            }
-            return stringBuilder.toString().trim();
-        } catch (Exception ignored) {
-        }
-        return "";
-    }
-
-    synchronized void logOut(final String userName, final String toUser) {
-        conversations.remove(userName + toUser);
-        onlineUsers.remove(userName);
+    synchronized void logOut(final String fromUser, final String toUser) {
+        conversations.remove(fromUser + toUser);
+        onlineUsers.remove(fromUser);
     }
 
     synchronized void setConversation(final String fromUser, final String toUser) {
@@ -133,6 +93,10 @@ public class ChatData {
 
     boolean isAddresseeOnline(final String target) {
         return onlineUsers.get(target) != null;
+    }
+
+    synchronized void setOnline(final String login, final UserThread userThread) {
+        onlineUsers.put(login, userThread);
     }
 
     String getOnlineUsers(final String owner) {

@@ -118,6 +118,13 @@ public class Tests extends StageTest<String> {
             return CheckResult.wrong("Can't get the \"Server: the user is not online!\"" +
             "after try to chat using wrong users' name");
 
+        client1.execute("blabla");
+        sleep(executePause);
+        final String client1Answer6 = client1.getOutput().trim();
+        if (!client1Answer6.equals("Server: use /list command to choose an user to text!"))
+            return CheckResult.wrong("Can't get the \"Server: use /list command to " +
+            "choose an user to text!\" after try to chat without choosing a user");
+
         client1.execute("/chat second");
         sleep(executePause);
 
@@ -155,9 +162,8 @@ public class Tests extends StageTest<String> {
         client3.execute("10");
         sleep(executePause);
 
-        final String client1Answer6 = client1.getOutput().trim();
-        System.out.println(client1Answer6);
-        if (!client1Answer6.equals(
+        final String client1Answer7 = client1.getOutput().trim();
+        if (!client1Answer7.equals(
         "first: test\n" +
         "first: 1\n" +
         "first: 2\n" +
@@ -172,7 +178,6 @@ public class Tests extends StageTest<String> {
             return CheckResult.wrong("Client output wrong messages");
 
         final String client3Answer5 = client3.getOutput().trim();
-        System.out.println(client1Answer6);
         if (!client3Answer5.equals(
         "first: 1\n" +
         "first: 2\n" +

@@ -8,8 +8,9 @@ public class UserThread implements Runnable {
     private final ChatData chatData;
     private final IOManager ioManager;
     private Message message;
-    private String userName;
+    private String login;
     private String addressee;
+    private int rights;
 
     public UserThread(final Socket socket, final ChatData chatData) {
         this.chatData = chatData;
@@ -20,6 +21,7 @@ public class UserThread implements Runnable {
     public void run() {
         sendDefaultMessage();
         authOrRegister();
+        endingAuthentication();
         chatting();
     }
 
@@ -31,7 +33,7 @@ public class UserThread implements Runnable {
                 case "list":
                     sendListOfUsers();
                     break;
-                case "chat":
+                case "chat": //////////// TO DO
                     setConversation();
                     break;
                 case "exit":
@@ -46,7 +48,7 @@ public class UserThread implements Runnable {
 
     private void authOrRegister() {
         while (!ioManager.isSocketClosed()) {
-            Message message = new Message(ioManager.read());
+            message = new Message(ioManager.read());
 
             switch (message.getCommand()) {
                 case "registration":
@@ -68,33 +70,34 @@ public class UserThread implements Runnable {
 
     }
 
-    void setUserName(final String userName) {
-        this.userName = userName;
+    private void endingAuthentication() {
+        chatData.setOnline(login, this);
+        login = message.getLogin();
     }
 
     private void tryToSentMessage() {
         if (addressee.isEmpty()) {
             sentTechnicalMessage("use /list command to choose an user to text!");
         } else {
-            chatData.sentMessage(userName, addressee, message.getMessage());
-            sentMessage(userName + ": " + message.getMessage());
+            chatData.sentMessage(login, addressee, message.getMessage());
+            sentMessage(login + ": " + message.getMessage());
         }
     }
 
     private void sendListOfUsers() {
-        sentTechnicalMessage(chatData.getOnlineUsers(userName));
+        sentTechnicalMessage(chatData.getOnlineUsers(login));
     }
 
     private void exit() {
-        chatData.logOut(userName, addressee);
+        chatData.logOut(login, addressee);
         ioManager.closeSocket();
     }
 
     private void setConversation() {
         if (chatData.isAddresseeOnline(message.getTarget())) {
             addressee = message.getTarget();
-            chatData.setConversation(userName, addressee);
-            final String temp = chatData.getLastMessages(addressee, userName);
+            chatData.setConversation(login, addressee);
+            final String temp = chatData.getLastMessages(login, addressee);
             if (!temp.isEmpty())
                 sentMessage(temp);
             addressee = message.getTarget();
@@ -102,7 +105,6 @@ public class UserThread implements Runnable {
             sentTechnicalMessage("the user is not online!");
         }
     }
-
 
     private void sendDefaultMessage() {
         sentTechnicalMessage("authorize or register.");

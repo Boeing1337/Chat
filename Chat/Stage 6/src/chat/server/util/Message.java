@@ -6,37 +6,70 @@ public class Message {
     private final static String auth = "/auth ";
     private final static String list = "/list";
     private final static String chat = "/chat ";
+    private final static String kick = "/kick ";
+    private final static String grant = "/grant ";
+    private final static String revoke = "/revoke ";
+    private final static String unread = "/unread";
+    private final static String history = "/history ";
+    private final static String stats = "/stats";
     private final String message;
     private String command = "";
     private String login = "";
     private String pass = "";
     private String target = "";
+    private String count = "";
 
     public Message(final String message) {
         this.message = message;
         process();
     }
 
+
     private void process() {
         if (message.startsWith(reg)) {
             command = "registration";
-            parse();
+            userInfoParse();
         } else if (message.startsWith(auth)) {
             command = "auth";
-            parse();
+            userInfoParse();
         } else if (message.equals(list)) {
             command = "list";
         } else if (message.startsWith(chat)) {
             command = "chat";
-            parseChat();
+            parseWithTarget();
         } else if (message.equals(exit)) {
             command = "exit";
+        } else if (message.startsWith(kick)) {
+            command = "kick";
+            parseWithTarget();
+        } else if (message.startsWith(grant)) {
+            command = "grant";
+            parseWithTarget();
+        } else if (message.startsWith(revoke)) {
+            command = "revoke";
+            parseWithTarget();
+        } else if (message.equals(unread)) {
+            command = "unread";
+        } else if (message.equals(stats)) {
+            count = "stats";
+        } else if (message.startsWith(history)) {
+            count = "stats";
+            numericCommandParse();
         } else {
             command = "text";
         }
     }
 
-    private void parseChat() {
+    private void numericCommandParse() {
+        String[] words = message.split("\\h");
+        if (words.length == 2) {
+            count = words[1];
+        } else {
+            setError();
+        }
+    }
+
+    private void parseWithTarget() {
         String[] words = message.split("\\h");
         if (words.length == 2) {
             target = words[1];
@@ -45,7 +78,7 @@ public class Message {
         }
     }
 
-    private void parse() {
+    private void userInfoParse() {
         String[] words = message.split("\\h");
         if (words.length == 3) {
             login = words[1];
@@ -77,5 +110,9 @@ public class Message {
 
     public String getTarget() {
         return target;
+    }
+
+    public String getCount() {
+        return count;
     }
 }

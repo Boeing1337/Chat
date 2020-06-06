@@ -18,3 +18,7 @@ files:
   visible: true
 - name: test/Tests.java
   visible: false
+- name: src/chat/server/util/UserInfo.java
+  visible: true
+- name: src/chat/server/util/UsersDataManager.java
+  visible: true

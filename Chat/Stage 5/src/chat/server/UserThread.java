@@ -8,8 +8,8 @@ public class UserThread implements Runnable {
     private final ChatData chatData;
     private final IOManager ioManager;
     private Message message;
-    private String userName;
-    private String addressee;
+    private String userName = "";
+    private String addressee = "";
 
     public UserThread(final Socket socket, final ChatData chatData) {
         this.chatData = chatData;
