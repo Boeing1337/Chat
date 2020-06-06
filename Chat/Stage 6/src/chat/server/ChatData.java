@@ -1,5 +1,6 @@
 package chat.server;
 
+import chat.server.util.UserInfo;
 import chat.server.util.UsersDataManager;
 
 import java.util.HashMap;
@@ -30,6 +31,8 @@ public class ChatData {
 
     }
 
+    synchronized String get()
+
     synchronized boolean registry(final UserThread userThread, final String login,
                                   final String pass) {
 
@@ -43,6 +46,7 @@ public class ChatData {
         }
 
         usersDataManager.createUser(login, pass, "3");
+        userThread.setRights("3");
         userThread.sentTechnicalMessage("you are registered successfully!");
         return true;
     }
@@ -55,11 +59,12 @@ public class ChatData {
             userThread.sentTechnicalMessage("incorrect login!");
             return false;
         }
-        if (!usersDataManager.getUserInfo(login).getLogin().equals(pass)) {
+        final UserInfo userInfo = usersDataManager.getUserInfo(login);
+        if (!userInfo.getLogin().equals(pass)) {
             userThread.sentTechnicalMessage("incorrect password!");
             return false;
         }
-
+        userThread.setRights(userInfo.getRights());
         userThread.sentTechnicalMessage("you are authorized successfully!");
         return true;
     }

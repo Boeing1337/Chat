@@ -10,7 +10,7 @@ public class UserThread implements Runnable {
     private Message message;
     private String login;
     private String addressee;
-    private int rights;
+    private String rights;
 
     public UserThread(final Socket socket, final ChatData chatData) {
         this.chatData = chatData;
@@ -39,11 +39,33 @@ public class UserThread implements Runnable {
                 case "exit":
                     exit();
                     break;
+                case "stats":
+                    sendStatsOfConversation();
+                    break;
+                case "kick":
+                    kickUser();
+                    break;
+                case "grant":
+                    grantRightsToUser();
+                    break;
+                case "revoke":
+                    removeRightsFromUser();
+                    break;
+                case "unread":
+                    sendUnreadList();
+                    break;
+                case "history":
+                    sendHistory();
+                    break;
                 case "text":
                     tryToSentMessage();
                     break;
             }
         }
+    }
+
+    private void sendStatsOfConversation() {
+        ioManager.sent(chatData.getStats(login));
     }
 
     private void authOrRegister() {
@@ -116,6 +138,10 @@ public class UserThread implements Runnable {
 
     void sentMessage(final String message) {
         ioManager.sent(message);
+    }
+
+    void setRights(final String rights) {
+        this.rights = rights;
     }
 
 
