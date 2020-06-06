@@ -4,16 +4,16 @@ import chat.server.util.Message;
 
 import java.net.Socket;
 
-public class UserThread implements Runnable {
-    private final ChatData chatData;
+public class Client implements Runnable {
+    private final ChatProcessor chatProcessor;
     private final IOManager ioManager;
+    private State state = State.OFFLINE;
     private Message message;
     private String login;
     private String addressee;
-    private String rights;
 
-    public UserThread(final Socket socket, final ChatData chatData) {
-        this.chatData = chatData;
+    public Client(final Socket socket, final ChatProcessor chatProcessor) {
+        this.chatProcessor = chatProcessor;
         this.ioManager = new IOManager(socket);
     }
 
@@ -21,7 +21,7 @@ public class UserThread implements Runnable {
     public void run() {
         sendDefaultMessage();
         authOrRegister();
-        endingAuthentication();
+        postAuthentication();
         chatting();
     }
 
@@ -33,7 +33,7 @@ public class UserThread implements Runnable {
                 case "list":
                     sendListOfUsers();
                     break;
-                case "chat": //////////// TO DO
+                case "chat":
                     setConversation();
                     break;
                 case "exit":
@@ -64,8 +64,16 @@ public class UserThread implements Runnable {
         }
     }
 
+    private void kickUser() {
+        chatProcessor.kick(login, message.getTarget());
+    }
+
     private void sendStatsOfConversation() {
-        ioManager.sent(chatData.getStats(login));
+        if (state == State.CONVERSATION)
+            sentMessage((chatProcessor.getStats(login, addressee)));
+        else
+            sentTechnicalMessage(
+            "You need to choose a conversation before using this command");
     }
 
     private void authOrRegister() {
@@ -74,11 +82,11 @@ public class UserThread implements Runnable {
 
             switch (message.getCommand()) {
                 case "registration":
-                    if (chatData.registry(this, message.getLogin(), message.getPass()))
+                    if (chatProcessor.registry(this, message.getLogin(), message.getPass()))
                         return;
                     break;
                 case "auth":
-                    if (chatData.auth(this, message.getLogin(), message.getPass()))
+                    if (chatProcessor.auth(this, message.getLogin(), message.getPass()))
                         return;
                     break;
                 case "exit":
@@ -89,11 +97,11 @@ public class UserThread implements Runnable {
                     break;
             }
         }
-
+        state = State.ONLINE;
     }
 
-    private void endingAuthentication() {
-        chatData.setOnline(login, this);
+    private void postAuthentication() {
+        chatProcessor.setOnline(login, this);
         login = message.getLogin();
     }
 
@@ -101,25 +109,26 @@ public class UserThread implements Runnable {
         if (addressee.isEmpty()) {
             sentTechnicalMessage("use /list command to choose an user to text!");
         } else {
-            chatData.sentMessage(login, addressee, message.getMessage());
+            chatProcessor.sentMessage(login, addressee, message.getMessage());
             sentMessage(login + ": " + message.getMessage());
         }
     }
 
     private void sendListOfUsers() {
-        sentTechnicalMessage(chatData.getOnlineUsers(login));
+        sentTechnicalMessage(chatProcessor.getOnlineUsers(login));
     }
 
     private void exit() {
-        chatData.logOut(login, addressee);
+        chatProcessor.logOut(login, addressee);
         ioManager.closeSocket();
     }
 
     private void setConversation() {
-        if (chatData.isAddresseeOnline(message.getTarget())) {
+        if (chatProcessor.isAddresseeOnline(message.getTarget())) {
+            state = State.CONVERSATION;
             addressee = message.getTarget();
-            chatData.setConversation(login, addressee);
-            final String temp = chatData.getLastMessages(login, addressee);
+            chatProcessor.setConversation(login, addressee);
+            final String temp = chatProcessor.getLastMessages(login, addressee);
             if (!temp.isEmpty())
                 sentMessage(temp);
             addressee = message.getTarget();
@@ -140,10 +149,11 @@ public class UserThread implements Runnable {
         ioManager.sent(message);
     }
 
-    void setRights(final String rights) {
-        this.rights = rights;
+    enum State {
+        OFFLINE,
+        ONLINE,
+        CONVERSATION
     }
-
 
 }
 

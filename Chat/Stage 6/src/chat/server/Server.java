@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
-    private final ChatData chatData = new ChatData();
+    private final ChatProcessor chatProcessor = new ChatProcessor();
     private ServerSocket ss;
 
     public static void main(final String[] args) {
@@ -43,7 +43,7 @@ public class Server {
             while (!ss.isClosed()) {
                 final Socket clientSocket = getConnection();
                 if (clientSocket != null)
-                    new Thread(new UserThread(clientSocket, chatData)).start();
+                    new Thread(new Client(clientSocket, chatProcessor)).start();
             }
         }).start();
 

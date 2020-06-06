@@ -36,10 +36,18 @@ public class Tests extends StageTest<String> {
             return CheckResult.wrong("Can't get the \"Client started!\nServer: " +
             "authorize or register.\" messages");
 
-        client1.execute("/auth asdasd asdasd");
+        client1.execute("bla bla bla");
         sleep(executePause);
         final String client1Answer1 = client1.getOutput().trim();
-        if (!client1Answer1.equals("Server: incorrect login!"))
+        if (!client1Answer1.equals("Server: you are not in the chat!"))
+            return CheckResult.wrong(
+            "Can't get the \"Server: you are not in the chat!\" message after " +
+            "trying to send a message before auth or register");
+
+        client1.execute("/auth asdasd asdasd");
+        sleep(executePause);
+        final String client1Answer2 = client1.getOutput().trim();
+        if (!client1Answer2.equals("Server: incorrect login!"))
             return CheckResult.wrong(
             "Can't get the \"Server: incorrect login!\" message after " +
             "input wrong login and password");
@@ -74,16 +82,16 @@ public class Tests extends StageTest<String> {
 
         client1.execute("/auth first paasf");
         sleep(executePause);
-        final String client1Answer2 = client1.getOutput().trim();
-        if (!client1Answer2.equals("Server: incorrect password!"))
+        final String client1Answer3 = client1.getOutput().trim();
+        if (!client1Answer3.equals("Server: incorrect password!"))
             return CheckResult.wrong(
             "Can't get the \"Server: incorrect password!\" message after " +
             "input a wrong password being logging");
 
         client1.execute("/auth first 12345678");
         sleep(executePause);
-        final String client1Answer3 = client1.getOutput().trim();
-        if (!client1Answer3.equals("Server: you are authorized successfully!"))
+        final String client1Answer4 = client1.getOutput().trim();
+        if (!client1Answer4.equals("Server: you are authorized successfully!"))
             return CheckResult.wrong("Can't get the \"Server: you are authorized " +
             "successfully!\" message after successful authentication");
 
@@ -104,24 +112,24 @@ public class Tests extends StageTest<String> {
 
         client1.execute("/list");
         sleep(executePause);
-        final String client1Answer4 = client1.getOutput().trim();
-        if (client1Answer4.contains("first"))
+        final String client1Answer5 = client1.getOutput().trim();
+        if (client1Answer5.contains("first"))
             return CheckResult.wrong("The list of onLine users contains the client's " +
             "name, but shouldn't");
-        if (!client1Answer4.equals("Server: online: second"))
+        if (!client1Answer5.equals("Server: online: second"))
             return CheckResult.wrong("A client receive a wrong list of online users");
 
         client1.execute("/chat blabla");
         sleep(executePause);
-        final String client1Answer5 = client1.getOutput().trim();
-        if (!client1Answer5.equals("Server: the user is not online!"))
+        final String client1Answer6 = client1.getOutput().trim();
+        if (!client1Answer6.equals("Server: the user is not online!"))
             return CheckResult.wrong("Can't get the \"Server: the user is not online!\"" +
             "after try to chat using wrong users' name");
 
         client1.execute("blabla");
         sleep(executePause);
-        final String client1Answer6 = client1.getOutput().trim();
-        if (!client1Answer6.equals("Server: use /list command to choose an user to text!"))
+        final String client1Answer7 = client1.getOutput().trim();
+        if (!client1Answer7.equals("Server: use /list command to choose an user to text!"))
             return CheckResult.wrong("Can't get the \"Server: use /list command to " +
             "choose an user to text!\" after try to chat without choosing a user");
 
@@ -162,8 +170,8 @@ public class Tests extends StageTest<String> {
         client3.execute("10");
         sleep(executePause);
 
-        final String client1Answer7 = client1.getOutput().trim();
-        if (!client1Answer7.equals(
+        final String client1Answer8 = client1.getOutput().trim();
+        if (!client1Answer8.equals(
         "first: test\n" +
         "first: 1\n" +
         "first: 2\n" +
@@ -235,7 +243,6 @@ public class Tests extends StageTest<String> {
         "first: 9\n" +
         "second: 10"))
             return CheckResult.wrong("Server should save conversations on hard disk.");
-        tempClient.execute("/chat");
 
         return CheckResult.correct();
     }

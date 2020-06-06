@@ -8,64 +8,63 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class ChatData {
+public class ChatProcessor {
     private final Set<String> allUsers = new HashSet<>();
-    private final Map<String, UserThread> onlineUsers = new HashMap<>();
+    private final Map<String, Client> onlineUsers = new HashMap<>();
     private final Set<String> conversations = new HashSet<>();
     private final UsersDataManager usersDataManager;
 
-    ChatData() {
+    ChatProcessor() {
         this.usersDataManager = new UsersDataManager(allUsers);
         usersDataManager.createUser("admin", "12345678", "1");
     }
 
-    synchronized void revoke(final UserThread owner, final String target) {
+    synchronized void revoke(final String owner, final String target) {
 
     }
 
-    synchronized void kick(final UserThread owner, final String target) {
+    synchronized void kick(final String owner, final String target) {
 
     }
 
-    synchronized void grant(final UserThread owner, final String target) {
+    synchronized void grant(final Client owner, final String target) {
 
     }
 
-    synchronized String get()
+    synchronized String getStats(final String owner, final String fromUser) {
 
-    synchronized boolean registry(final UserThread userThread, final String login,
+    }
+
+    synchronized boolean registry(final Client client, final String login,
                                   final String pass) {
 
         if (allUsers.contains(login)) {
-            userThread.sentTechnicalMessage("this login is already in use!");
+            client.sentTechnicalMessage("this login is already in use!");
             return false;
         }
         if (pass.length() < 8) {
-            userThread.sentTechnicalMessage("the password is too short!");
+            client.sentTechnicalMessage("the password is too short!");
             return false;
         }
 
         usersDataManager.createUser(login, pass, "3");
-        userThread.setRights("3");
-        userThread.sentTechnicalMessage("you are registered successfully!");
+        client.sentTechnicalMessage("you are registered successfully!");
         return true;
     }
 
-
-    synchronized boolean auth(final UserThread userThread, final String login,
+    synchronized boolean auth(final Client client, final String login,
                               final String pass) {
 
         if (!usersDataManager.isUserExist(login)) {
-            userThread.sentTechnicalMessage("incorrect login!");
+            client.sentTechnicalMessage("incorrect login!");
             return false;
         }
         final UserInfo userInfo = usersDataManager.getUserInfo(login);
         if (!userInfo.getLogin().equals(pass)) {
-            userThread.sentTechnicalMessage("incorrect password!");
+            client.sentTechnicalMessage("incorrect password!");
             return false;
         }
-        userThread.setRights(userInfo.getRights());
-        userThread.sentTechnicalMessage("you are authorized successfully!");
+        client.sentTechnicalMessage("you are authorized successfully!");
         return true;
     }
 
@@ -100,8 +99,8 @@ public class ChatData {
         return onlineUsers.get(target) != null;
     }
 
-    synchronized void setOnline(final String login, final UserThread userThread) {
-        onlineUsers.put(login, userThread);
+    synchronized void setOnline(final String login, final Client client) {
+        onlineUsers.put(login, client);
     }
 
     String getOnlineUsers(final String owner) {
@@ -116,6 +115,5 @@ public class ChatData {
             return "online: " + users;
         }
     }
-
 
 }
