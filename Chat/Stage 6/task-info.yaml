@@ -14,11 +14,25 @@ files:
   visible: false
 - name: src/chat/server/util/UserInfo.java
   visible: true
-- name: src/chat/server/util/UsersDataManager.java
-  visible: true
-- name: src/chat/server/Client.java
-  visible: true
 - name: src/chat/client/ClientSideApp.java
   visible: true
-- name: src/chat/server/ChatProcessor.java
+- name: src/chat/server/DAO/DataRetriever.java
+  visible: true
+- name: src/chat/server/Chat.java
+  visible: true
+- name: src/chat/server/commands/RegistrationCommand.java
+  visible: true
+- name: src/chat/server/commands/AuthCommand.java
+  visible: true
+- name: src/chat/server/commands/KickCommand.java
+  visible: true
+- name: src/chat/server/commands/SendCommand.java
+  visible: true
+- name: src/chat/server/commands/ExitCommand.java
+  visible: true
+- name: src/chat/server/commands/interfaces/Command.java
+  visible: true
+- name: src/chat/server/commands/fabrics/CommandsConfigurator.java
+  visible: true
+- name: src/chat/server/UserThread.java
   visible: true

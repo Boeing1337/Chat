@@ -3,7 +3,7 @@ package chat.server.util;
 public class UserInfo {
     private final String login;
     private final String password;
-    private final String rights;
+    private final int rights;
     private final long ubanTime;
 
 
@@ -11,7 +11,7 @@ public class UserInfo {
                     final long unbanTime) {
         this.login = login;
         this.password = password;
-        this.rights = rights;
+        this.rights = Integer.parseInt(rights);
         this.ubanTime = unbanTime;
     }
 
@@ -23,7 +23,7 @@ public class UserInfo {
         return password;
     }
 
-    public String getRights() {
+    public int getRights() {
         return rights;
     }
 }

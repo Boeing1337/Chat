@@ -1,12 +1,14 @@
-package chat.server.util;
+package chat.server.DAO;
+
+import chat.server.util.UserInfo;
 
 import java.util.Set;
 
-public class UsersDataManager {
+public class DataRetriever {
 
     private final Set<String> allUsers;
 
-    public UsersDataManager(final Set<String> allUsers) {
+    public DataRetriever(final Set<String> allUsers) {
         this.allUsers = allUsers;
     }
 
@@ -18,14 +20,17 @@ public class UsersDataManager {
 
     }
 
-    public void saveMessage(final String owner,
-                            final String addressee,
-                            final String message) {
+    public void saveAsReadMessage(final String owner, final String addressee,
+                                  final String message) {
 
     }
 
-    public String getLastMessages(final String owner,
-                                  final String fromUser) {
+    public void saveAsUnreadMessage(final String owner, final String addressee,
+                                    final String message) {
+
+    }
+
+    public String getLastMessages(final String owner, final String fromUser) {
         //10 messages + all unread
     }
 

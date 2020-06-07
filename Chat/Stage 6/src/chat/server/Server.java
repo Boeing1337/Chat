@@ -1,11 +1,15 @@
 package chat.server;
 
+import chat.server.commands.interfaces.Command;
+import chat.server.commands.fabrics.CommandsConfigurator;
+
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Map;
 
 public class Server {
-    private final ChatProcessor chatProcessor = new ChatProcessor();
+    private final Map<String, Command> commands = CommandsConfigurator.getCommandsMap();
     private ServerSocket ss;
 
     public static void main(final String[] args) {
@@ -43,10 +47,9 @@ public class Server {
             while (!ss.isClosed()) {
                 final Socket clientSocket = getConnection();
                 if (clientSocket != null)
-                    new Thread(new Client(clientSocket, chatProcessor)).start();
+                    new Thread(new UserThread(new IOManager(clientSocket), commands)).start();
             }
         }).start();
-
     }
 
 

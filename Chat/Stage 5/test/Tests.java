@@ -67,12 +67,20 @@ public class Tests extends StageTest<String> {
             return CheckResult.wrong("Can't get the \"Server: you are registered " +
             "successfully!\" message after successful authentication");
 
-        client2.execute("/list");
+        client2.execute("before choosing an addressee");
         sleep(executePause);
         final String client2Answer3 = client2.getOutput().trim();
-        if (!client2Answer3.equals("Server: no one online"))
+        if (!client2Answer3.equals("Server: use /list command to choose an user to text!"))
+            return CheckResult.wrong("Can't get the " +
+            "\"Server: use /list command to choose an user to text!\" message " +
+            "before choosing an addressee");
+
+        client2.execute("/list");
+        sleep(executePause);
+        final String client2Answer4 = client2.getOutput().trim();
+        if (!client2Answer4.equals("Server: no one online"))
             return CheckResult.wrong("Can't get the \"Server: no one online\" message " +
-            "after receive a empty list of online users");
+            "if there are no online users");
 
         client2.execute("/exit");
         sleep(executePause);
