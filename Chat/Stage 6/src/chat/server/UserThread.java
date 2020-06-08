@@ -28,7 +28,6 @@ public class UserThread implements Runnable {
             if (command != null)
                 command.execute(message, this);
         }
-
     }
 
     public void stop() {

@@ -34,8 +34,8 @@ public class DataRetriever {
         //10 messages + all unread
     }
 
-    public String getMessages(final String owner, final String fromUser,
-                              final int count) {
+    public String getHistory(final String owner, final String fromUser,
+                             final int count) {
         //10 messages + all unread
     }
 

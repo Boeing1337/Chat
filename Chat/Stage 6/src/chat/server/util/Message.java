@@ -56,7 +56,7 @@ public class Message {
             count = "stats";
             numericCommandParse();
         } else {
-            command = "text";
+            command = "send";
         }
     }
 

@@ -20,7 +20,7 @@ public class Chat {
         dataRetriever.createUser("admin", "12345678", "1");
     }
 
-    public synchronized String getHistory(final String owner, final String fromUser) {
+    public synchronized void getHistory(final String owner, final String fromUser) {
         dataRetriever.getLastMessages(owner, fromUser);
     }
 
@@ -36,11 +36,11 @@ public class Chat {
 
     }
 
-    public synchronized String getUnreadUsers(final String owner) {
+    public synchronized void getUnreadUsers(final String owner) {
 
     }
 
-    public synchronized String getStats(final String owner, final String fromUser) {
+    public synchronized void getStats(final String owner, final String fromUser) {
 
     }
 
@@ -62,15 +62,6 @@ public class Chat {
         userThread.sentTechnicalMessage("you are registered successfully!");
     }
 
-    private synchronized void finishLogging(final UserThread userThread, final String login,
-                                            final int rights) {
-
-        userThread.setState(UserThread.State.ONLINE);
-        onlineUsers.put(login, userThread);
-        userThread.setLogin(login);
-        userThread.setRights(rights);
-    }
-
     public synchronized void auth(final UserThread userThread, final String login,
                                   final String pass) {
 
@@ -88,21 +79,28 @@ public class Chat {
         userThread.sentTechnicalMessage("you are authorized successfully!");
     }
 
-    public synchronized void sentMessage(final String fromUser, final String owner,
-                                         final String message) {
+    private synchronized void finishLogging(final UserThread userThread, final String login,
+                                            final int rights) {
 
-        if (conversations.contains(owner + fromUser)) {
-            dataRetriever.saveAsReadMessage(owner, fromUser, message);
-            onlineUsers.get(owner).sentMessage(fromUser + ": " + message);
-        } else {
-            dataRetriever.saveAsUnreadMessage(owner, fromUser, message);
-        }
-
+        userThread.setState(UserThread.State.ONLINE);
+        onlineUsers.put(login, userThread);
+        userThread.setLogin(login);
+        userThread.setRights(rights);
     }
 
-    public synchronized String getLastMessages(final String user, final String fromUser) {
 
-        return dataRetriever.getLastMessages(user, fromUser);
+    public synchronized void sentMessage(final String fromUser, final String toUser,
+                                         final String message) {
+
+        if (conversations.contains(toUser + fromUser)) {
+            dataRetriever.saveAsReadMessage(toUser, fromUser, message);
+            onlineUsers.get(toUser).sentMessage(fromUser + ": " + message);
+        } else {
+            dataRetriever.saveAsUnreadMessage(toUser, fromUser, message);
+        }
+
+        dataRetriever.saveAsReadMessage(fromUser, fromUser, message);
+        onlineUsers.get(fromUser).sentMessage(fromUser + ": " + message);
 
     }
 
@@ -111,29 +109,26 @@ public class Chat {
         onlineUsers.remove(fromUser);
     }
 
-    public synchronized void setConversation(final String fromUser, final String toUser) {
-        conversations.remove(fromUser + toUser);
+    public synchronized void setConversation(final UserThread userThread, final String toUser) {
+        final String fromUser = userThread.getLogin();
+        conversations.remove(fromUser + userThread.getAddressee());
         conversations.add(fromUser + toUser);
+        userThread.setState(UserThread.State.CONVERSATION);
+        final String messages = dataRetriever.getLastMessages(fromUser, toUser);
+        if (!messages.isEmpty())
+            userThread.sentMessage(messages);
     }
 
-    public boolean isAddresseeOnline(final String target) {
-        return onlineUsers.get(target) != null;
-    }
-
-    public synchronized void setOnline(final String login, final UserThread userThread) {
-        onlineUsers.put(login, userThread);
-    }
-
-    public String getOnlineUsers(final String owner) {
+    public void sendOnlineUsers(final UserThread owner) {
         final StringBuilder temp = new StringBuilder();
         final Set<String> set = new HashSet<>(onlineUsers.keySet());
-        set.remove(owner);
+        set.remove(owner.getLogin());
         set.forEach(a -> temp.append(" ").append(a));
         final String users = temp.toString().trim();
         if (users.isEmpty()) {
-            return "no one online";
+            owner.sentTechnicalMessage("no one online");
         } else {
-            return "online: " + users;
+            owner.sentTechnicalMessage("online: " + users);
         }
     }
 

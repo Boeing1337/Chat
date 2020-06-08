@@ -1,7 +1,6 @@
 package chat.server.commands.fabrics;
 
-import chat.server.commands.AuthCommand;
-import chat.server.commands.RegistrationCommand;
+import chat.server.commands.*;
 import chat.server.commands.interfaces.Command;
 
 import java.util.HashMap;
@@ -13,6 +12,10 @@ public class CommandsConfigurator {
         final HashMap<String, Command> commands = new HashMap<>();
         commands.put("registration", new RegistrationCommand());
         commands.put("auth", new AuthCommand());
+        commands.put("send", new SendCommand());
+        commands.put("exit", new ExitCommand());
+        commands.put("chat", new ChatCommand());
+        commands.put("kick", new KickCommand());
         return commands;
     }
 }

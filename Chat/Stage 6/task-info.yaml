@@ -36,3 +36,7 @@ files:
   visible: true
 - name: src/chat/server/UserThread.java
   visible: true
+- name: src/chat/server/commands/ChatCommand.java
+  visible: true
+- name: src/chat/server/commands/ListCommand.java
+  visible: true
