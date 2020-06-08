@@ -4,15 +4,18 @@ public class UserInfo {
     private final String login;
     private final String password;
     private final int rights;
-    private final long ubanTime;
+    private final long banTime;
 
+    public UserInfo(final String... arg) {
 
-    public UserInfo(final String login, final String password, final String rights,
-                    final long unbanTime) {
-        this.login = login;
-        this.password = password;
-        this.rights = Integer.parseInt(rights);
-        this.ubanTime = unbanTime;
+        this.login = arg[0];
+        this.password = arg[1];
+        this.rights = Integer.parseInt(arg[2]);
+        this.banTime = Long.parseLong(arg[3]);
+    }
+
+    public long getBanTime() {
+        return banTime;
     }
 
     public String getLogin() {

@@ -16,8 +16,6 @@ files:
   visible: true
 - name: src/chat/client/ClientSideApp.java
   visible: true
-- name: src/chat/server/DAO/DataRetriever.java
-  visible: true
 - name: src/chat/server/Chat.java
   visible: true
 - name: src/chat/server/commands/RegistrationCommand.java
@@ -39,4 +37,6 @@ files:
 - name: src/chat/server/commands/ChatCommand.java
   visible: true
 - name: src/chat/server/commands/ListCommand.java
+  visible: true
+- name: src/chat/server/DAO/Cybernate.java
   visible: true

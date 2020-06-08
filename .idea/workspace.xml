@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d709212-bb65-4ffb-86d0-927349d46620" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/commands/ChatCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/commands/ListCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 5/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 5/task-info.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/Chat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/DAO/DataRetriever.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/DAO/DataRetriever.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/UserThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/UserThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/commands/fabrics/CommandsConfigurator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/commands/fabrics/CommandsConfigurator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/DAO/DataRetriever.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/DAO/Cybernate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/UserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/UserInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/Stage 6/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/task-info.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -107,7 +104,7 @@
       <module name="Chat-Stage_5_main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="chat.server.DAO.*" />
+          <option name="PATTERN" value="chat.server.DAO.Cybernate" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -237,7 +234,7 @@
       <workItem from="1591269485671" duration="23441000" />
       <workItem from="1591426586316" duration="9290000" />
       <workItem from="1591529285204" duration="21526000" />
-      <workItem from="1591609091001" duration="11540000" />
+      <workItem from="1591609091001" duration="23102000" />
     </task>
     <task id="LOCAL-00001" summary="Just test">
       <created>1589305118834</created>
@@ -470,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591554645326</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="stage 6">
+      <created>1591627610875</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1591627610875</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -543,26 +547,26 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="872" y="380" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1591041058159" />
-    <state x="1047" y="415" key="#com.intellij.ide.util.MemberChooser" timestamp="1591624607635">
+    <state x="1047" y="415" key="#com.intellij.ide.util.MemberChooser" timestamp="1591632602226">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="1047" y="415" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1440@0.0.2560.1440" timestamp="1591624607635" />
+    <state x="1047" y="415" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1440@0.0.2560.1440" timestamp="1591632602226" />
     <state x="992" y="654" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1591537019565">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="992" y="654" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1591537019565" />
-    <state x="905" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591551008210">
+    <state x="905" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591629619938">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="905" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1591551008210" />
+    <state x="905" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1591629619938" />
     <state x="1034" y="561" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1590630410687">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="1034" y="561" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.2560.1440@0.0.2560.1440" timestamp="1590630410687" />
-    <state x="875" y="317" key="CommitChangelistDialog2" timestamp="1591554644766">
+    <state x="875" y="317" key="CommitChangelistDialog2" timestamp="1591627617058">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="875" y="317" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1591554644766" />
+    <state x="875" y="317" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1591627617058" />
     <state x="1059" y="476" key="FileChooserDialogImpl" timestamp="1589304970754">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>

@@ -1,6 +1,6 @@
 package chat.server;
 
-import chat.server.DAO.DataRetriever;
+import chat.server.DAO.Cybernate;
 import chat.server.util.UserInfo;
 
 import java.util.HashMap;
@@ -12,16 +12,16 @@ public class Chat {
     private final Set<String> allUsers;
     private final Map<String, UserThread> onlineUsers = new HashMap<>();
     private final Set<String> conversations = new HashSet<>();
-    private final DataRetriever dataRetriever;
+    private final Cybernate cybernate;
 
     public Chat() {
         allUsers = new HashSet<>();
-        this.dataRetriever = new DataRetriever(allUsers);
-        dataRetriever.createUser("admin", "12345678", "1");
+        this.cybernate = new Cybernate(allUsers);
+        cybernate.createUser("admin", "12345678", "1");
     }
 
     public synchronized void getHistory(final String owner, final String fromUser) {
-        dataRetriever.getLastMessages(owner, fromUser);
+        cybernate.getLastMessages(owner, fromUser);
     }
 
     public synchronized void revoke(final String owner, final String fromUser) {
@@ -57,30 +57,36 @@ public class Chat {
             return;
         }
 
-        dataRetriever.createUser(login, pass, "3");
-        finishLogging(userThread, login, 3);
+        cybernate.createUser(login, pass, "3");
+        finishAuth(userThread, login, 3);
         userThread.sentTechnicalMessage("you are registered successfully!");
     }
 
     public synchronized void auth(final UserThread userThread, final String login,
                                   final String pass) {
 
-        if (!dataRetriever.isUserExist(login)) {
+        if (!allUsers.contains(login)) {
             userThread.sentTechnicalMessage("incorrect login!");
             return;
         }
-        final UserInfo userInfo = dataRetriever.getUserInfo(login);
+        final UserInfo userInfo = cybernate.getUserInfo(login);
+
         if (!userInfo.getLogin().equals(pass)) {
             userThread.sentTechnicalMessage("incorrect password!");
             return;
         }
 
-        finishLogging(userThread, login, userInfo.getRights());
+        if (userInfo.getBanTime() > System.currentTimeMillis()) {
+            userThread.sentTechnicalMessage("you are banned!");
+            return;
+        }
+
+        finishAuth(userThread, login, userInfo.getRights());
         userThread.sentTechnicalMessage("you are authorized successfully!");
     }
 
-    private synchronized void finishLogging(final UserThread userThread, final String login,
-                                            final int rights) {
+    private synchronized void finishAuth(final UserThread userThread, final String login,
+                                         final int rights) {
 
         userThread.setState(UserThread.State.ONLINE);
         onlineUsers.put(login, userThread);
@@ -93,13 +99,13 @@ public class Chat {
                                          final String message) {
 
         if (conversations.contains(toUser + fromUser)) {
-            dataRetriever.saveAsReadMessage(toUser, fromUser, message);
+            cybernate.saveAsReadMessage(toUser, fromUser, message);
             onlineUsers.get(toUser).sentMessage(fromUser + ": " + message);
         } else {
-            dataRetriever.saveAsUnreadMessage(toUser, fromUser, message);
+            cybernate.saveAsUnreadMessage(toUser, fromUser, message);
         }
 
-        dataRetriever.saveAsReadMessage(fromUser, fromUser, message);
+        cybernate.saveAsReadMessage(fromUser, fromUser, message);
         onlineUsers.get(fromUser).sentMessage(fromUser + ": " + message);
 
     }
@@ -110,11 +116,22 @@ public class Chat {
     }
 
     public synchronized void setConversation(final UserThread userThread, final String toUser) {
+        if (!allUsers.contains(toUser)) {
+            userThread.sentTechnicalMessage("this user isn't exist!");
+            return;
+        }
+
+        if (onlineUsers.get(toUser) == null) {
+            userThread.sentTechnicalMessage("this user isn't online!");
+            return;
+        }
+
         final String fromUser = userThread.getLogin();
         conversations.remove(fromUser + userThread.getAddressee());
         conversations.add(fromUser + toUser);
+        cybernate.createConversation(fromUser, toUser);
         userThread.setState(UserThread.State.CONVERSATION);
-        final String messages = dataRetriever.getLastMessages(fromUser, toUser);
+        final String messages = cybernate.getLastMessages(fromUser, toUser);
         if (!messages.isEmpty())
             userThread.sentMessage(messages);
     }
