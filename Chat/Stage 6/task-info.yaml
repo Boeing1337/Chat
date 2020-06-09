@@ -40,3 +40,5 @@ files:
   visible: true
 - name: src/chat/server/DAO/Cybernate.java
   visible: true
+- name: src/chat/server/util/DialogStats.java
+  visible: true

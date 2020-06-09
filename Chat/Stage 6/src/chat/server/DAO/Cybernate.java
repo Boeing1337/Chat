@@ -1,5 +1,6 @@
 package chat.server.DAO;
 
+import chat.server.util.DialogStats;
 import chat.server.util.UserInfo;
 
 import java.io.File;
@@ -38,8 +39,15 @@ public class Cybernate {
 
     }
 
-    public void saveAsReadMessage(final String owner, final String addressee,
+    public void saveAsReadMessage(final String owner, final String toUser,
                                   final String message) {
+
+        try (FileWriter fileWriter =
+             new FileWriter(new File(owner + "\\" + toUser + chatSuffix))) {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -52,46 +60,43 @@ public class Cybernate {
         try (
         Scanner text = new Scanner(new File(owner + "\\" + user + chatSuffix));
         Scanner unread = new Scanner(new File(owner + "\\" + user + infSuffix))) {
-            final int count;
-            if (unread.hasNextLine())
-                count = unread.nextInt();
+            final DialogStats dialogStats = new DialogStats(unread.nextLine().split("\\h"));
 
-            final List<String> temp = new ArrayList<>();
+            final List<String> temp = new ArrayList<>(50);
             final StringBuilder stringBuilder = new StringBuilder();
             while (text.hasNextLine()) {
                 temp.add(text.nextLine());
             }
 
-            for (int i = temp.size() - 10, step = 0; step < 10; i++, step++) {
+            final int totalCount = 10 + dialogStats.getUnread();
+            for (int i = temp.size() - totalCount; i < temp.size(); i++) {
                 if (i < 0)
                     continue;
                 stringBuilder.append("\n").append(temp.get(i));
             }
             return stringBuilder.toString().trim();
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //10 messages + all unread
+        return "";
     }
 
     public String getHistory(final String owner, final String fromUser,
                              final int count) {
-        //10 messages + all unread
+        return null;
     }
 
     public UserInfo getUserInfo(final String user) {
-        if (allUsers.contains(user)) {
+        UserInfo userInfo = null;
+        try (final Scanner scanner = new Scanner(new File(
+        user + "\\" + user + infSuffix))) {
 
-            try (final Scanner scanner = new Scanner(new File(
-            user + "\\" + user + infSuffix))) {
-
-                return new UserInfo(scanner.nextLine().split("\\h"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            userInfo = new UserInfo(scanner.nextLine().split("\\h"));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return userInfo;
     }
 
     public void createConversation(final String userA, final String userB) {
@@ -110,11 +115,7 @@ public class Cybernate {
                 textStats.createNewFile();
 
             try (FileWriter fileWriter = new FileWriter(textStats)) {
-                fileWriter.write(
-                "count=0\n" +
-                owner + "=0\n" +
-                fromUser + "=0\n+" +
-                "unread=0");
+                fileWriter.write("0 0 0 0");
             }
         } catch (Exception e) {
             e.printStackTrace();

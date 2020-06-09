@@ -95,18 +95,18 @@ public class Chat {
     }
 
 
-    public synchronized void sentMessage(final String fromUser, final String toUser,
-                                         final String message) {
-
-        if (conversations.contains(toUser + fromUser)) {
-            cybernate.saveAsReadMessage(toUser, fromUser, message);
-            onlineUsers.get(toUser).sentMessage(fromUser + ": " + message);
+    public synchronized void sentMessage(final String owner, final String toUser,
+                                         String message) {
+        message = owner + ": " + message;
+        if (conversations.contains(toUser + owner)) {
+            cybernate.saveAsReadMessage(toUser, owner, message);
+            onlineUsers.get(toUser).sentMessage(message);
         } else {
-            cybernate.saveAsUnreadMessage(toUser, fromUser, message);
+            cybernate.saveAsUnreadMessage(toUser, owner, message);
         }
 
-        cybernate.saveAsReadMessage(fromUser, fromUser, message);
-        onlineUsers.get(fromUser).sentMessage(fromUser + ": " + message);
+        cybernate.saveAsReadMessage(owner, toUser,  message);
+        onlineUsers.get(owner).sentMessage(message);
 
     }
 
