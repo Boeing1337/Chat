@@ -35,12 +35,24 @@ public class DialogStats {
         return count + " " + owner + " " + fromUser + " " + unread;
     }
 
-    public void addUnread() {
-        unread++;
-        count++;
+    public void increaseRead(final String owner, final String fromUser) {
+        if (owner.equals(fromUser)) {
+            this.owner++;
+        } else {
+            this.fromUser++;
+        }
+
+        this.count++;
+
     }
 
-    public void addRead() {
-Ебаня ИДея всё похерила .ывАываыяваплджбывакпяолд.вапряолдж.
+    public void increaseUnread() {
+        this.count++;
+        this.unread++;
+        this.fromUser++;
+    }
+
+    public void clearUnread() {
+        this.unread = 0;
     }
 }

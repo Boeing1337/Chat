@@ -6,7 +6,7 @@ public class UserInfo {
     private final int rights;
     private final long banTime;
 
-    public UserInfo(final String... arg) {
+    public UserInfo(final String[] arg) {
 
         this.login = arg[0];
         this.password = arg[1];

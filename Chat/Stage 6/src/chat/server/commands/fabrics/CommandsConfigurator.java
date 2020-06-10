@@ -16,6 +16,7 @@ public class CommandsConfigurator {
         commands.put("exit", new ExitCommand());
         commands.put("chat", new ChatCommand());
         commands.put("kick", new KickCommand());
+        commands.put("list", new ListCommand());
         return commands;
     }
 }

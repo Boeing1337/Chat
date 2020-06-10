@@ -47,28 +47,46 @@ public class Cybernate {
         }
     }
 
-    private void addReadCount(final String owner, final String fromUser) {
-        final File file = formChatFile(owner, fromUser);
-        try (Scanner text = new Scanner(file)) {
-            DialogStats dialogStats = new DialogStats(text.nextLine().split("\\h"));
-            try (FileWriter fileWriter = new FileWriter(file)) {
-
-            }
-
+    public void saveAsUnreadMessage(final String owner, final String fromUser,
+                                    final String message) {
+        try (FileWriter fileWriter = new FileWriter(formChatFile(owner, fromUser), true)) {
+            fileWriter.write(message + "\n");
+            addUnreadCount(owner, fromUser);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void saveAsUnreadMessage(final String owner, final String addressee,
-                                    final String message) {
-
+    private void addReadCount(final String owner, final String fromUser) {
+        final File file = formInfFile(owner, fromUser);
+        try (Scanner text = new Scanner(file)) {
+            DialogStats dialogStats = new DialogStats(text.nextLine().split("\\h"));
+            dialogStats.increaseRead(owner, fromUser);
+            try (FileWriter fileWriter = new FileWriter(file)) {
+                fileWriter.write(dialogStats.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public String getLastMessages(final String owner, final String user) {
+    private void addUnreadCount(final String owner, final String fromUser) {
+        final File file = formInfFile(owner, fromUser);
+        try (Scanner text = new Scanner(file)) {
+            DialogStats dialogStats = new DialogStats(text.nextLine().split("\\h"));
+            dialogStats.increaseUnread();
+            try (FileWriter fileWriter = new FileWriter(file)) {
+                fileWriter.write(dialogStats.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getLastMessages(final String owner, final String fromUser) {
         try (
-        Scanner textScanner = new Scanner(formChatFile(owner, user));
-        Scanner statsScanner = new Scanner(formInfFile(owner, user))) {
+        Scanner textScanner = new Scanner(formChatFile(owner, fromUser));
+        Scanner statsScanner = new Scanner(formInfFile(owner, fromUser))) {
             final String stats = statsScanner.nextLine();
             final DialogStats dialogStats = new DialogStats(stats.split("\\h"));
             final List<String> temp = new ArrayList<>(50);
@@ -83,11 +101,15 @@ public class Cybernate {
                     continue;
                 stringBuilder.append("\n").append(temp.get(i));
             }
+            dialogStats.clearUnread();
+            try (FileWriter fileWriter = new FileWriter(formInfFile(owner, fromUser))) {
+                fileWriter.write(dialogStats.toString());
+            }
             return stringBuilder.toString().trim();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return "";
     }
 

@@ -4,7 +4,9 @@
     <list default="true" id="3d709212-bb65-4ffb-86d0-927349d46620" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/DAO/Cybernate.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/DAO/Cybernate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/commands/fabrics/CommandsConfigurator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/commands/fabrics/CommandsConfigurator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/DialogStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/DialogStats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/UserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/UserInfo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -487,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591746114958</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="stage 6">
+      <created>1591805896659</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1591805896659</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,10 +585,10 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="1034" y="561" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.2560.1440@0.0.2560.1440" timestamp="1590630410687" />
-    <state x="875" y="317" key="CommitChangelistDialog2" timestamp="1591746114394">
+    <state x="875" y="317" key="CommitChangelistDialog2" timestamp="1591805896214">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="875" y="317" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1591746114394" />
+    <state x="875" y="317" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1591805896214" />
     <state x="1059" y="476" key="FileChooserDialogImpl" timestamp="1589304970754">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
@@ -620,10 +629,10 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="803" y="365" key="SettingsEditor/0.0.2560.1440@0.0.2560.1440" timestamp="1591744051038" />
-    <state x="872" y="454" key="Vcs.Push.Dialog.v2" timestamp="1591640413534">
+    <state x="872" y="454" key="Vcs.Push.Dialog.v2" timestamp="1591805911284">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="872" y="454" key="Vcs.Push.Dialog.v2/0.0.2560.1440@0.0.2560.1440" timestamp="1591640413534" />
+    <state x="872" y="454" key="Vcs.Push.Dialog.v2/0.0.2560.1440@0.0.2560.1440" timestamp="1591805911284" />
     <state x="1102" y="638" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591805889065">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
