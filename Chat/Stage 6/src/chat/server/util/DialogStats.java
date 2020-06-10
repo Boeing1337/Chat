@@ -1,10 +1,10 @@
 package chat.server.util;
 
 public class DialogStats {
-    private final int count;
-    private final int owner;
-    private final int fromUser;
-    private final int unread;
+    private int count;
+    private int owner;
+    private int fromUser;
+    private int unread;
 
     public DialogStats(final String[] arg) {
         this.count = Integer.parseInt(arg[0]);
@@ -28,5 +28,19 @@ public class DialogStats {
 
     public int getUnread() {
         return unread;
+    }
+
+    @Override
+    public String toString() {
+        return count + " " + owner + " " + fromUser + " " + unread;
+    }
+
+    public void addUnread() {
+        unread++;
+        count++;
+    }
+
+    public void addRead() {
+
     }
 }

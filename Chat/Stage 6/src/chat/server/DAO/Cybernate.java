@@ -9,9 +9,6 @@ import java.util.*;
 
 public class Cybernate {
 
-    private final String infSuffix = ".inf";
-    private final String chatSuffix = ".chat";
-
     private final Set<String> allUsers;
 
     public Cybernate(final Set<String> allUsers) {
@@ -24,7 +21,7 @@ public class Cybernate {
         try {
             final File directory = new File(login);
             directory.mkdir();
-            final File userInfo = new File(login + "\\" + login + infSuffix);
+            final File userInfo = formInfFile(login, login);
             userInfo.createNewFile();
             try (FileWriter fileWriter = new FileWriter(userInfo)) {
                 fileWriter.write(login + " " + pass + " " + rights + " " + "-1");
@@ -39,16 +36,28 @@ public class Cybernate {
 
     }
 
-    public void saveAsReadMessage(final String owner, final String toUser,
+    public void saveAsReadMessage(final String owner, final String fromUser,
                                   final String message) {
 
-        try (FileWriter fileWriter =
-             new FileWriter(new File(owner + "\\" + toUser + chatSuffix))) {
+        try (FileWriter fileWriter = new FileWriter(formChatFile(owner, fromUser), true)) {
+            fileWriter.write(message + "\n");
+            addReadCount(owner, fromUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addReadCount(final String owner, final String fromUser) {
+        final File file = formChatFile(owner, fromUser);
+        try (Scanner text = new Scanner(file)) {
+            DialogStats dialogStats = new DialogStats(text.nextLine().split("\\h"));
+            try (FileWriter fileWriter = new FileWriter(file)) {
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void saveAsUnreadMessage(final String owner, final String addressee,
@@ -58,14 +67,14 @@ public class Cybernate {
 
     public String getLastMessages(final String owner, final String user) {
         try (
-        Scanner text = new Scanner(new File(owner + "\\" + user + chatSuffix));
-        Scanner unread = new Scanner(new File(owner + "\\" + user + infSuffix))) {
-            final DialogStats dialogStats = new DialogStats(unread.nextLine().split("\\h"));
-
+        Scanner textScanner = new Scanner(formChatFile(owner, user));
+        Scanner statsScanner = new Scanner(formInfFile(owner, user))) {
+            final String stats = statsScanner.nextLine();
+            final DialogStats dialogStats = new DialogStats(stats.split("\\h"));
             final List<String> temp = new ArrayList<>(50);
             final StringBuilder stringBuilder = new StringBuilder();
-            while (text.hasNextLine()) {
-                temp.add(text.nextLine());
+            while (textScanner.hasNextLine()) {
+                temp.add(textScanner.nextLine());
             }
 
             final int totalCount = 10 + dialogStats.getUnread();
@@ -89,9 +98,7 @@ public class Cybernate {
 
     public UserInfo getUserInfo(final String user) {
         UserInfo userInfo = null;
-        try (final Scanner scanner = new Scanner(new File(
-        user + "\\" + user + infSuffix))) {
-
+        try (final Scanner scanner = new Scanner(formInfFile(user, user))) {
             userInfo = new UserInfo(scanner.nextLine().split("\\h"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -106,21 +113,29 @@ public class Cybernate {
 
     private void createConversationFiles(final String owner, final String fromUser) {
         try {
-            final File textData = new File(owner + "\\" + fromUser + chatSuffix);
-            if (!textData.exists())
+            final File textData = formChatFile(owner, fromUser);
+            final File textStats = formInfFile(owner, fromUser);
+            if (!textData.exists() && !textStats.exists()) {
                 textData.createNewFile();
-
-            final File textStats = new File(owner + "\\" + fromUser + infSuffix);
-            if (!textStats.exists())
                 textStats.createNewFile();
-
-            try (FileWriter fileWriter = new FileWriter(textStats)) {
-                fileWriter.write("0 0 0 0");
+                try (FileWriter fileWriter = new FileWriter(textStats)) {
+                    fileWriter.write("0 0 0 0");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    private File formChatFile(final String a, final String b) {
+        final String chatSuffix = ".chat";
+        return new File(a + "\\" + b + chatSuffix);
+    }
+
+    private File formInfFile(final String a, final String b) {
+        final String infSuffix = ".inf";
+        return new File(a + "\\" + b + infSuffix);
     }
 
 }
