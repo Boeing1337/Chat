@@ -17,10 +17,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/client/ClientSideApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/UserThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/UserThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/DAO/Cybernate.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/DAO/Cybernate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/Stage 6/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/task-info.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/test/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/test/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -517,7 +516,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591808471766</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="stage 6">
+      <created>1591808709226</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1591808709226</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -590,6 +596,10 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="872" y="380" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1591041058159" />
+    <state x="1050" y="534" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591810500151">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="1050" y="534" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1440@0.0.2560.1440" timestamp="1591810500151" />
     <state x="1047" y="415" key="#com.intellij.ide.util.MemberChooser" timestamp="1591744870532">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
@@ -606,30 +616,30 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="1034" y="561" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.2560.1440@0.0.2560.1440" timestamp="1590630410687" />
-    <state x="875" y="317" key="CommitChangelistDialog2" timestamp="1591808471296">
+    <state x="875" y="317" key="CommitChangelistDialog2" timestamp="1591808708650">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="875" y="317" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1591808471296" />
+    <state x="875" y="317" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1591808708650" />
     <state x="1059" y="476" key="FileChooserDialogImpl" timestamp="1589304970754">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="1059" y="476" key="FileChooserDialogImpl/0.0.2560.1440@0.0.2560.1440" timestamp="1589304970754" />
-    <state width="2519" height="244" key="GridCell.Tab.0.bottom" timestamp="1591808635985">
+    <state width="2519" height="424" key="GridCell.Tab.0.bottom" timestamp="1591810527023">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="244" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1591808635985" />
-    <state width="2519" height="244" key="GridCell.Tab.0.center" timestamp="1591808635985">
+    <state width="2519" height="424" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1591810527023" />
+    <state width="2519" height="424" key="GridCell.Tab.0.center" timestamp="1591810527023">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="244" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1591808635985" />
-    <state width="2519" height="244" key="GridCell.Tab.0.left" timestamp="1591808635984">
+    <state width="2519" height="424" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1591810527023" />
+    <state width="2519" height="424" key="GridCell.Tab.0.left" timestamp="1591810527023">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="244" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1591808635984" />
-    <state width="2519" height="244" key="GridCell.Tab.0.right" timestamp="1591808635985">
+    <state width="2519" height="424" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1591810527023" />
+    <state width="2519" height="424" key="GridCell.Tab.0.right" timestamp="1591810527023">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="244" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1591808635985" />
+    <state width="2519" height="424" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1591810527023" />
     <state width="2519" height="508" key="GridCell.Tab.1.bottom" timestamp="1588367961346">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>

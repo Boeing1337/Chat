@@ -71,7 +71,7 @@ public class Chat {
         }
         final UserInfo userInfo = cybernate.getUserInfo(login);
 
-        if (!userInfo.getLogin().equals(pass)) {
+        if (!userInfo.getPassword().equals(pass)) {
             userThread.sentTechnicalMessage("incorrect password!");
             return;
         }
@@ -116,13 +116,8 @@ public class Chat {
     }
 
     public synchronized void setConversation(final UserThread userThread, final String toUser) {
-        if (!allUsers.contains(toUser)) {
-            userThread.sentTechnicalMessage("this user isn't exist!");
-            return;
-        }
-
         if (onlineUsers.get(toUser) == null) {
-            userThread.sentTechnicalMessage("this user isn't online!");
+            userThread.sentTechnicalMessage("the user is not online!");
             return;
         }
 
