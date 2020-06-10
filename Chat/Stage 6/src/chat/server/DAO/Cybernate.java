@@ -13,7 +13,7 @@ public class Cybernate {
 
     public Cybernate(final Set<String> allUsers) {
         this.allUsers = allUsers;
-        Arrays.stream(Objects.requireNonNull(new File("\\").listFiles()))
+        Arrays.stream(Objects.requireNonNull(new File(".").listFiles()))
         .forEach(e -> allUsers.add(e.getName()));
     }
 
@@ -125,6 +125,7 @@ public class Cybernate {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("\n\n" + userInfo.getLogin() + "\n\n");
         return userInfo;
     }
 

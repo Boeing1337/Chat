@@ -15,6 +15,6 @@ public class SendCommand implements Command {
         else if (state == UserThread.State.ONLINE)
             ut.sentTechnicalMessage("use /list command to choose an user to text!");
         else if (state == possibleState)
-            chat.sentMessage(ut.getLogin(), m.getTarget(), m.getMessage());
+            chat.sentMessage(ut.getLogin(), ut.getAddressee(), m.getMessage());
     }
 }

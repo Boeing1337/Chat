@@ -47,7 +47,6 @@ public class Chat {
     public synchronized void registry(final UserThread userThread,
                                       final String login,
                                       final String pass) {
-
         if (allUsers.contains(login)) {
             userThread.sentTechnicalMessage("this login is already in use!");
             return;
@@ -105,7 +104,7 @@ public class Chat {
             cybernate.saveAsUnreadMessage(toUser, owner, message);
         }
 
-        cybernate.saveAsReadMessage(owner, toUser,  message);
+        cybernate.saveAsReadMessage(owner, toUser, message);
         onlineUsers.get(owner).sentMessage(message);
 
     }
@@ -126,6 +125,7 @@ public class Chat {
         conversations.add(fromUser + toUser);
         cybernate.createConversation(fromUser, toUser);
         userThread.setState(UserThread.State.CONVERSATION);
+        userThread.setAddressee(toUser);
         final String messages = cybernate.getLastMessages(fromUser, toUser);
         if (!messages.isEmpty())
             userThread.sentMessage(messages);

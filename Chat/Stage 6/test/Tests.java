@@ -4,8 +4,6 @@ import org.hyperskill.hstest.dynamic.input.DynamicTestingMethod;
 import org.hyperskill.hstest.stage.StageTest;
 import org.hyperskill.hstest.testcase.CheckResult;
 import org.hyperskill.hstest.testing.TestedProgram;
-import org.junit.Assert;
-import org.junit.Test;
 
 import static org.hyperskill.hstest.common.Utils.sleep;
 
