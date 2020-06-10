@@ -7,20 +7,20 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ClientSideApp {
+public class Client {
     private final Scanner scanner = new Scanner(System.in);
     private final InputReader inputReader;
     private final OutputWriter outputWriter;
     private Socket socket;
 
-    private ClientSideApp() {
+    private Client() {
         createSocket();
         this.inputReader = new InputReader(socket);
         this.outputWriter = new OutputWriter(socket);
     }
 
     public static void main(final String[] args) {
-        new ClientSideApp().start();
+        new Client().start();
     }
 
     private void start() {

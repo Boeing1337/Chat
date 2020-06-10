@@ -21,7 +21,7 @@ public class UserThread implements Runnable {
 
     @Override
     public void run() {
-        sentTechnicalMessage("auth or register");
+        sentTechnicalMessage("authorize or register.");
         while (!ioManager.isSocketClosed()) {
             final Message message = new Message(ioManager.read());
             final Command command = commands.get(message.getCommand());
