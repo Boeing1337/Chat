@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d709212-bb65-4ffb-86d0-927349d46620" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/DAO/Cybernate.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/DAO/Cybernate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/DialogStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/DialogStats.java" afterDir="false" />
-    </list>
+    <list default="true" id="3d709212-bb65-4ffb-86d0-927349d46620" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -521,6 +517,11 @@
             </State>
           </value>
         </entry>
+        <entry key="2">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -576,10 +577,10 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="1034" y="561" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.2560.1440@0.0.2560.1440" timestamp="1590630410687" />
-    <state x="875" y="317" key="CommitChangelistDialog2" timestamp="1591746114394">
+    <state x="875" y="317" key="CommitChangelistDialog2" timestamp="1591804215917">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="875" y="317" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1591746114394" />
+    <state x="875" y="317" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1591804215917" />
     <state x="1059" y="476" key="FileChooserDialogImpl" timestamp="1589304970754">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
