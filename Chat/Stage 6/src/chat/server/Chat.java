@@ -48,10 +48,19 @@ public class Chat {
         admin.sentTechnicalMessage(target + " was kicked!");
     }
 
-    public synchronized void grant(final String user) {
+    public synchronized void grant(final String user, final UserThread admin) {
+        if (!allUsers.contains(user))
+            return;
+
         UserInfo userInfo = cybernate.getUserInfo(user);
+        if (userInfo.getRights() == 2) {
+            admin.sentTechnicalMessage("this user is already a moderator!");
+            return;
+        }
+
         userInfo.grant();
         cybernate.saveUserInfo(user, userInfo);
+        admin.sentTechnicalMessage(userInfo.getLogin() + " is a new moderator!");
     }
 
     public synchronized void getUnreadUsers(final String owner) {
