@@ -213,39 +213,39 @@ public class Tests extends StageTest<String> {
     @DynamicTestingMethod
     CheckResult test2() {
         final TestedProgram server2 = new TestedProgram(Server.class);
-        final TestedProgram tempClient = new TestedProgram(Client.class);
-        final TestedProgram tempClient2 = new TestedProgram(Client.class);
+        final TestedProgram client1 = new TestedProgram(Client.class);
+        final TestedProgram client2 = new TestedProgram(Client.class);
         final TestedProgram admin = new TestedProgram(Client.class);
-        tempClient.setReturnOutputAfterExecution(false);
-        tempClient2.setReturnOutputAfterExecution(false);
+        client1.setReturnOutputAfterExecution(false);
+        client2.setReturnOutputAfterExecution(false);
         admin.setReturnOutputAfterExecution(false);
         server2.startInBackground();
         sleep(executePause);
-        tempClient.start();
+        client1.start();
         sleep(executePause);
-        tempClient2.start();
+        client2.start();
         sleep(executePause);
         admin.start();
         sleep(executePause);
-        tempClient.getOutput();
-        tempClient2.getOutput();
+        client1.getOutput();
+        client2.getOutput();
         admin.getOutput();
 
-        tempClient.execute("/auth first 12345678");
+        client1.execute("/auth first 12345678");
         sleep(executePause);
-        final String tempClientAnswer1 = tempClient.getOutput().trim();
-        if (!tempClientAnswer1.equals("Server: you are authorized successfully!"))
+        final String clientAnswer1 = client1.getOutput().trim();
+        if (!clientAnswer1.equals("Server: you are authorized successfully!"))
             return CheckResult.wrong("A registered client can't be authenticated after" +
             " rebooting a server");
 
-        tempClient2.execute("/auth second 12345678");
+        client2.execute("/auth second 12345678");
         sleep(executePause);
-        tempClient2.getOutput();
+        client2.getOutput();
 
-        tempClient.execute("/chat second");
+        client1.execute("/chat second");
         sleep(executePause);
-        final String tempClientAnswer2 = tempClient.getOutput().trim();
-        if (!tempClientAnswer2.equals(
+        final String clientAnswer2 = client1.getOutput().trim();
+        if (!clientAnswer2.equals(
         "first: 1\n" +
         "first: 2\n" +
         "first: 3\n" +
@@ -257,6 +257,41 @@ public class Tests extends StageTest<String> {
         "first: 9\n" +
         "second: 10"))
             return CheckResult.wrong("Server should save conversations on hard disk.");
+
+        return CheckResult.correct();
+    }
+
+    @DynamicTestingMethod
+    CheckResult test3() {
+        final TestedProgram server = new TestedProgram(Server.class);
+        final TestedProgram client1 = new TestedProgram(Client.class);
+        final TestedProgram client2 = new TestedProgram(Client.class);
+        final TestedProgram admin = new TestedProgram(Client.class);
+        client1.setReturnOutputAfterExecution(false);
+        client2.setReturnOutputAfterExecution(false);
+        admin.setReturnOutputAfterExecution(false);
+        server.startInBackground();
+        sleep(executePause);
+        client1.start();
+        sleep(executePause);
+        client2.start();
+        sleep(executePause);
+        admin.start();
+        sleep(executePause);
+        client1.getOutput();
+        client2.getOutput();
+        admin.getOutput();
+
+        client1.execute("/auth first 12345678");
+        sleep(executePause);
+        final String clientAnswer1 = client1.getOutput().trim();
+        if (!clientAnswer1.equals("Server: you are authorized successfully!"))
+            return CheckResult.wrong("A registered client can't be authenticated after" +
+            " rebooting a server");
+
+        client2.execute("/auth second 12345678");
+        sleep(executePause);
+        client2.getOutput();
 
         admin.execute("/auth admin 12345678");
         sleep(executePause);
@@ -278,29 +313,61 @@ public class Tests extends StageTest<String> {
             return CheckResult.wrong("Can't get the message! \"Server: USER was " +
             "kicked!\" after a user was kicked by admin");
 
-        final String tempClientAnswer3 = tempClient.getOutput().trim();
-        if (!tempClientAnswer3.equals("Server: you have been kicked from the server!"))
+        admin.execute("/list");
+        sleep(executePause);
+        final String adminAnswer4 = admin.getOutput().trim();
+        if (!adminAnswer4.equals("Server: online: second"))
+            return CheckResult.wrong("Admin received a wrong list of users after kick " +
+            "one");
+
+        final String client1Answer3 = client1.getOutput().trim();
+        if (!client1Answer3.equals("Server: you have been kicked from the server!"))
             return CheckResult.wrong("Can't get the \"Server: you have been kicked from the" +
             " server!\" after a successful kicking a user");
 
-        tempClient.execute("I'm not authed");
+        client1.execute("I'm not authed");
         sleep(executePause);
-        final String tempClientAnswer4 = tempClient.getOutput().trim();
-        if (!tempClientAnswer4.equals("Server: you are not in the chat!"))
+        final String client1Answer4 = client1.getOutput().trim();
+        if (!client1Answer4.equals("Server: you are not in the chat!"))
             return CheckResult.wrong(
             "Can't get the \"Server: you are not in the chat!\" message after " +
             "trying to send a message before auth or register");
 
-        tempClient2.execute("/kick admin");
+        client1.execute("/auth first 12345678");
         sleep(executePause);
-        final String tempClient2Answer1 = tempClient2.getOutput().trim();
-        if (!tempClient2Answer1.isEmpty())
+        client1.getOutput();
+
+        admin.execute("/grant first");
+        sleep(executePause);
+        final String adminAnswer5 = admin.getOutput().trim();
+        if (!adminAnswer5.equals("Server: first is a new moderator!"))
+            return CheckResult.wrong("Can't get the message! \"Server: USER is a new " +
+            "moderator!\" after a user became a moderator");
+
+        final String client1Answer5 = client1.getOutput().trim();
+        if (!client1Answer5.equals("Server: you are a new moderator now!"))
+            return CheckResult.wrong("Can't get the message! \"Server: you are a new " +
+            "moderator now!\" after a user became a moderator");
+
+        admin.execute("/grant first");
+        sleep(executePause);
+        final String adminAnswer6 = admin.getOutput().trim();
+        if (!adminAnswer6.equals("Server: this user is already a moderator!"))
+            return CheckResult.wrong("Can't get the message! \"Server: this user is " +
+            "already a moderator!\" after cast the \"/grant\" command on a moderator");
+
+        final String client1Answer6 = client1.getOutput().trim();
+        if (!client1Answer6.isEmpty())
+            return CheckResult.wrong("A moderator shouldn't react on \"grant\" command!");
+
+        client2.execute("/kick admin");
+        sleep(executePause);
+        final String client2Answer1 = client2.getOutput().trim();
+        if (!client2Answer1.isEmpty())
             return CheckResult.wrong("The server shouldn't react on /kick command" +
             " from user which has not been allowed to use it");
 
-
         return CheckResult.correct();
     }
-
 
 }

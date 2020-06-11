@@ -17,6 +17,7 @@ public class CommandsConfigurator {
         commands.put("chat", new ChatCommand());
         commands.put("kick", new KickCommand());
         commands.put("list", new ListCommand());
+        commands.put("grant", new GrantCommand());
         return commands;
     }
 }

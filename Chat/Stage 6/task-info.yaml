@@ -1,46 +1,46 @@
 type: edu
 files:
-- name: src/chat/server/Server.java
-  visible: true
-- name: src/chat/connection/OutputWriter.java
-  visible: true
-- name: src/chat/connection/InputReader.java
-  visible: true
-- name: src/chat/server/IOManager.java
+- name: test/Tests.java
+  visible: false
+- name: src/chat/server/DAO/Cybernate.java
   visible: true
 - name: src/chat/server/util/Message.java
   visible: true
-- name: test/Tests.java
-  visible: false
 - name: src/chat/server/util/UserInfo.java
-  visible: true
-- name: src/chat/server/Chat.java
-  visible: true
-- name: src/chat/server/commands/RegistrationCommand.java
-  visible: true
-- name: src/chat/server/commands/AuthCommand.java
-  visible: true
-- name: src/chat/server/commands/KickCommand.java
-  visible: true
-- name: src/chat/server/commands/SendCommand.java
-  visible: true
-- name: src/chat/server/commands/ExitCommand.java
-  visible: true
-- name: src/chat/server/commands/interfaces/Command.java
-  visible: true
-- name: src/chat/server/commands/fabrics/CommandsConfigurator.java
-  visible: true
-- name: src/chat/server/UserThread.java
-  visible: true
-- name: src/chat/server/commands/ChatCommand.java
-  visible: true
-- name: src/chat/server/commands/ListCommand.java
-  visible: true
-- name: src/chat/server/DAO/Cybernate.java
   visible: true
 - name: src/chat/server/util/DialogStats.java
   visible: true
+- name: src/chat/server/commands/fabrics/CommandsConfigurator.java
+  visible: true
+- name: src/chat/server/commands/interfaces/Command.java
+  visible: true
+- name: src/chat/server/commands/AuthCommand.java
+  visible: true
+- name: src/chat/server/commands/ChatCommand.java
+  visible: true
+- name: src/chat/server/commands/ExitCommand.java
+  visible: true
+- name: src/chat/server/commands/KickCommand.java
+  visible: true
+- name: src/chat/server/commands/ListCommand.java
+  visible: true
+- name: src/chat/server/commands/SendCommand.java
+  visible: true
+- name: src/chat/server/commands/RegistrationCommand.java
+  visible: true
+- name: src/chat/server/Chat.java
+  visible: true
+- name: src/chat/server/Server.java
+  visible: true
+- name: src/chat/server/IOManager.java
+  visible: true
+- name: src/chat/server/UserThread.java
+  visible: true
+- name: src/chat/connection/InputReader.java
+  visible: true
+- name: src/chat/connection/OutputWriter.java
+  visible: true
 - name: src/chat/client/Client.java
   visible: true
-- name: src/chat/server/commands/GrandCommand.java
+- name: src/chat/server/commands/GrantCommand.java
   visible: true

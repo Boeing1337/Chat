@@ -4,7 +4,7 @@ import chat.server.UserThread;
 import chat.server.commands.interfaces.Command;
 import chat.server.util.Message;
 
-public class GrandCommand implements Command {
+public class GrantCommand implements Command {
     /**
      * only if ->
      * UserThread.State.ONLINE;
@@ -15,6 +15,6 @@ public class GrandCommand implements Command {
     @Override
     public void execute(Message m, UserThread ut) {
         if (ut.getRights() == rights && ut.getState() != UserThread.State.OFFLINE)
-            chat.grant(m.getTarget());
+            chat.grant(m.getTarget(), ut);
     }
 }

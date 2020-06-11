@@ -60,6 +60,12 @@ public class Chat {
 
         userInfo.grant();
         cybernate.saveUserInfo(user, userInfo);
+
+        final UserThread userThread = onlineUsers.get(user);
+        if (userThread != null) {
+            userThread.setRights(2);
+            userThread.sentTechnicalMessage("you are a new moderator now!");
+        }
         admin.sentTechnicalMessage(userInfo.getLogin() + " is a new moderator!");
     }
 
@@ -111,7 +117,8 @@ public class Chat {
         userThread.sentTechnicalMessage("you are authorized successfully!");
     }
 
-    private synchronized void finishAuth(final UserThread userThread, final String login,
+    private synchronized void finishAuth(final UserThread userThread,
+                                         final String login,
                                          final int rights) {
 
         userThread.setState(UserThread.State.ONLINE);
@@ -141,7 +148,8 @@ public class Chat {
         onlineUsers.remove(fromUser);
     }
 
-    public synchronized void setConversation(final UserThread userThread, final String toUser) {
+    public synchronized void setConversation(final UserThread userThread,
+                                             final String toUser) {
         if (onlineUsers.get(toUser) == null) {
             userThread.sentTechnicalMessage("the user is not online!");
             return;
