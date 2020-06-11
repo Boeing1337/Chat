@@ -32,9 +32,9 @@ public class Tests extends StageTest<String> {
         client2.getOutput();
 
         final String client1Start = client1.getOutput().trim();
-        if (!"Client started!\nServer: write your name.".equals(client1Start.trim()))
+        if (!"Client started!\nServer: write your name".equals(client1Start.trim()))
             return CheckResult.wrong("Can't get the \"Client started!\nServer: write " +
-            "your name.\" messages");
+            "your name\" messages");
 
         client1.execute("First");
         sleep(executePause);

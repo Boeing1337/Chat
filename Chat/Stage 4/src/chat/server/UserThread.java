@@ -58,7 +58,7 @@ public class UserThread implements Runnable {
 
 
     private void sendDefaultMessage() {
-        outputWriter.sentMessage("Server: write your name.");
+        outputWriter.sentMessage("Server: write your name");
     }
 
     protected void sentMessage(final String message) {
