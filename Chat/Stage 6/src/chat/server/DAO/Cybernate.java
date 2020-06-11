@@ -59,8 +59,8 @@ public class Cybernate {
 
     private void addReadCount(final String owner, final String fromUser) {
         final File file = formInfFile(owner, fromUser);
-        try (Scanner text = new Scanner(file)) {
-            DialogStats dialogStats = new DialogStats(text.nextLine().split("\\h"));
+        try (Scanner stats = new Scanner(file)) {
+            DialogStats dialogStats = new DialogStats(stats.nextLine().split("\\h"));
             dialogStats.increaseRead(owner, fromUser);
             try (FileWriter fileWriter = new FileWriter(file)) {
                 fileWriter.write(dialogStats.toString());
@@ -72,8 +72,8 @@ public class Cybernate {
 
     private void addUnreadCount(final String owner, final String fromUser) {
         final File file = formInfFile(owner, fromUser);
-        try (Scanner text = new Scanner(file)) {
-            DialogStats dialogStats = new DialogStats(text.nextLine().split("\\h"));
+        try (Scanner stats = new Scanner(file)) {
+            DialogStats dialogStats = new DialogStats(stats.nextLine().split("\\h"));
             dialogStats.increaseUnread();
             try (FileWriter fileWriter = new FileWriter(file)) {
                 fileWriter.write(dialogStats.toString());
@@ -128,6 +128,14 @@ public class Cybernate {
         return userInfo;
     }
 
+    public void saveUserInfo(final String user, final UserInfo userInfo) {
+        try (FileWriter fileWriter = new FileWriter(formInfFile(user, user))) {
+            fileWriter.write(userInfo.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void createConversation(final String userA, final String userB) {
         createConversationFiles(userA, userB);
         createConversationFiles(userB, userA);
@@ -158,13 +166,5 @@ public class Cybernate {
     private File formInfFile(final String a, final String b) {
         final String infSuffix = ".inf";
         return new File(a + "\\" + b + infSuffix);
-    }
-
-    public void saveUserInfo(final String user, final UserInfo userInfo) {
-        try (FileWriter fileWriter = new FileWriter(formInfFile(user, user))) {
-            fileWriter.write(userInfo.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

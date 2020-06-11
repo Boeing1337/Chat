@@ -51,7 +51,7 @@ public class Chat {
     public synchronized void grant(final String user) {
         UserInfo userInfo = cybernate.getUserInfo(user);
         userInfo.grant();
-        cybernate.saveUserInfo(userInfo);
+        cybernate.saveUserInfo(user, userInfo);
     }
 
     public synchronized void getUnreadUsers(final String owner) {
