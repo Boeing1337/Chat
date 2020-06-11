@@ -32,9 +32,9 @@ public class Tests extends StageTest<String> {
         client2.getOutput();
 
         final String client1Start = client1.getOutput().trim();
-        if (!"Client started!\nServer: authorize or register.".equals(client1Start.trim()))
+        if (!"Client started!\nServer: authorize or register".equals(client1Start.trim()))
             return CheckResult.wrong("Can't get the \"Client started!\nServer: " +
-            "authorize or register.\" messages");
+            "authorize or register\" messages");
 
         client1.execute("bla bla bla");
         sleep(executePause);

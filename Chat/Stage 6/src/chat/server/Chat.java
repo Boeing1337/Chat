@@ -38,7 +38,7 @@ public class Chat {
         if (kicked == null)
             return;
 
-        if (kicked.getRights() <= admin.getRights())
+        if (admin.getRights() >= kicked.getRights())
             return;
 
 

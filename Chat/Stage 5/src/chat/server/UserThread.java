@@ -105,7 +105,7 @@ public class UserThread implements Runnable {
 
 
     private void sendDefaultMessage() {
-        sentTechnicalMessage("authorize or register.");
+        sentTechnicalMessage("authorize or register");
     }
 
     void sentTechnicalMessage(final String message) {
