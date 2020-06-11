@@ -125,7 +125,6 @@ public class Cybernate {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("\n\n" + userInfo.getLogin() + "\n\n");
         return userInfo;
     }
 

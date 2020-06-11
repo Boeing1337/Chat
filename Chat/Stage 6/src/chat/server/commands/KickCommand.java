@@ -11,12 +11,12 @@ public class KickCommand implements Command {
      * UserThread.State.CONVERSATION;
      */
 
-    private final int requiredRights = 1;
+    private final int requiredRights = 2;
 
     @Override
     public void execute(Message m, UserThread ut) {
         if (ut.getState() != UserThread.State.OFFLINE && ut.getRights() <= requiredRights)
-            chat.kick(m.getTarget());
+            chat.kick(ut,m.getTarget());
 
     }
 }

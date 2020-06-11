@@ -28,8 +28,24 @@ public class Chat {
 
     }
 
-    public synchronized void kick(final String target) {
+    public synchronized void kick(final UserThread admin, final String target) {
+        if (admin.getLogin().equals(target)) {
+            admin.sentTechnicalMessage("you can't kick himself!");
+            return;
+        }
 
+        final UserThread kicked = onlineUsers.get(target);
+        if (kicked == null)
+            return;
+
+        if (kicked.getRights() <= admin.getRights())
+            return;
+
+
+        onlineUsers.remove(target);
+        kicked.sentTechnicalMessage("you have been kicked from the server!");
+        kicked.setState(UserThread.State.OFFLINE);
+        admin.sentTechnicalMessage(target + " was kicked!");
     }
 
     public synchronized void grant(final String owner, final String fromUser) {
