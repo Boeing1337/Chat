@@ -286,7 +286,6 @@ public class Tests extends StageTest<String> {
         tempClient2.execute("/kick admin");
         sleep(executePause);
         final String tempClient2Answer1 = tempClient2.getOutput().trim();
-        System.out.println(tempClient2Answer1);
         if (!tempClient2Answer1.isEmpty())
             return CheckResult.wrong("The server shouldn't react on /kick command" +
             " from user which has not been granted to use it");
