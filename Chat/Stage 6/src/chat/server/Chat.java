@@ -48,8 +48,10 @@ public class Chat {
         admin.sentTechnicalMessage(target + " was kicked!");
     }
 
-    public synchronized void grant(final String owner, final String fromUser) {
-
+    public synchronized void grant(final String user) {
+        UserInfo userInfo = cybernate.getUserInfo(user);
+        userInfo.grant();
+        cybernate.saveUserInfo(userInfo);
     }
 
     public synchronized void getUnreadUsers(final String owner) {

@@ -42,3 +42,5 @@ files:
   visible: true
 - name: src/chat/client/Client.java
   visible: true
+- name: src/chat/server/commands/GrandCommand.java
+  visible: true

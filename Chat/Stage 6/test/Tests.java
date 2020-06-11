@@ -283,12 +283,20 @@ public class Tests extends StageTest<String> {
             return CheckResult.wrong("Can't get the \"Server: you have been kicked from the" +
             " server!\" after a successful kicking a user");
 
+        tempClient.execute("I'm not authed");
+        sleep(executePause);
+        final String tempClientAnswer4 = tempClient.getOutput().trim();
+        if (!tempClientAnswer4.equals("Server: you are not in the chat!"))
+            return CheckResult.wrong(
+            "Can't get the \"Server: you are not in the chat!\" message after " +
+            "trying to send a message before auth or register");
+
         tempClient2.execute("/kick admin");
         sleep(executePause);
         final String tempClient2Answer1 = tempClient2.getOutput().trim();
         if (!tempClient2Answer1.isEmpty())
             return CheckResult.wrong("The server shouldn't react on /kick command" +
-            " from user which has not been granted to use it");
+            " from user which has not been allowed to use it");
 
 
         return CheckResult.correct();

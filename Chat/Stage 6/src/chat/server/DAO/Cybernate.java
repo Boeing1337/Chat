@@ -160,4 +160,11 @@ public class Cybernate {
         return new File(a + "\\" + b + infSuffix);
     }
 
+    public void saveUserInfo(final String user, final UserInfo userInfo) {
+        try (FileWriter fileWriter = new FileWriter(formInfFile(user, user))) {
+            fileWriter.write(userInfo.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
