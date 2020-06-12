@@ -113,6 +113,26 @@ public class Cybernate {
         return "";
     }
 
+    private String readLine(final File file) {
+        try (Scanner scanner = new Scanner(file)) {
+            return scanner.nextLine();
+        } catch (Exception ignored) {
+        }
+        return "";
+    }
+
+    private List<String> realAllLines(final File file) {
+        try (Scanner scanner = new Scanner(file)) {
+            final List<String> tempList = new ArrayList<>(50);
+            while (scanner.hasNextLine()) {
+                tempList.add(scanner.nextLine());
+            }
+            return tempList;
+        } catch (Exception ignored) {
+        }
+        return new ArrayList<>();
+    }
+
     public String getHistory(final String owner, final String fromUser,
                              final int count) {
         return null;

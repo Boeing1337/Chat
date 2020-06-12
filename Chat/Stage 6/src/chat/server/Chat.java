@@ -129,8 +129,7 @@ public class Chat {
 
 
     public synchronized void sentMessage(final String owner, final String toUser,
-                                         String message) {
-        message = owner + ": " + message;
+                                         final String message) {
         if (conversations.contains(toUser + owner)) {
             cybernate.saveAsReadMessage(toUser, owner, message);
             onlineUsers.get(toUser).sentMessage(message);
@@ -142,6 +141,7 @@ public class Chat {
         onlineUsers.get(owner).sentMessage(message);
 
     }
+
 
     public synchronized void logOut(final String fromUser, final String toUser) {
         conversations.remove(fromUser + toUser);
