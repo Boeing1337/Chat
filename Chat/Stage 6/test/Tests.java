@@ -262,7 +262,7 @@ public class Tests extends StageTest<String> {
     }
 
     @DynamicTestingMethod
-    CheckResult kickGrand() {
+    CheckResult kickAndGrand() {
         final TestedProgram server = new TestedProgram(Server.class);
         final TestedProgram client1 = new TestedProgram(Client.class);
         final TestedProgram client2 = new TestedProgram(Client.class);
@@ -360,6 +360,21 @@ public class Tests extends StageTest<String> {
         if (!client1Answer5.isEmpty())
             return CheckResult.wrong("A moderator shouldn't react on \"grant\" command!");
 
+        client2.execute("/kick first");
+        sleep(executePause);
+        final String client2Answer2 = client2.getOutput().trim();
+        if (!client2Answer2.isEmpty())
+            return CheckResult.wrong("The server shouldn't react on /kick command" +
+            " from user which has not been allowed to use it");
+
+        admin.execute("/list");
+        sleep(executePause);
+        final String adminAnswer7 = admin.getOutput().trim();
+        if (!adminAnswer7.endsWith("first second") && !adminAnswer7.endsWith("second " +
+        "first")) //order is insignificant
+            return CheckResult.wrong("Admin received a wrong list of users after kick " +
+            "one");
+
         client1.execute("/kick second");
         sleep(executePause);
         final String client1Answer6 = client1.getOutput().trim();
@@ -374,17 +389,48 @@ public class Tests extends StageTest<String> {
 
         admin.execute("/list");
         sleep(executePause);
-        final String adminAnswer7 = admin.getOutput().trim();
-        if (!adminAnswer7.equals("Server: online: first"))
+        final String adminAnswer8 = admin.getOutput().trim();
+        if (!adminAnswer8.equals("Server: online: first"))
             return CheckResult.wrong("Admin received a wrong list of users after kick " +
             "one");
 
         client2.execute("/kick admin");
         sleep(executePause);
-        final String client2Answer2 = client2.getOutput().trim();
-        if (!client2Answer2.isEmpty())
+        final String client2Answer3 = client2.getOutput().trim();
+        if (!client2Answer3.isEmpty())
             return CheckResult.wrong("The server shouldn't react on /kick command" +
             " from user which has not been allowed to use it");
+
+        return CheckResult.correct();
+    }
+
+    @DynamicTestingMethod
+    CheckResult test4() {
+        final TestedProgram server = new TestedProgram(Server.class);
+        final TestedProgram client1 = new TestedProgram(Client.class);
+        final TestedProgram client2 = new TestedProgram(Client.class);
+        final TestedProgram admin = new TestedProgram(Client.class);
+        client1.setReturnOutputAfterExecution(false);
+        client2.setReturnOutputAfterExecution(false);
+        admin.setReturnOutputAfterExecution(false);
+        server.startInBackground();
+        sleep(executePause);
+        client1.start();
+        sleep(executePause);
+        client2.start();
+        sleep(executePause);
+        admin.start();
+        sleep(executePause);
+        client1.execute("/auth first 12345678");
+        sleep(executePause);
+        client2.execute("/auth second 12345678");
+        sleep(executePause);
+        admin.execute("/auth admin 12345678");
+        sleep(executePause);
+        client1.getOutput();
+        client2.getOutput();
+        admin.getOutput();
+
 
         return CheckResult.correct();
     }

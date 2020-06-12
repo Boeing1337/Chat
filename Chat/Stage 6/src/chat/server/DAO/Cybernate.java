@@ -30,10 +30,6 @@ public class Cybernate {
         allUsers.add(login);
     }
 
-    public void changeUsersInfo(final String login, final String content) {
-
-    }
-
     public void saveMessage(final String owner, final String fromUser,
                             final String message) {
         write(formChatFile(owner, fromUser), message + "\n", true);
