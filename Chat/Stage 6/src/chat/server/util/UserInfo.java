@@ -6,8 +6,8 @@ public class UserInfo {
     private int rights;
     private long banTime;
 
-    public UserInfo(final String[] arg) {
-
+    public UserInfo(final String rawString) {
+        final String[] arg = rawString.split("\\h");
         this.login = arg[0];
         this.password = arg[1];
         this.rights = Integer.parseInt(arg[2]);

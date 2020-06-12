@@ -6,7 +6,8 @@ public class DialogStats {
     private int fromUser;
     private int unread;
 
-    public DialogStats(final String[] arg) {
+    public DialogStats(final String rawString) {
+        final String[] arg = rawString.split("\\h");
         this.count = Integer.parseInt(arg[0]);
         this.owner = Integer.parseInt(arg[1]);
         this.fromUser = Integer.parseInt(arg[2]);

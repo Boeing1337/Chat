@@ -23,9 +23,7 @@ public class Cybernate {
             directory.mkdir();
             final File userInfo = formInfFile(login, login);
             userInfo.createNewFile();
-            try (FileWriter fileWriter = new FileWriter(userInfo)) {
-                fileWriter.write(login + " " + pass + " " + rights + " " + "-1");
-            }
+            write(userInfo, login + " " + pass + " " + rights + " " + "-1", false);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,81 +34,39 @@ public class Cybernate {
 
     }
 
-    public void saveAsReadMessage(final String owner, final String fromUser,
-                                  final String message) {
-
-        try (FileWriter fileWriter = new FileWriter(formChatFile(owner, fromUser), true)) {
-            fileWriter.write(message + "\n");
-            addReadCount(owner, fromUser);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void saveMessage(final String owner, final String fromUser,
+                            final String message) {
+        write(formChatFile(owner, fromUser), message + "\n", true);
     }
 
-    public void saveAsUnreadMessage(final String owner, final String fromUser,
-                                    final String message) {
-        try (FileWriter fileWriter = new FileWriter(formChatFile(owner, fromUser), true)) {
-            fileWriter.write(message + "\n");
-            addUnreadCount(owner, fromUser);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void addReadCount(final String owner, final String fromUser) {
+    public void saveConversationInfo(final String owner, final String fromUser,
+                                     final DialogStats dialogStats) {
         final File file = formInfFile(owner, fromUser);
-        try (Scanner stats = new Scanner(file)) {
-            DialogStats dialogStats = new DialogStats(stats.nextLine().split("\\h"));
-            dialogStats.increaseRead(owner, fromUser);
-            try (FileWriter fileWriter = new FileWriter(file)) {
-                fileWriter.write(dialogStats.toString());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        write(file, dialogStats.toString(), false);
     }
 
-    private void addUnreadCount(final String owner, final String fromUser) {
-        final File file = formInfFile(owner, fromUser);
-        try (Scanner stats = new Scanner(file)) {
-            DialogStats dialogStats = new DialogStats(stats.nextLine().split("\\h"));
-            dialogStats.increaseUnread();
-            try (FileWriter fileWriter = new FileWriter(file)) {
-                fileWriter.write(dialogStats.toString());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public DialogStats getDialogStats(final String owner, final String fromUser) {
+        return new DialogStats(readLine(formInfFile(owner, fromUser)));
     }
 
     public String getLastMessages(final String owner, final String fromUser) {
-        try (
-        Scanner textScanner = new Scanner(formChatFile(owner, fromUser));
-        Scanner statsScanner = new Scanner(formInfFile(owner, fromUser))) {
-            final String stats = statsScanner.nextLine();
-            final DialogStats dialogStats = new DialogStats(stats.split("\\h"));
-            final List<String> temp = new ArrayList<>(50);
-            final StringBuilder stringBuilder = new StringBuilder();
-            while (textScanner.hasNextLine()) {
-                temp.add(textScanner.nextLine());
-            }
+        final File infFile = formInfFile(owner, fromUser);
+        final File chatFile = formChatFile(owner, fromUser);
+        final String rawStats = readLine(infFile);
 
-            final int totalCount = 10 + dialogStats.getUnread();
-            for (int i = temp.size() - totalCount; i < temp.size(); i++) {
-                if (i < 0)
-                    continue;
-                stringBuilder.append("\n").append(temp.get(i));
-            }
-            dialogStats.clearUnread();
-            try (FileWriter fileWriter = new FileWriter(formInfFile(owner, fromUser))) {
-                fileWriter.write(dialogStats.toString());
-            }
-            return stringBuilder.toString().trim();
-        } catch (Exception e) {
-            e.printStackTrace();
+        final DialogStats dialogStats = new DialogStats(rawStats);
+        final List<String> temp = realAllLines(chatFile);
+        final StringBuilder stringBuilder = new StringBuilder();
+
+        final int totalCount = 10 + dialogStats.getUnread();
+        for (int i = temp.size() - totalCount; i < temp.size(); i++) {
+            if (i < 0)
+                continue;
+            stringBuilder.append("\n").append(temp.get(i));
         }
-
-        return "";
+        dialogStats.clearUnread();
+        write(infFile, dialogStats.toString(), false);
+        return stringBuilder.toString().trim();
     }
 
     private String readLine(final File file) {
@@ -119,6 +75,13 @@ public class Cybernate {
         } catch (Exception ignored) {
         }
         return "";
+    }
+
+    private void write(final File file, final String text, final boolean append) {
+        try (FileWriter fileWriter = new FileWriter(file, append)) {
+            fileWriter.write(text);
+        } catch (Exception ignored) {
+        }
     }
 
     private List<String> realAllLines(final File file) {
@@ -139,21 +102,11 @@ public class Cybernate {
     }
 
     public UserInfo getUserInfo(final String user) {
-        UserInfo userInfo = null;
-        try (final Scanner scanner = new Scanner(formInfFile(user, user))) {
-            userInfo = new UserInfo(scanner.nextLine().split("\\h"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return userInfo;
+        return new UserInfo(readLine(formInfFile(user, user)));
     }
 
     public void saveUserInfo(final String user, final UserInfo userInfo) {
-        try (FileWriter fileWriter = new FileWriter(formInfFile(user, user))) {
-            fileWriter.write(userInfo.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        write(formInfFile(user, user), userInfo.toString(), false);
     }
 
     public void createConversation(final String userA, final String userB) {
@@ -168,9 +121,7 @@ public class Cybernate {
             if (!textData.exists() && !textStats.exists()) {
                 textData.createNewFile();
                 textStats.createNewFile();
-                try (FileWriter fileWriter = new FileWriter(textStats)) {
-                    fileWriter.write("0 0 0 0");
-                }
+                write(textStats, "0 0 0 0", false);
             }
         } catch (Exception e) {
             e.printStackTrace();

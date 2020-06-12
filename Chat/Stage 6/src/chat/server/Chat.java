@@ -1,6 +1,7 @@
 package chat.server;
 
 import chat.server.DAO.Cybernate;
+import chat.server.util.DialogStats;
 import chat.server.util.UserInfo;
 
 import java.util.HashMap;
@@ -130,16 +131,21 @@ public class Chat {
 
     public synchronized void sentMessage(final String owner, final String toUser,
                                          final String message) {
+        final DialogStats ownerStats = cybernate.getDialogStats(owner, toUser);
+        final DialogStats toUserStats = cybernate.getDialogStats(toUser, owner);
+        cybernate.saveMessage(owner, toUser, message);
+        cybernate.saveMessage(toUser, owner, message);
+
         if (conversations.contains(toUser + owner)) {
-            cybernate.saveAsReadMessage(toUser, owner, message);
+            toUserStats.increaseRead(owner, toUser);
             onlineUsers.get(toUser).sentMessage(message);
         } else {
-            cybernate.saveAsUnreadMessage(toUser, owner, message);
+            toUserStats.increaseUnread();
         }
-
-        cybernate.saveAsReadMessage(owner, toUser, message);
+        cybernate.saveConversationInfo(toUser, owner, toUserStats);
+        ownerStats.increaseRead(owner, owner);
+        cybernate.saveConversationInfo(owner, toUser, ownerStats);
         onlineUsers.get(owner).sentMessage(message);
-
     }
 
 
