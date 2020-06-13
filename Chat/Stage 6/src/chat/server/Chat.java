@@ -88,7 +88,13 @@ public class Chat {
         admin.sentTechnicalMessage(userInfo.getLogin() + " is a new moderator!");
     }
 
-    public synchronized void getUnreadUsers(final String owner) {
+    public synchronized void getUnread(final UserThread owner) {
+        final String unread = cybernate.parseUnread(owner.getLogin());
+        if (unread.isEmpty()) {
+            owner.sentTechnicalMessage("no one unread");
+        } else {
+            owner.sentTechnicalMessage("unread from: " + unread);
+        }
 
     }
 

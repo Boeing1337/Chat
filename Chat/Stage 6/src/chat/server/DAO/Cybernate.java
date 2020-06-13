@@ -134,4 +134,19 @@ public class Cybernate {
         final String infSuffix = ".inf";
         return new File(a + "\\" + b + infSuffix);
     }
+
+    public String parseUnread(final String owner) {
+        StringBuilder stringBuilder = new StringBuilder();
+        Arrays.stream(Objects.requireNonNull(new File("owner\\").listFiles()))
+        .filter(e -> e.getName().endsWith(".inf") && !e.getName().startsWith(owner))
+        .forEach(file -> {
+            final DialogStats dialogStats = new DialogStats(readLine(file));
+            final int unread = dialogStats.getUnread();
+            if (unread != 0) {
+                stringBuilder
+                .append(" ").append(file.getName()).append("(").append(unread).append(")");
+            }
+        });
+        return stringBuilder.toString().trim().replaceAll("\\h", ", ");
+    }
 }

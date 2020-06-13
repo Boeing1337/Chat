@@ -371,7 +371,8 @@ public class Tests extends StageTest<String> {
 
         final String client3Answer2 = client3.getOutput().trim();
         if (!client3Answer2.isEmpty())
-            return CheckResult.wrong("A moderator shouldn't react on \"grant\" command!");
+            return CheckResult.wrong("A moderator shouldn't react on the \"/grant\" " +
+            "command!");
 
         client2.execute("/kick first2");
         sleep(executePause);
@@ -494,6 +495,23 @@ public class Tests extends StageTest<String> {
         if (!moderatorAnswer2.equals("Server: you are no longer a moderator!"))
             return CheckResult.wrong("Can't get the message \"Server: you are no longer" +
             " a moderator\" after using the \"/revoke\" command by an admin");
+
+        moderator.execute("/kick 999");
+        sleep(executePause);
+        final String moderatorAnswer3 = moderator.getOutput().trim();
+        if (!moderatorAnswer3.isEmpty())
+            return CheckResult.wrong("Server shouldn't react on the /kick command by an" +
+            " ex-moderator");
+
+        admin.execute("/list");
+        sleep(executePause);
+        final String adminAnswer2 = admin.getOutput().trim();
+        if (!adminAnswer2.endsWith("999 moderator") && !adminAnswer2.endsWith("moderator " +
+        "999")) //order is insignificant
+            return CheckResult.wrong("Admin received a wrong list of users after " +
+            "trying to kick one by ex-moderator");
+
+
 
 
 ///revoke NAME
