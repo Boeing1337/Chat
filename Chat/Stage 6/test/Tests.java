@@ -312,7 +312,7 @@ public class Tests extends StageTest<String> {
         final String adminAnswer2 = admin.getOutput().trim();
         if (!adminAnswer2.equals("Server: you can't kick himself!"))
             return CheckResult.wrong("Can't get the message \"Server: you can't kick " +
-            "himself!\" after admin tried to kick himself");
+            "yourself!\" after admin tried to kick yourself");
 
         admin.execute("/kick first");
         sleep(executePause);

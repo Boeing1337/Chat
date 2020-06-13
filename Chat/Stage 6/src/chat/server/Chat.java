@@ -46,7 +46,7 @@ public class Chat {
 
     public synchronized void kick(final UserThread admin, final String target) {
         if (admin.getLogin().equals(target)) {
-            admin.sentTechnicalMessage("you can't kick himself!");
+            admin.sentTechnicalMessage("you can't kick yourself!");
             return;
         }
 
@@ -167,7 +167,7 @@ public class Chat {
 
         if (conversations.contains(toUser + owner)) {
             toUserStats.increaseRead(owner, toUser);
-            onlineUsers.get(toUser).sentMessage(message);
+            onlineUsers.get(toUser).sentMessage("(new) " + message);
         } else {
             toUserStats.increaseUnread();
         }
