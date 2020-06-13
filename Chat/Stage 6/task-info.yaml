@@ -44,3 +44,5 @@ files:
   visible: true
 - name: src/chat/server/commands/GrantCommand.java
   visible: true
+- name: src/chat/server/commands/RevokeCommand.java
+  visible: true

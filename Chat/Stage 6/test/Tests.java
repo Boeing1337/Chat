@@ -11,7 +11,7 @@ public class Tests extends StageTest<String> {
     private final int executePause = 50;
 
     @DynamicTestingMethod
-    CheckResult test1() {
+    CheckResult Stage5() {
         final TestedProgram server = new TestedProgram(Server.class);
         final TestedProgram client1 = new TestedProgram(Client.class);
         final TestedProgram client2 = new TestedProgram(Client.class);
@@ -211,7 +211,7 @@ public class Tests extends StageTest<String> {
     }
 
     @DynamicTestingMethod
-    CheckResult test2() {
+    CheckResult lastMessagesExtenedEdition() {
         final TestedProgram server2 = new TestedProgram(Server.class);
         final TestedProgram client1 = new TestedProgram(Client.class);
         final TestedProgram client2 = new TestedProgram(Client.class);
@@ -240,12 +240,13 @@ public class Tests extends StageTest<String> {
 
         client2.execute("/auth second 12345678");
         sleep(executePause);
-        client2.getOutput();
+        client2.execute("/chat first");
+        client2.execute("unread");
 
         client1.execute("/chat second");
         sleep(executePause);
-        final String clientAnswer2 = client1.getOutput().trim();
-        if (!clientAnswer2.equals(
+        final String client1Answer2 = client1.getOutput().trim();
+        if (!client1Answer2.equals(
         "first: 1\n" +
         "first: 2\n" +
         "first: 3\n" +
@@ -255,8 +256,10 @@ public class Tests extends StageTest<String> {
         "first: 7\n" +
         "first: 8\n" +
         "first: 9\n" +
-        "second: 10"))
-            return CheckResult.wrong("Server should save conversations on hard disk.");
+        "second: 10\n" +
+        "second: unread"))
+            return CheckResult.wrong("A client should receive ALL unread messages and " +
+            "10 additional last messages from the end of the conversation");
 
         return CheckResult.correct();
     }
@@ -266,9 +269,11 @@ public class Tests extends StageTest<String> {
         final TestedProgram server = new TestedProgram(Server.class);
         final TestedProgram client1 = new TestedProgram(Client.class);
         final TestedProgram client2 = new TestedProgram(Client.class);
+        final TestedProgram client3 = new TestedProgram(Client.class);
         final TestedProgram admin = new TestedProgram(Client.class);
         client1.setReturnOutputAfterExecution(false);
         client2.setReturnOutputAfterExecution(false);
+        client3.setReturnOutputAfterExecution(false);
         admin.setReturnOutputAfterExecution(false);
         server.startInBackground();
         sleep(executePause);
@@ -276,10 +281,13 @@ public class Tests extends StageTest<String> {
         sleep(executePause);
         client2.start();
         sleep(executePause);
+        client3.start();
+        sleep(executePause);
         admin.start();
         sleep(executePause);
         client1.getOutput();
         client2.getOutput();
+        client3.getOutput();
         admin.getOutput();
 
         client1.execute("/auth first 12345678");
@@ -335,32 +343,38 @@ public class Tests extends StageTest<String> {
 
         client1.execute("/auth first 12345678");
         sleep(executePause);
-        client1.getOutput();
+        final String client1Answer4 = client1.getOutput().trim();
+        if (!client1Answer4.equals("Server: you are banned!"))
+            return CheckResult.wrong("Can't get the message \"Server: you are banned!\"");
 
-        admin.execute("/grant first");
+        client3.execute("/registration first2 12345678");
+        sleep(executePause);
+        client3.getOutput();
+
+        admin.execute("/grant first2");
         sleep(executePause);
         final String adminAnswer5 = admin.getOutput().trim();
-        if (!adminAnswer5.equals("Server: first is a new moderator!"))
-            return CheckResult.wrong("Can't get the message! \"Server: USER is a new " +
+        if (!adminAnswer5.equals("Server: first2 is a new moderator!"))
+            return CheckResult.wrong("Can't get the message \"Server: USER is a new " +
             "moderator!\" after a user became a moderator");
 
-        final String client1Answer4 = client1.getOutput().trim();
-        if (!client1Answer4.equals("Server: you are a new moderator now!"))
+        final String client3Answer1 = client3.getOutput().trim();
+        if (!client3Answer1.equals("Server: you are a new moderator now!"))
             return CheckResult.wrong("Can't get the message! \"Server: you are a new " +
             "moderator now!\" after a user became a moderator");
 
-        admin.execute("/grant first");
+        admin.execute("/grant first2");
         sleep(executePause);
         final String adminAnswer6 = admin.getOutput().trim();
         if (!adminAnswer6.equals("Server: this user is already a moderator!"))
             return CheckResult.wrong("Can't get the message! \"Server: this user is " +
             "already a moderator!\" after cast the \"/grant\" command on a moderator");
 
-        final String client1Answer5 = client1.getOutput().trim();
-        if (!client1Answer5.isEmpty())
+        final String client3Answer2 = client3.getOutput().trim();
+        if (!client3Answer2.isEmpty())
             return CheckResult.wrong("A moderator shouldn't react on \"grant\" command!");
 
-        client2.execute("/kick first");
+        client2.execute("/kick first2");
         sleep(executePause);
         final String client2Answer2 = client2.getOutput().trim();
         if (!client2Answer2.isEmpty())
@@ -370,15 +384,15 @@ public class Tests extends StageTest<String> {
         admin.execute("/list");
         sleep(executePause);
         final String adminAnswer7 = admin.getOutput().trim();
-        if (!adminAnswer7.endsWith("first second") && !adminAnswer7.endsWith("second " +
-        "first")) //order is insignificant
+        if (!adminAnswer7.endsWith("first2 second") && !adminAnswer7.endsWith("second " +
+        "first2")) //order is insignificant
             return CheckResult.wrong("Admin received a wrong list of users after kick " +
             "one");
 
-        client1.execute("/kick second");
+        client3.execute("/kick second");
         sleep(executePause);
-        final String client1Answer6 = client1.getOutput().trim();
-        if (!client1Answer6.equals("Server: second was kicked!"))
+        final String client3Answer3 = client3.getOutput().trim();
+        if (!client3Answer3.equals("Server: second was kicked!"))
             return CheckResult.wrong("Can't get the message! \"Server: USER was " +
             "kicked!\" after a user was kicked by a moderator");
 
@@ -390,22 +404,45 @@ public class Tests extends StageTest<String> {
         admin.execute("/list");
         sleep(executePause);
         final String adminAnswer8 = admin.getOutput().trim();
-        if (!adminAnswer8.equals("Server: online: first"))
+        if (!adminAnswer8.equals("Server: online: first2"))
             return CheckResult.wrong("Admin received a wrong list of users after kick " +
             "one");
 
-        client2.execute("/kick admin");
+        client3.execute("/kick admin");
         sleep(executePause);
-        final String client2Answer3 = client2.getOutput().trim();
-        if (!client2Answer3.isEmpty())
+        final String client3Answer4 = client3.getOutput().trim();
+        if (!client3Answer4.isEmpty())
             return CheckResult.wrong("The server shouldn't react on /kick command" +
-            " from user which has not been allowed to use it");
+            " from a moderator trying to kick an admin");
+
+        client3.execute("/list");
+        sleep(executePause);
+        final String client3Answer5 = client3.getOutput().trim();
+        if (!client3Answer5.equals("Server: online: admin"))
+            return CheckResult.wrong("It is look like a moderator kicked an admin");
+
+        admin.execute("/kick first2");
+        sleep(executePause);
+        final String adminAnswer9 = admin.getOutput().trim();
+        if (!adminAnswer9.equals("Server: first2 was kicked!"))
+            return CheckResult.wrong("It is look like an admin can't kick a moderator");
+
+        final String client3Answer6 = client3.getOutput().trim();
+        if (!client3Answer6.equals("Server: you have been kicked from the server!"))
+            return CheckResult.wrong("It is look like an admin can't kick a moderator");
+
+        admin.execute("/list");
+        sleep(executePause);
+        final String adminAnswer10 = admin.getOutput().trim();
+        if (!adminAnswer10.equals("Server: no one online"))
+            return CheckResult.wrong("It is look like an admin can't kick a moderator");
+
 
         return CheckResult.correct();
     }
 
     @DynamicTestingMethod
-    CheckResult test4() {
+    CheckResult revoke() {
         final TestedProgram server = new TestedProgram(Server.class);
         final TestedProgram client1 = new TestedProgram(Client.class);
         final TestedProgram client2 = new TestedProgram(Client.class);
@@ -421,7 +458,7 @@ public class Tests extends StageTest<String> {
         sleep(executePause);
         admin.start();
         sleep(executePause);
-        client1.execute("/auth first 12345678");
+        client1.execute("/auth first2 12345678");
         sleep(executePause);
         client2.execute("/auth second 12345678");
         sleep(executePause);
@@ -431,7 +468,7 @@ public class Tests extends StageTest<String> {
         client2.getOutput();
         admin.getOutput();
 
-
+///revoke NAME
         return CheckResult.correct();
     }
 

@@ -25,8 +25,23 @@ public class Chat {
         cybernate.getLastMessages(owner, fromUser);
     }
 
-    public synchronized void revoke(final String owner, final String fromUser) {
+    public synchronized void revoke(final String target) {
+        final UserThread admin = onlineUsers.get(target);
+        if (admin == null)
+            return;
 
+        if (!allUsers.contains(target))
+            return;
+
+        UserInfo userInfo = cybernate.getUserInfo(target);
+        userInfo.revoke();
+        cybernate.saveUserInfo(target, userInfo);
+
+        final UserThread userThread = onlineUsers.get(target);
+        if (userThread != null)
+            userThread.sentTechnicalMessage("you are no longer a moderator!");
+
+        admin.sentTechnicalMessage(target + " is no longer a moderator!");
     }
 
     public synchronized void kick(final UserThread admin, final String target) {
@@ -46,6 +61,9 @@ public class Chat {
         onlineUsers.remove(target);
         kicked.sentTechnicalMessage("you have been kicked from the server!");
         kicked.setState(UserThread.State.OFFLINE);
+        UserInfo userInfo = cybernate.getUserInfo(target);
+        userInfo.ban();
+        cybernate.saveUserInfo(target, userInfo);
         admin.sentTechnicalMessage(target + " was kicked!");
     }
 
@@ -109,7 +127,7 @@ public class Chat {
             return;
         }
 
-        if (userInfo.getBanTime() > System.currentTimeMillis()) {
+        if (userInfo.getBanTime() > 0) {
             userThread.sentTechnicalMessage("you are banned!");
             return;
         }

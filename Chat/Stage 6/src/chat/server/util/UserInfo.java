@@ -38,6 +38,10 @@ public class UserInfo {
         this.rights = 3;
     }
 
+    public void ban() {
+        banTime = 999; //duration is no make sense, we wont wait 5 minuses.
+    }
+
     @Override
     public String toString() {
         return login + " " + password + " " + rights + " " + banTime;
