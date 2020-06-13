@@ -311,14 +311,14 @@ public class Tests extends StageTest<String> {
         sleep(executePause);
         final String adminAnswer2 = admin.getOutput().trim();
         if (!adminAnswer2.equals("Server: you can't kick himself!"))
-            return CheckResult.wrong("Can't get the message! \"Server: you can't kick " +
+            return CheckResult.wrong("Can't get the message \"Server: you can't kick " +
             "himself!\" after admin tried to kick himself");
 
         admin.execute("/kick first");
         sleep(executePause);
         final String adminAnswer3 = admin.getOutput().trim();
         if (!adminAnswer3.equals("Server: first was kicked!"))
-            return CheckResult.wrong("Can't get the message! \"Server: USER was " +
+            return CheckResult.wrong("Can't get the message \"Server: USER was " +
             "kicked!\" after a user was kicked by admin");
 
         admin.execute("/list");
@@ -330,16 +330,15 @@ public class Tests extends StageTest<String> {
 
         final String client1Answer2 = client1.getOutput().trim();
         if (!client1Answer2.equals("Server: you have been kicked from the server!"))
-            return CheckResult.wrong("Can't get the \"Server: you have been kicked from the" +
-            " server!\" after a successful kicking a user");
+            return CheckResult.wrong("Can't get the message \"Server: you have been " +
+            "kicked from the server!\" after a successful kicking a user");
 
         client1.execute("I'm not authed");
         sleep(executePause);
         final String client1Answer3 = client1.getOutput().trim();
         if (!client1Answer3.equals("Server: you are not in the chat!"))
-            return CheckResult.wrong(
-            "Can't get the \"Server: you are not in the chat!\" message after " +
-            "trying to send a message before auth or register");
+            return CheckResult.wrong("Can't get the message \"Server: you are not in " +
+            "the chat!\" after trying to send a message before both auth or register");
 
         client1.execute("/auth first 12345678");
         sleep(executePause);
@@ -360,14 +359,14 @@ public class Tests extends StageTest<String> {
 
         final String client3Answer1 = client3.getOutput().trim();
         if (!client3Answer1.equals("Server: you are a new moderator now!"))
-            return CheckResult.wrong("Can't get the message! \"Server: you are a new " +
+            return CheckResult.wrong("Can't get the message \"Server: you are a new " +
             "moderator now!\" after a user became a moderator");
 
         admin.execute("/grant first2");
         sleep(executePause);
         final String adminAnswer6 = admin.getOutput().trim();
         if (!adminAnswer6.equals("Server: this user is already a moderator!"))
-            return CheckResult.wrong("Can't get the message! \"Server: this user is " +
+            return CheckResult.wrong("Can't get the message \"Server: this user is " +
             "already a moderator!\" after cast the \"/grant\" command on a moderator");
 
         final String client3Answer2 = client3.getOutput().trim();
@@ -393,13 +392,13 @@ public class Tests extends StageTest<String> {
         sleep(executePause);
         final String client3Answer3 = client3.getOutput().trim();
         if (!client3Answer3.equals("Server: second was kicked!"))
-            return CheckResult.wrong("Can't get the message! \"Server: USER was " +
-            "kicked!\" after a user was kicked by a moderator");
+            return CheckResult.wrong("Can't get the message \"Server: USER was " +
+            "kicked!\" message after a user was kicked by a moderator");
 
         final String client2Answer1 = client2.getOutput().trim();
         if (!client2Answer1.equals("Server: you have been kicked from the server!"))
-            return CheckResult.wrong("Can't get the \"Server: you have been kicked from the" +
-            " server!\" after a successful kicking a user");
+            return CheckResult.wrong("Can't get the message \"Server: you have been " +
+            "kicked from the server!\" after a successful kicking a user");
 
         admin.execute("/list");
         sleep(executePause);
@@ -444,29 +443,58 @@ public class Tests extends StageTest<String> {
     @DynamicTestingMethod
     CheckResult revoke() {
         final TestedProgram server = new TestedProgram(Server.class);
-        final TestedProgram client1 = new TestedProgram(Client.class);
+        final TestedProgram moderator = new TestedProgram(Client.class);
         final TestedProgram client2 = new TestedProgram(Client.class);
         final TestedProgram admin = new TestedProgram(Client.class);
-        client1.setReturnOutputAfterExecution(false);
+        moderator.setReturnOutputAfterExecution(false);
         client2.setReturnOutputAfterExecution(false);
         admin.setReturnOutputAfterExecution(false);
         server.startInBackground();
         sleep(executePause);
-        client1.start();
+        moderator.start();
         sleep(executePause);
         client2.start();
         sleep(executePause);
         admin.start();
         sleep(executePause);
-        client1.execute("/auth first2 12345678");
+        moderator.execute("/registration moderator 12345678");
         sleep(executePause);
-        client2.execute("/auth second 12345678");
+        client2.execute("/registration 999 12345678");
         sleep(executePause);
         admin.execute("/auth admin 12345678");
         sleep(executePause);
-        client1.getOutput();
+        admin.execute("/grant moderator");
+        sleep(executePause);
+        moderator.getOutput();
         client2.getOutput();
         admin.getOutput();
+
+        client2.execute("/revoke admin");
+        sleep(executePause);
+        final String client2Answer1 = client2.getOutput().trim();
+        if (!client2Answer1.isEmpty())
+            return CheckResult.wrong("Server should react on the /revoke command only " +
+            "if it is using by an admin");
+
+        moderator.execute("/revoke 999");
+        sleep(executePause);
+        final String moderatorAnswer1 = moderator.getOutput().trim();
+        if (!moderatorAnswer1.isEmpty())
+            return CheckResult.wrong("Server should react on the /revoke command only " +
+            "if it is using by an admin");
+
+        admin.execute("/revoke moderator");
+        sleep(executePause);
+        final String adminAnswer1 = admin.getOutput().trim();
+        if (!adminAnswer1.equals("Server: moderator is no longer a moderator!"))
+            return CheckResult.wrong("Can't get the message \"Server: USER is no longer" +
+            " a moderator!\" after using the \"/revoke\" command by an admin");
+
+        final String moderatorAnswer2 = moderator.getOutput().trim();
+        if (!moderatorAnswer2.equals("Server: you are no longer a moderator!"))
+            return CheckResult.wrong("Can't get the message \"Server: you are no longer" +
+            " a moderator\" after using the \"/revoke\" command by an admin");
+
 
 ///revoke NAME
         return CheckResult.correct();

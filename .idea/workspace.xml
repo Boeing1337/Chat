@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d709212-bb65-4ffb-86d0-927349d46620" name="Default Changelist" comment="stage 6 tests + adding rest of commands">
-      <change afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/commands/RevokeCommand.java" afterDir="false" />
+    <list default="true" id="3d709212-bb65-4ffb-86d0-927349d46620" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -18,10 +17,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.3.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/Chat/Stage 1/Chat-Stage_1_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/Chat/Stage 1/Chat-Stage_1_test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/Chat/Stage 2/Chat-Stage_2_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/Chat/Stage 2/Chat-Stage_2_test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/Chat/Stage 3/Chat-Stage_3_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/Chat/Stage 3/Chat-Stage_3_test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/Chat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/UserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/util/UserInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/task-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/task.html" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/task.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/Stage 6/test/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/test/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -255,14 +257,7 @@
       <workItem from="1591829282084" duration="6645000" />
       <workItem from="1591836301955" duration="93000" />
       <workItem from="1591836980576" duration="11829000" />
-      <workItem from="1591988969360" duration="19452000" />
-    </task>
-    <task id="LOCAL-00004" summary="Stage 4 in process">
-      <created>1589838976818</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1589838976819</updated>
+      <workItem from="1591988969360" duration="23411000" />
     </task>
     <task id="LOCAL-00005" summary="Stage 4 in process">
       <created>1589845812819</created>
@@ -600,7 +595,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592006037252</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="stage 6 tests + adding rest of commands">
+      <created>1592010110543</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1592010110543</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -694,30 +696,30 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="1034" y="561" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.2560.1440@0.0.2560.1440" timestamp="1590630410687" />
-    <state x="875" y="317" key="CommitChangelistDialog2" timestamp="1592008062791">
+    <state x="875" y="317" key="CommitChangelistDialog2" timestamp="1592010109867">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="875" y="317" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1592008062791" />
+    <state x="875" y="317" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1592010109867" />
     <state x="1059" y="476" key="FileChooserDialogImpl" timestamp="1589304970754">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="1059" y="476" key="FileChooserDialogImpl/0.0.2560.1440@0.0.2560.1440" timestamp="1589304970754" />
-    <state width="2519" height="397" key="GridCell.Tab.0.bottom" timestamp="1592009931239">
+    <state width="2519" height="397" key="GridCell.Tab.0.bottom" timestamp="1592014164407">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="397" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1592009931239" />
-    <state width="2519" height="397" key="GridCell.Tab.0.center" timestamp="1592009931239">
+    <state width="2519" height="397" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1592014164407" />
+    <state width="2519" height="397" key="GridCell.Tab.0.center" timestamp="1592014164407">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="397" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1592009931239" />
-    <state width="2519" height="397" key="GridCell.Tab.0.left" timestamp="1592009931239">
+    <state width="2519" height="397" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1592014164407" />
+    <state width="2519" height="397" key="GridCell.Tab.0.left" timestamp="1592014164407">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="397" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1592009931239" />
-    <state width="2519" height="397" key="GridCell.Tab.0.right" timestamp="1592009931239">
+    <state width="2519" height="397" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1592014164407" />
+    <state width="2519" height="397" key="GridCell.Tab.0.right" timestamp="1592014164407">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="397" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1592009931239" />
+    <state width="2519" height="397" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1592014164407" />
     <state width="2519" height="508" key="GridCell.Tab.1.bottom" timestamp="1588367961346">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
@@ -738,10 +740,14 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="803" y="365" key="SettingsEditor/0.0.2560.1440@0.0.2560.1440" timestamp="1591744051038" />
-    <state x="872" y="454" key="Vcs.Push.Dialog.v2" timestamp="1592006043505">
+    <state x="872" y="454" key="Vcs.Push.Dialog.v2" timestamp="1592010118014">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="872" y="454" key="Vcs.Push.Dialog.v2/0.0.2560.1440@0.0.2560.1440" timestamp="1592006043505" />
+    <state x="872" y="454" key="Vcs.Push.Dialog.v2/0.0.2560.1440@0.0.2560.1440" timestamp="1592010118014" />
+    <state x="92" y="92" width="2376" height="1256" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1592012997557">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="92" y="92" width="2376" height="1256" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1592012997557" />
     <state x="1102" y="638" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591894414916">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
@@ -758,9 +764,9 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="705" y="343" key="new project wizard/0.0.2560.1440@0.0.2560.1440" timestamp="1590178518021" />
-    <state x="943" y="325" width="672" height="678" key="search.everywhere.popup" timestamp="1591545818025">
+    <state x="943" y="325" width="672" height="678" key="search.everywhere.popup" timestamp="1592013151914">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="943" y="325" width="672" height="678" key="search.everywhere.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1591545818025" />
+    <state x="943" y="325" width="672" height="678" key="search.everywhere.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1592013151914" />
   </component>
 </project>

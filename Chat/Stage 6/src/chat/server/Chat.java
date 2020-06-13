@@ -26,20 +26,20 @@ public class Chat {
     }
 
     public synchronized void revoke(final String target) {
-        final UserThread admin = onlineUsers.get(target);
+        final UserThread admin = onlineUsers.get("admin");
         if (admin == null)
             return;
-
         if (!allUsers.contains(target))
             return;
 
         UserInfo userInfo = cybernate.getUserInfo(target);
         userInfo.revoke();
         cybernate.saveUserInfo(target, userInfo);
-
         final UserThread userThread = onlineUsers.get(target);
-        if (userThread != null)
+        if (userThread != null) {
+            userThread.setRights(3);
             userThread.sentTechnicalMessage("you are no longer a moderator!");
+        }
 
         admin.sentTechnicalMessage(target + " is no longer a moderator!");
     }

@@ -18,6 +18,7 @@ public class CommandsConfigurator {
         commands.put("kick", new KickCommand());
         commands.put("list", new ListCommand());
         commands.put("grant", new GrantCommand());
+        commands.put("revoke", new RevokeCommand());
         return commands;
     }
 }
