@@ -1256,10 +1256,17 @@ public class Tests extends StageTest<String> {
             return CheckResult.wrong("A user get wrong messages. Maybe you server " +
             "sent more than 100 unread messages.");
 
+        client4.execute("/history test");
+        sleep(executePause);
+        final String client4Answer2 = client4.getOutput().trim();
+        if (!client4Answer2.equals("Server: test is not a number!"))
+            return CheckResult.wrong("Can't get the message \"Server: X is not a " +
+            "number!\"");
+
         client4.execute("/history 250");
         sleep(executePause);
-        final String client4Answer = client4.getOutput().trim();
-        if (!client4Answer.equals(
+        final String client4Answer3 = client4.getOutput().trim();
+        if (!client4Answer3.equals(
         "Server:\n" +
         "client3: 1\n" +
         "client3: 2\n" +
