@@ -540,6 +540,9 @@ public class Tests extends StageTest<String> {
         client2.getOutput();
         admin.getOutput();
 
+        admin.execute("/chat client2");
+        sleep(executePause);
+
         client1.execute("/chat client2");
         sleep(executePause);
         client1.execute("1");
@@ -582,10 +585,35 @@ public class Tests extends StageTest<String> {
         admin.execute("/chat client2");
         sleep(executePause);
 
+        admin.getOutput();
+        admin.execute("/stats");
+        sleep(executePause);
+        final String adminAnswer2 = admin.getOutput().trim();
+        if (!adminAnswer2.equals(
+        "Server: \n" +
+        "Statistics with client2:\n" +
+        "Total messages: 6\n" +
+        "Messages from admin: 3\n" +
+        "Messages from client2: 3"
+        ))
+            return CheckResult.wrong("Stats information is not correct");
 
+        admin.execute("1");
+        sleep(executePause);
 
-
-        System.out.println(adminAnswer1);
+        client2.getOutput();
+        client2.execute("/stats");
+        sleep(executePause);
+        final String client2Answer = client2.getOutput().trim();
+        System.out.println(adminAnswer2);
+        if (!client2Answer.equals(
+        "Server: \n" +
+        "Statistics with admin:\n" +
+        "Total messages: 7\n" +
+        "Messages from client2: 3\n" +
+        "Messages from admin: 4"
+        ))
+            return CheckResult.wrong("Stats information is not correct");
 
         return CheckResult.correct();
     }

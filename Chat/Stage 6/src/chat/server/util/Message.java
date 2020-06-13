@@ -51,9 +51,9 @@ public class Message {
         } else if (message.equals(unread)) {
             command = "unread";
         } else if (message.equals(stats)) {
-            count = "stats";
+            command = "stats";
         } else if (message.startsWith(history)) {
-            count = "stats";
+            command = "history";
             numericCommandParse();
         } else {
             command = "send";

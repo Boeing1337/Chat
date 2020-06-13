@@ -149,6 +149,6 @@ public class Cybernate {
                 ")");
             }
         });
-        return stringBuilder.toString().trim().replaceAll("\\h", ", ");
+        return stringBuilder.toString().trim();
     }
 }
