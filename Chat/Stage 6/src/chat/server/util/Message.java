@@ -24,7 +24,6 @@ public class Message {
         process();
     }
 
-    //TO DO history
     private void process() {
         if (message.startsWith(reg)) {
             command = "registration";

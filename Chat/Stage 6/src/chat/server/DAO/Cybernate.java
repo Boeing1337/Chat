@@ -45,6 +45,24 @@ public class Cybernate {
         return new DialogStats(readLine(formInfFile(owner, fromUser)));
     }
 
+    public String getHistory(final String owner, final String fromUser,
+                               final int count) {
+
+        final File chatFile = formChatFile(owner, fromUser);
+        final List<String> temp = realAllLines(chatFile);
+        final StringBuilder stringBuilder = new StringBuilder();
+
+        int maxCount = 1;
+        for (int i = temp.size() - count; i < temp.size(); i++, maxCount++) {
+            if (i < 0)
+                continue;
+            stringBuilder.append("\n").append(temp.get(i));
+            if (maxCount == 100)
+                break;
+        }
+        return stringBuilder.toString().trim();
+    }
+
     public String getLastMessages(final String owner, final String fromUser) {
         final File infFile = formInfFile(owner, fromUser);
         final File chatFile = formChatFile(owner, fromUser);
@@ -54,11 +72,15 @@ public class Cybernate {
         final List<String> temp = realAllLines(chatFile);
         final StringBuilder stringBuilder = new StringBuilder();
 
-        final int totalCount = 10 + dialogStats.getUnread();
-        for (int i = temp.size() - totalCount; i < temp.size(); i++) {
+        int totalCount = 10 + dialogStats.getUnread();
+        totalCount = Math.min(totalCount, 100);
+        int maxCount = 1;
+        for (int i = temp.size() - totalCount; i < temp.size(); i++, maxCount++) {
             if (i < 0)
                 continue;
             stringBuilder.append("\n").append(temp.get(i));
+            if (maxCount == 100)
+                break;
         }
         dialogStats.clearUnread();
         write(infFile, dialogStats.toString(), false);
@@ -90,11 +112,6 @@ public class Cybernate {
         } catch (Exception ignored) {
         }
         return new ArrayList<>();
-    }
-
-    public String getHistory(final String owner, final String fromUser,
-                             final int count) {
-        return null;
     }
 
     public UserInfo getUserInfo(final String user) {

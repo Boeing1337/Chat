@@ -21,8 +21,19 @@ public class Chat {
         cybernate.createUser("admin", "12345678", "1");
     }
 
-    public synchronized void getHistory(final String owner, final String fromUser) {
-        cybernate.getLastMessages(owner, fromUser);
+    public synchronized void sendHistory(final String owner, final String fromUser,
+                                         final String count) {
+        final UserThread userThread = onlineUsers.get(owner);
+        final int parsedCount;
+        try {
+            parsedCount = Integer.parseInt(count);
+        } catch (Exception e) {
+            userThread.sentTechnicalMessage(" " + count + " is not a number!");
+            return;
+        }
+
+        final String history = cybernate.getHistory(owner, fromUser, parsedCount);
+        userThread.sentTechnicalMessage("\n" + history);
     }
 
     public synchronized void revoke(final String target) {
@@ -38,15 +49,15 @@ public class Chat {
         final UserThread userThread = onlineUsers.get(target);
         if (userThread != null) {
             userThread.setRights(3);
-            userThread.sentTechnicalMessage("you are no longer a moderator!");
+            userThread.sentTechnicalMessage(" you are no longer a moderator!");
         }
 
-        admin.sentTechnicalMessage(target + " is no longer a moderator!");
+        admin.sentTechnicalMessage(" " + target + " is no longer a moderator!");
     }
 
     public synchronized void kick(final UserThread admin, final String target) {
         if (admin.getLogin().equals(target)) {
-            admin.sentTechnicalMessage("you can't kick yourself!");
+            admin.sentTechnicalMessage(" you can't kick yourself!");
             return;
         }
 
@@ -59,12 +70,12 @@ public class Chat {
 
 
         onlineUsers.remove(target);
-        kicked.sentTechnicalMessage("you have been kicked from the server!");
+        kicked.sentTechnicalMessage(" you have been kicked from the server!");
         kicked.setState(UserThread.State.OFFLINE);
         UserInfo userInfo = cybernate.getUserInfo(target);
         userInfo.ban();
         cybernate.saveUserInfo(target, userInfo);
-        admin.sentTechnicalMessage(target + " was kicked!");
+        admin.sentTechnicalMessage(" " + target + " was kicked!");
     }
 
     public synchronized void grant(final String user, final UserThread admin) {
@@ -73,7 +84,7 @@ public class Chat {
 
         UserInfo userInfo = cybernate.getUserInfo(user);
         if (userInfo.getRights() == 2) {
-            admin.sentTechnicalMessage("this user is already a moderator!");
+            admin.sentTechnicalMessage(" this user is already a moderator!");
             return;
         }
 
@@ -83,17 +94,17 @@ public class Chat {
         final UserThread userThread = onlineUsers.get(user);
         if (userThread != null) {
             userThread.setRights(2);
-            userThread.sentTechnicalMessage("you are a new moderator now!");
+            userThread.sentTechnicalMessage(" you are a new moderator now!");
         }
-        admin.sentTechnicalMessage(userInfo.getLogin() + " is a new moderator!");
+        admin.sentTechnicalMessage(" " + userInfo.getLogin() + " is a new moderator!");
     }
 
     public synchronized void getUnread(final UserThread owner) {
         final String unread = cybernate.parseUnread(owner.getLogin());
         if (unread.isEmpty()) {
-            owner.sentTechnicalMessage("no one unread");
+            owner.sentTechnicalMessage(" no one unread");
         } else {
-            owner.sentTechnicalMessage("unread from: " + unread);
+            owner.sentTechnicalMessage(" unread from: " + unread);
         }
 
     }
@@ -111,40 +122,40 @@ public class Chat {
                                       final String login,
                                       final String pass) {
         if (allUsers.contains(login)) {
-            userThread.sentTechnicalMessage("this login is already in use!");
+            userThread.sentTechnicalMessage(" this login is already in use!");
             return;
         }
         if (pass.length() < 8) {
-            userThread.sentTechnicalMessage("the password is too short!");
+            userThread.sentTechnicalMessage(" the password is too short!");
             return;
         }
 
         cybernate.createUser(login, pass, "3");
         finishAuth(userThread, login, 3);
-        userThread.sentTechnicalMessage("you are registered successfully!");
+        userThread.sentTechnicalMessage(" you are registered successfully!");
     }
 
     public synchronized void auth(final UserThread userThread, final String login,
                                   final String pass) {
 
         if (!allUsers.contains(login)) {
-            userThread.sentTechnicalMessage("incorrect login!");
+            userThread.sentTechnicalMessage(" incorrect login!");
             return;
         }
         final UserInfo userInfo = cybernate.getUserInfo(login);
 
         if (!userInfo.getPassword().equals(pass)) {
-            userThread.sentTechnicalMessage("incorrect password!");
+            userThread.sentTechnicalMessage(" incorrect password!");
             return;
         }
 
         if (userInfo.getBanTime() > 0) {
-            userThread.sentTechnicalMessage("you are banned!");
+            userThread.sentTechnicalMessage(" you are banned!");
             return;
         }
 
         finishAuth(userThread, login, userInfo.getRights());
-        userThread.sentTechnicalMessage("you are authorized successfully!");
+        userThread.sentTechnicalMessage(" you are authorized successfully!");
     }
 
     private synchronized void finishAuth(final UserThread userThread,
@@ -186,7 +197,7 @@ public class Chat {
     public synchronized void setConversation(final UserThread userThread,
                                              final String toUser) {
         if (onlineUsers.get(toUser) == null) {
-            userThread.sentTechnicalMessage("the user is not online!");
+            userThread.sentTechnicalMessage(" the user is not online!");
             return;
         }
 
@@ -208,9 +219,9 @@ public class Chat {
         set.forEach(a -> temp.append(" ").append(a));
         final String users = temp.toString().trim();
         if (users.isEmpty()) {
-            owner.sentTechnicalMessage("no one online");
+            owner.sentTechnicalMessage(" no one online");
         } else {
-            owner.sentTechnicalMessage("online: " + users);
+            owner.sentTechnicalMessage(" online: " + users);
         }
     }
 

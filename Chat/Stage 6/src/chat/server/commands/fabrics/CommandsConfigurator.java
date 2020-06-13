@@ -21,6 +21,7 @@ public class CommandsConfigurator {
         commands.put("revoke", new RevokeCommand());
         commands.put("unread", new UnreadCommand());
         commands.put("stats", new StatsCommand());
+        commands.put("history", new HistoryCommand());
         return commands;
     }
 }

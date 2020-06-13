@@ -21,7 +21,7 @@ public class UserThread implements Runnable {
 
     @Override
     public void run() {
-        sentTechnicalMessage("authorize or register.");
+        sentTechnicalMessage(" authorize or register");
         while (!ioManager.isSocketClosed()) {
             final Message message = new Message(ioManager.read());
             final Command command = commands.get(message.getCommand());
@@ -39,7 +39,7 @@ public class UserThread implements Runnable {
     }
 
     public void sentTechnicalMessage(@NotNull final String message) {
-        ioManager.sent("Server: " + message);
+        ioManager.sent("Server:" + message);
     }
 
     public State getState() {
