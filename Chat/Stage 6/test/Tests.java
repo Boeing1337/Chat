@@ -511,10 +511,82 @@ public class Tests extends StageTest<String> {
             return CheckResult.wrong("Admin received a wrong list of users after " +
             "trying to kick one by ex-moderator");
 
+        return CheckResult.correct();
+    }
+
+    @DynamicTestingMethod
+    CheckResult statsAndUnread() {
+        final TestedProgram server = new TestedProgram(Server.class);
+        final TestedProgram client1 = new TestedProgram(Client.class);
+        final TestedProgram client2 = new TestedProgram(Client.class);
+        final TestedProgram admin = new TestedProgram(Client.class);
+        client1.setReturnOutputAfterExecution(false);
+        client2.setReturnOutputAfterExecution(false);
+        server.startInBackground();
+        sleep(executePause);
+        client1.start();
+        sleep(executePause);
+        client2.start();
+        sleep(executePause);
+        admin.start();
+        sleep(executePause);
+        client1.execute("/registration client1 12345678");
+        sleep(executePause);
+        client2.execute("/registration client2 12345678");
+        sleep(executePause);
+        admin.execute("/auth admin 12345678");
+        sleep(executePause);
+        client1.getOutput();
+        client2.getOutput();
+        admin.getOutput();
+
+        client1.execute("/chat client2");
+        sleep(executePause);
+        client1.execute("1");
+        sleep(executePause);
+        client1.execute("2");
+        sleep(executePause);
+        client1.execute("3");
+        sleep(executePause);
+
+        admin.execute("/chat client2");
+        sleep(executePause);
+        admin.execute("1");
+        sleep(executePause);
+        admin.execute("2");
+        sleep(executePause);
+        admin.execute("3");
+        sleep(executePause);
+
+        client2.execute("/unread");
+        sleep(executePause);
+        final String client2Answer1 = client2.getOutput().trim();
+        if (!client2Answer1.equals("Server: unread from: admin(3) client1(3)"))
+            return CheckResult.wrong("List of unread messages is not correct");
+
+        admin.execute("/unread");
+        sleep(executePause);
+        final String adminAnswer1 = admin.getOutput().trim();
+        if (!adminAnswer1.equals("Server: no one unread"))
+            return CheckResult.wrong("List of unread messages is not correct");
+
+        client2.execute("/chat admin");
+        sleep(executePause);
+        client2.execute("1");
+        sleep(executePause);
+        client2.execute("1");
+        sleep(executePause);
+        client2.execute("1");
+        sleep(executePause);
+
+        admin.execute("/chat client2");
+        sleep(executePause);
 
 
 
-///revoke NAME
+
+        System.out.println(adminAnswer1);
+
         return CheckResult.correct();
     }
 

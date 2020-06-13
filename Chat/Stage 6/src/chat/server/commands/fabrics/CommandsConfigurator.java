@@ -19,6 +19,8 @@ public class CommandsConfigurator {
         commands.put("list", new ListCommand());
         commands.put("grant", new GrantCommand());
         commands.put("revoke", new RevokeCommand());
+        commands.put("unread", new UnreadCommand());
+        commands.put("stats", new StatsCommand());
         return commands;
     }
 }

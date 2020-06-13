@@ -48,3 +48,5 @@ files:
   visible: true
 - name: src/chat/server/commands/UnreadCommand.java
   visible: true
+- name: src/chat/server/commands/StatsCommand.java
+  visible: true

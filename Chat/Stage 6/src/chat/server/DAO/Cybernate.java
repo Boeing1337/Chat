@@ -137,14 +137,16 @@ public class Cybernate {
 
     public String parseUnread(final String owner) {
         StringBuilder stringBuilder = new StringBuilder();
-        Arrays.stream(Objects.requireNonNull(new File("owner\\").listFiles()))
+        Arrays.stream(Objects.requireNonNull(new File(owner + "\\").listFiles()))
         .filter(e -> e.getName().endsWith(".inf") && !e.getName().startsWith(owner))
         .forEach(file -> {
             final DialogStats dialogStats = new DialogStats(readLine(file));
             final int unread = dialogStats.getUnread();
             if (unread != 0) {
+                final String name = file.getName().replaceAll("\\..+", "");
                 stringBuilder
-                .append(" ").append(file.getName()).append("(").append(unread).append(")");
+                .append(" ").append(name).append("(").append(unread).append(
+                ")");
             }
         });
         return stringBuilder.toString().trim().replaceAll("\\h", ", ");

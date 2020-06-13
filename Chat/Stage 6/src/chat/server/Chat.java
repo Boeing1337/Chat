@@ -98,8 +98,13 @@ public class Chat {
 
     }
 
-    public synchronized void getStats(final String owner, final String fromUser) {
-
+    public synchronized void getStats(final UserThread owner, final String fromUser) {
+        final DialogStats stats = cybernate.getDialogStats(owner.getLogin(), fromUser);
+        final String head = "Statistics with " + fromUser + ":";
+        final String total = "Total messages: " + stats.getCount();
+        final String mine = "Messages from " + owner.getLogin() + ": " + stats.getOwner();
+        final String their = "Messages from " + fromUser + ": " + stats.getFromUser();
+        owner.sentTechnicalMessage("\n" + head + "\n" + total + "\n" + mine + "\n" + their);
     }
 
     public synchronized void registry(final UserThread userThread,
