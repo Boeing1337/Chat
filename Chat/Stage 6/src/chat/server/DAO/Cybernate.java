@@ -57,7 +57,7 @@ public class Cybernate {
             if (i < 0)
                 continue;
             stringBuilder.append("\n").append(temp.get(i));
-            if (maxCount == 100)
+            if (maxCount == 25)
                 break;
         }
         return stringBuilder.toString().trim();
@@ -73,13 +73,13 @@ public class Cybernate {
         final StringBuilder stringBuilder = new StringBuilder();
 
         int totalCount = 10 + dialogStats.getUnread();
-        totalCount = Math.min(totalCount, 100);
+        totalCount = Math.min(totalCount, 25);
         int maxCount = 1;
         for (int i = temp.size() - totalCount; i < temp.size(); i++, maxCount++) {
             if (i < 0)
                 continue;
             stringBuilder.append("\n").append(temp.get(i));
-            if (maxCount == 100)
+            if (maxCount == 25)
                 break;
         }
         dialogStats.clearUnread();
