@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d709212-bb65-4ffb-86d0-927349d46620" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/DAO/Cybernate.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/src/chat/server/DAO/Cybernate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/test/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/test/Tests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/Stage 6/task-info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/Stage 6/task-info.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +93,7 @@
       <recent name="C:\Users\Java Course — Chat\Chat\Stage 3\src\chat\client" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Tests">
+  <component name="RunManager" selected="Gradle.MainTest">
     <configuration name="sdf" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="chat.server.commands.sdf" />
       <module name="Chat-Stage_6_main" />
@@ -171,9 +169,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.MainTest" />
         <item itemvalue="Gradle.Tests" />
         <item itemvalue="Application.sdf" />
-        <item itemvalue="Gradle.Tests" />
         <item itemvalue="Gradle.Tests" />
         <item itemvalue="Gradle.Tests" />
       </list>
@@ -241,6 +239,7 @@
       <workItem from="1592045778386" duration="806000" />
       <workItem from="1592047658464" duration="28000" />
       <workItem from="1592416678796" duration="574000" />
+      <workItem from="1594248888722" duration="67000" />
     </task>
     <task id="LOCAL-00013" summary="Work on 5 stage">
       <created>1590358397467</created>
@@ -688,22 +687,22 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="1059" y="476" key="FileChooserDialogImpl/0.0.2560.1440@0.0.2560.1440" timestamp="1589304970754" />
-    <state width="2519" height="390" key="GridCell.Tab.0.bottom" timestamp="1592417228994">
+    <state width="2519" height="390" key="GridCell.Tab.0.bottom" timestamp="1594248955293">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="390" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1592417228994" />
-    <state width="2519" height="390" key="GridCell.Tab.0.center" timestamp="1592417228994">
+    <state width="2519" height="390" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1594248955293" />
+    <state width="2519" height="390" key="GridCell.Tab.0.center" timestamp="1594248955293">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="390" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1592417228994" />
-    <state width="2519" height="390" key="GridCell.Tab.0.left" timestamp="1592417228994">
+    <state width="2519" height="390" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1594248955293" />
+    <state width="2519" height="390" key="GridCell.Tab.0.left" timestamp="1594248955293">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="390" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1592417228994" />
-    <state width="2519" height="390" key="GridCell.Tab.0.right" timestamp="1592417228994">
+    <state width="2519" height="390" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1594248955293" />
+    <state width="2519" height="390" key="GridCell.Tab.0.right" timestamp="1594248955293">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2519" height="390" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1592417228994" />
+    <state width="2519" height="390" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1594248955293" />
     <state width="2519" height="508" key="GridCell.Tab.1.bottom" timestamp="1588367961346">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>

@@ -50,7 +50,5 @@ files:
   visible: true
 - name: src/chat/server/commands/StatsCommand.java
   visible: true
-- name: src/chat/server/commands/sdf.java
-  visible: true
 - name: src/chat/server/commands/HistoryCommand.java
   visible: true
