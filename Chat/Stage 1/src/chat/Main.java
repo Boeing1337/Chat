@@ -1,5 +1,5 @@
 package chat;
-
+// Это всё попытка обмануть Сканер при вводе отрицательного значения в строковую переменную 
 import java.util.Scanner;
 
 public class Main {
